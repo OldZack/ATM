@@ -11,7 +11,7 @@
  *
  *              abstract void withdrawal(): withdraw money from the account
  *
- *              abstract boolean requestAloan(): request loan, return true if request get approved, otherwise false
+ *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
  *              abstract void takeOutLoans(): take out loans (if they have collateral)
  *
