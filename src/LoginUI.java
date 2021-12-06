@@ -4,9 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class LoginUI {
+public class LoginUI extends JFrame{
 
-    private JFrame frame;
     private JPanel panel;
     private JButton loginButton;
     private JButton backButton;
@@ -23,7 +22,7 @@ public class LoginUI {
         } else{
             ID = "Manager";
         }
-        frame = new JFrame(ID + " Login Board");
+
         panel = new JPanel();
         idLabel = new JLabel("UserID: ");
         passwordLabel = new JLabel("Password: ");
@@ -32,11 +31,12 @@ public class LoginUI {
         loginButton = new JButton("Login");
         backButton = new JButton("Back");
 
-        frame.add(panel);
-        frame.setSize(600, 400);
-        frame.setLocation(200, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        this.setTitle(ID + " Login Board");
+        this.add(panel);
+        this.setSize(600, 400);
+        this.setLocation(200, 200);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
         Init(panel);
     }
 
@@ -63,7 +63,7 @@ public class LoginUI {
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                dispose();
                 if (ID.equalsIgnoreCase("Customer")){
                     new CustomerUI();
                 } else{
@@ -74,7 +74,7 @@ public class LoginUI {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                frame.dispose();
+//                dispose();
                 new WelcomeUI();
             }
         });

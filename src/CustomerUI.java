@@ -2,8 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CustomerUI {
-    private JFrame frame;
+public class CustomerUI extends JFrame{
     private JPanel panel;
     private JLabel textLabel;
     private JButton createAccountButton;
@@ -16,7 +15,7 @@ public class CustomerUI {
     private JButton logOutButton;
 
     public CustomerUI(){
-        frame = new JFrame("Customer Board");
+
         panel = new JPanel();
         textLabel = new JLabel("Welcome");
         createAccountButton = new JButton("Create Account");
@@ -28,11 +27,12 @@ public class CustomerUI {
         stockButton = new JButton("Stock");
         logOutButton = new JButton("Log Out");
 
-        frame.add(panel);
-        frame.setSize(600, 400);
-        frame.setLocation(200, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        this.setTitle("Customer Board");
+        this.add(panel);
+        this.setSize(600, 400);
+        this.setLocation(200, 200);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
         Init(panel);
     }
 
@@ -62,39 +62,39 @@ public class CustomerUI {
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //frame.dispose();
-                System.out.print(1);
+                dispose();
+                new AccountUI();
             }
         });
 
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //frame.dispose();
-                System.out.print(1);
+                dispose();
+                new SaveUI();
             }
         });
 
         withdrawButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //frame.dispose();
-                System.out.print(1);
+                dispose();
+                new WithDrawUI();
             }
         });
 
         transactionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //frame.dispose();
-                System.out.print(1);
+                dispose();
+                new TransactionUI();
             }
         });
         informationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //frame.dispose();
-                System.out.print(1);
+                dispose();
+                new InformationUI();
             }
         });
         loanButton.addActionListener(new ActionListener() {
@@ -102,19 +102,21 @@ public class CustomerUI {
             public void actionPerformed(ActionEvent e) {
                 //frame.dispose();
                 System.out.print(1);
+                dispose();
+                new LoanUI();
             }
         });
         stockButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //frame.dispose();
-                System.out.print(1);
+                dispose();
+                new StockUI();
             }
         });
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                dispose();
                 new WelcomeUI();
             }
         });

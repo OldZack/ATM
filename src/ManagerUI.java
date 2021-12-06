@@ -2,8 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ManagerUI {
-    private JFrame frame;
+public class ManagerUI extends JFrame{
     private JPanel panel;
     private JLabel textLabel;
     private JButton viewClientButton;
@@ -11,18 +10,18 @@ public class ManagerUI {
     private JButton logOutButton;
 
     public ManagerUI(){
-        frame = new JFrame("Manager Board");
         panel = new JPanel();
         textLabel = new JLabel("Welcome");
         viewClientButton = new JButton("View Client");
         dailyReportButton = new JButton("Daily Report");
         logOutButton = new JButton("Log Out");
 
-        frame.add(panel);
-        frame.setSize(600, 400);
-        frame.setLocation(200, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        this.setTitle("Manager Board");
+        this.add(panel);
+        this.setSize(600, 400);
+        this.setLocation(200, 200);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
         Init(panel);
     }
 
@@ -41,7 +40,7 @@ public class ManagerUI {
         viewClientButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //frame.dispose();
+                //dispose();
                 System.out.print(1);
             }
         });
@@ -49,7 +48,7 @@ public class ManagerUI {
         dailyReportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //frame.dispose();
+                //dispose();
                 System.out.print(1);
             }
         });
@@ -57,7 +56,7 @@ public class ManagerUI {
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                dispose();
                 new WelcomeUI();
             }
         });

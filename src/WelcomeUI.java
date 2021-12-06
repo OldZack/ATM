@@ -4,9 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class WelcomeUI {
+public class WelcomeUI extends JFrame{
 
-    private JFrame frame;
     private JPanel panel;
     private JButton customerButton;
     private JButton managerButton;
@@ -15,7 +14,7 @@ public class WelcomeUI {
     private JLabel identityLabel;
 
     public WelcomeUI() {
-        frame = new JFrame("Welcome Board");
+
         panel = new JPanel();
         welcomeLabel = new JLabel("Welcome");
         customerButton = new JButton("Customer");
@@ -24,11 +23,12 @@ public class WelcomeUI {
         welcomeLabel = new JLabel("Welcome to the online ATM system!");
         identityLabel = new JLabel("Please select your identity.");
 
-        frame.add(panel);
-        frame.setSize(600, 400);
-        frame.setLocation(200, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        this.setTitle("Welcome Board");
+        this.add(panel);
+        this.setSize(600, 400);
+        this.setLocation(200, 200);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
         Init(panel);
     }
 
@@ -53,7 +53,7 @@ public class WelcomeUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Customer Login
-                frame.dispose();
+                dispose();
                 new LoginUI(1);
             }
         });
@@ -62,7 +62,7 @@ public class WelcomeUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Manager Login
-                frame.dispose();
+                dispose();
                 new LoginUI(2);
             }
         });
