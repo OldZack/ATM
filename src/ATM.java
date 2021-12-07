@@ -13,6 +13,8 @@
  *
  *              boolean login():   prompt user + password, return true if valid, false otherwise
  *
+ *              void registerNewCustomer():     Add a new Customer object to DataBase
+ *
  *              void askNewActionAfterLogin():
  *
  *
