@@ -11,9 +11,10 @@ public class LoginUI extends JFrame{
     private JButton backButton;
     private JLabel idLabel;
     private JLabel passwordLabel;
-    private JPasswordField idField;
+    private JTextField idField;
     private JPasswordField passwordField;
     private String ID;
+    ATM atm = ATM.getInstance();
 
 
     public LoginUI(int identity) {
@@ -26,7 +27,7 @@ public class LoginUI extends JFrame{
         panel = new JPanel();
         idLabel = new JLabel("UserID: ");
         passwordLabel = new JLabel("Password: ");
-        idField = new JPasswordField(30);
+        idField = new JTextField(30);
         passwordField = new JPasswordField(30);
         loginButton = new JButton("Login");
         backButton = new JButton("Back");
@@ -63,11 +64,31 @@ public class LoginUI extends JFrame{
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                if (ID.equalsIgnoreCase("Customer")){
-                    new CustomerUI();
+                String userId = idField.getText().trim();
+                String password = String.valueOf(passwordField.getPassword());
+                if( password.length() == 0 || userId.length() == 0) {
+                    JOptionPane.showMessageDialog(null, "Empty username or password!", "Login Error ", JOptionPane.ERROR_MESSAGE);
                 } else{
-                    new ManagerUI();
+
+                    if (ID.equalsIgnoreCase("Customer")){
+                        if(atm.customerLogin(userId, password)){
+                            dispose();
+                            new CustomerUI();
+                        } else {
+                            JOptionPane.showMessageDialog(null,"Wrong CustomerID or password! Please try again.", "Login Error",JOptionPane.ERROR_MESSAGE);
+                            idField.setText("");
+                            passwordField.setText("");
+                        }
+                    } else{
+                        if(atm.managerLogin(userId, password)){
+                            dispose();
+                            new ManagerUI();
+                        } else {
+                            JOptionPane.showMessageDialog(null,"Wrong CustomerID or password! Please try again.", "Login Error",JOptionPane.ERROR_MESSAGE);
+                            idField.setText("");
+                            passwordField.setText("");
+                        }
+                    }
                 }
             }
         });

@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  *   Class Customer :
  *
@@ -20,6 +22,18 @@
  *
  */
 
-public class Customer {
+public class Customer extends User{
+
     private float balance;
+    private List<Account> accountList;
+    private SavingAccount savingAccount;
+    private CheckingAccount checkingAccount;
+    private SecurityAccount securityAccount;
+
+    public Customer(String customerId, String password){
+        super(customerId, password);
+    }
+
+
+
 }

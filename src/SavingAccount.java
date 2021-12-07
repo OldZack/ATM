@@ -54,5 +54,5 @@
  *
  */
 
-public class SavingAccount  extends Account{
+public class SavingAccount extends Account{
 }

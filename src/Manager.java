@@ -17,5 +17,8 @@
  *
  */
 
-public class Manager {
+public class Manager extends User{
+    public Manager(String managerId, String password){
+        super(managerId,password);
+    }
 }

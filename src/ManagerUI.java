@@ -40,16 +40,16 @@ public class ManagerUI extends JFrame{
         viewClientButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //dispose();
-                System.out.print(1);
+                dispose();
+                new ViewClientUI();
             }
         });
 
         dailyReportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //dispose();
-                System.out.print(1);
+                dispose();
+                new DailyReportUI();
             }
         });
 

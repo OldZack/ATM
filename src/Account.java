@@ -35,4 +35,6 @@
 
 
 public abstract class Account {
+    private char accountId;
+    private float balance;
 }
