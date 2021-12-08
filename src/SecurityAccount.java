@@ -1,16 +1,16 @@
 /**
- *   Abstract Class Account
+ *   Predefined  Abstract Class Account:
  *
  *   Variables:
  *
  *              enum ActionType:
- *                                  DEPOSIT, WITHDRAW,  TRANSFEROUT,TRANSFERIN,REQUESTLOAN,TAKEOUTLOAN,  PAYBACKLOAN, INTEREST,SERVICEFEE
+ *                                  DEPOSIT, WITHDRAW,TRANSFEROUT,TRANSFERIN, REQUESTLOAN, TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
  *
  *              String accountId:
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
- *              Map<CurrencyType,Loan>     loans:
+ *              Map<CurrencyType,Loan>      loans:
  *
  *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
@@ -23,6 +23,11 @@
  *
  *   Methods:
  *
+ *      Account:
+ *              void openAccount():
+ *
+ *              void closeAccount():
+ *
  *      Deposit:
  *              abstract void makeDeposit(): maintain deposits in at least three different currencies
  *
@@ -31,7 +36,7 @@
  *              void transferTo( ): transfer money
  *
  *              void getTransferFrom(CurrencyType cType, double transAmount)
- *      Loan:
+ *     Loan:
  *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
  *              abstract void takeOutLoan(): take out loans (if they have collateral)
@@ -55,6 +60,9 @@
  *                                                    1.every time an account is opened or closed
  *                                                    2.every time a checking account transaction is made
  *                                                    3.every time any withdrawal is made
+ *
+ *
+ */
  * ---------------------------------------------------------------------------------------------------------------------
  *   Class SecurityAccount extends Account
  *
