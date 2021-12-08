@@ -4,13 +4,13 @@
  *   Variables:
  *
  *              enum ActionType:
- *                                  DEPOSIT, WITHDRAW, TRANSFEROUT,TRANSFERIN, REQUESTLOAN,TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
+ *                                  DEPOSIT, WITHDRAW, TRANSFEROUT,TRANSFERIN, REQUESTLOAN,TAKEOUTLOAN, PAYBACKLOAN, INTEREST, SERVICEFEE
  *
  *              String accountId:
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
- *              ArrayList<Loan>     loans:
+ *              Map<CurrencyType,Loan>     loans:
  *
  *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *

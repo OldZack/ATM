@@ -15,7 +15,7 @@ import java.util.Map;
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
- *              ArrayList<Loan>     loans:
+ *              Map<CurrencyType,Loan>      loans:
  *
  *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
