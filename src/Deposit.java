@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 /**
  *
- *   Class Currency :
+ *   Predefined Class Currency:
  *
  *   Variables:
  *
@@ -11,7 +11,7 @@ import java.time.LocalDate;
  *
  *              double amount:
  *
- *              LocalDate startDate:
+ *              LocalDate startDate: https://docs.oracle.com/javase/tutorial/datetime/iso/period.html
  *
  *   Constructors:
  *
@@ -24,6 +24,14 @@ import java.time.LocalDate;
  *
  *  ---------------------------------------------------------------------------------------------------------------------
  *
+ *  Class Deposit:
+ *
+ *  Constructors:
+ *
+ *              Deposit():
+ *                          empty constructor
+ *
+ *              Deposit( CurrencyType currencyType,double amount):
  */
 public class Deposit extends Currency{
 

@@ -1,14 +1,22 @@
 /**
- *   Predefined Abstract Class Account
- *
+ *   Abstract Class Account
  *
  *   Variables:
  *
- *              char accountId:
+ *              enum ActionType:
+ *                                  DEPOSIT, WITHDRAW, TRANSFEROUT,TRANSFERIN, REQUESTLOAN,TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
  *
- *              ArrayList<Currency> currenciesDeposit:
+ *              String accountId:
+ *
+ *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
  *              ArrayList<Loan>     loans:
+ *
+ *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
+ *
+ *              double depositInterestRate:
+ *
+ *              double loanInterestRate:
  *
  *   Constructors:
  *
@@ -20,12 +28,15 @@
  *
  *              abstract void withdrawal(): withdraw money from the account
  *
+ *              void transferTo( ): transfer money
+ *
+ *              void getTransferFrom(CurrencyType cType, double transAmount)
  *      Loan:
- *              abstract boolean requestAloan(): request loan, return true if request get approved, otherwise false
+ *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
- *              abstract void takeOutLoans(): take out loans (if they have collateral)
+ *              abstract void takeOutLoan(): take out loans (if they have collateral)
  *
- *              abstract void payBackLoans(): pay the loans on this account
+ *              abstract void payBackLoan(): pay the loans on this account
  *
  *      DisplayInfo:
  *
@@ -35,9 +46,11 @@
  *
  *      Helpers:
  *
- *              double calculateInterest( double interestRate, double duration, double baseAmountMoney):
+ *              void writeToTransactionsLog(CurrencyType cType,ActionType AType, double transAmount):
  *
- *              void beingCharged(int fee):  being charged a fee
+ *              double calculateInterest( double interestRate, int durationDays, double baseAmountMoney):
+ *
+ *              void beingCharged(CurrencyType cType ,double fee):  being charged a fee
  *
  *                                                    1.every time an account is opened or closed
  *                                                    2.every time a checking account transaction is made
@@ -59,4 +72,94 @@
  */
 
 public class CheckingAccount extends Account {
+
+    //Deposit:
+    public void makeDeposit()
+    {
+        //Ask user type of currency
+
+        //Ask user amount
+
+        //Charge a fee
+
+        //Record above fee charging action into transactions
+
+        //Record Deposit action into transactions
+
+        // Perform actual balance increment at this.currenciesDeposit
+
+    }
+    public void withdrawal(){
+        //Ask user type of currency
+
+        //Ask user amount
+
+        //Charge a fee
+
+        //Record above fee charging action into transactions
+
+        //Record Deposit action into transactions
+
+        // Perform actual balance decrement at this.currenciesDeposit
+
+    }
+
+
+    //Loan:
+    public boolean requestLoan()
+    {
+        //Ask user type of currency
+
+        //Ask user amount
+
+        //Charge a fee
+
+        //Record above fee charging action into transactions
+
+        //Record REQUESTLOAN action into transactions
+
+        //Add a new loan to this.loans
+
+
+        return false;
+    }
+    public void takeOutLoan()
+    {
+
+        //Ask user amount
+
+        //Charge a fee
+
+        //Record above fee charging action into transactions
+
+        //Record TAKEOUTLOAN action into transactions
+
+        //Perform actual balance increment at this.currenciesDeposit
+
+        // set hadBeenWithdrawn to true
+    }
+    public void payBackLoan()
+    {
+        //Ask user which loan
+
+        //Charge a fee
+
+        //Record above fee charging action into transactions
+
+        //Update the loan amount , plus the interest
+
+        //Record above INTEREST adding action into transactions
+
+        //Record PAYBACKLOAN action into transactions
+
+        //Perform actual balance decrement at this.currenciesDeposit
+
+        //remove the loan from this.loans
+
+    }
+
+
+    //DisplayInfo:
+
+
 }

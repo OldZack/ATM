@@ -11,7 +11,7 @@ import java.time.LocalDate;
  *
  *              double amount:
  *
- *              LocalDate startDate:
+ *              LocalDate startDate: https://docs.oracle.com/javase/tutorial/datetime/iso/period.html
  *
  *   Constructors:
  *

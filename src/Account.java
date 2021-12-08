@@ -9,9 +9,9 @@ import java.util.Map;
  *   Variables:
  *
  *              enum ActionType:
- *                                  DEPOSIT, WITHDRAW, TAKEOUTLOAN,  PAYBACKLOAN, INTEREST
+ *                                  DEPOSIT, WITHDRAW,TRANSFEROUT,TRANSFERIN, REQUESTLOAN, TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
  *
- *              char accountId:
+ *              String accountId:
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
@@ -28,12 +28,20 @@ import java.util.Map;
  *
  *   Methods:
  *
+ *      Account:
+ *              void openAccount():
+ *
+ *              void closeAccount():
+ *
  *      Deposit:
  *              abstract void makeDeposit(): maintain deposits in at least three different currencies
  *
  *              abstract void withdrawal(): withdraw money from the account
  *
- *      Loan:
+ *              void transferTo( ): transfer money
+ *
+ *              void getTransferFrom(CurrencyType cType, double transAmount)
+ *     Loan:
  *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
  *              abstract void takeOutLoan(): take out loans (if they have collateral)
@@ -50,14 +58,14 @@ import java.util.Map;
  *
  *              void writeToTransactionsLog(CurrencyType cType,ActionType AType, double transAmount):
  *
- *              double calculateInterest( double interestRate, double duration, double baseAmountMoney):
+ *              double calculateInterest( double interestRate, int durationDays, double baseAmountMoney):
  *
- *              void beingCharged(int fee):  being charged a fee
+ *              void beingCharged(CurrencyType cType ,double fee):  being charged a fee
  *
  *                                                    1.every time an account is opened or closed
  *                                                    2.every time a checking account transaction is made
  *                                                    3.every time any withdrawal is made
- * ---------------------------------------------------------------------------------------------------------------------
+ *
  *
  */
 
@@ -65,9 +73,9 @@ import java.util.Map;
 
 public abstract class Account {
     protected enum ActionType{
-        DEPOSIT,WITHDRAW,TAKEOUTLOAN,PAYBACKLOAN, INTEREST
+        DEPOSIT,WITHDRAW,TRANSFEROUT,TRANSFERIN,REQUESTLOAN,TAKEOUTLOAN,PAYBACKLOAN, INTEREST, SERVICEFEE
     }
-    protected char accountId;
+    protected String accountId;
     protected Map<CurrencyType,Deposit> currenciesDeposit;
     protected Map<CurrencyType,Loan>  loans;
     protected ArrayList<String>  transactions;
@@ -80,15 +88,65 @@ public abstract class Account {
         this.transactions= new ArrayList<String >();
     }
 
-    public double calculateInterest( double interestRate, double duration, double baseAmountMoney){
-        return interestRate * duration * baseAmountMoney;
+    // Account:
+    public void openAccount(){
+
+    }
+
+    public void closeAccount() {
+
+    }
+
+
+    //Deposit:
+    abstract void makeDeposit();
+    abstract void withdrawal();
+    public void transferTo()
+    {
+        //Ask user destination accountId
+
+        //Ask user type of currency
+
+        //Ask user amount
+
+        //Charge a fee
+
+        //Record above fee charging action into transactions
+
+        //Record TRANSFEROUT action into transactions
+
+        // Perform actual balance decrement at this.currenciesDeposit
+
+    }
+    public void getTransferFrom(CurrencyType cType, double transAmount)
+    {
+        //Record TRANSFERIN action into transactions
+
+        // Perform actual balance decrement at this.currenciesDeposit
+
+    }
+
+    //Loan:
+    abstract boolean requestLoan();
+    abstract void takeOutLoan();
+    abstract void payBackLoan();
+
+    //DisplayInfo:
+//    abstract void viewTransactions();
+//    abstract void viewCurrentBalance();
+
+
+    //Helpers:
+
+    public double calculateInterest( double interestRate, int durationDays, double baseAmountMoney){
+        return interestRate * durationDays * baseAmountMoney;
     }
 
     public void writeToTransactionsLog(CurrencyType cType,ActionType AType, double transAmount)
 
     {   double before,after;
         // Loan
-        if(AType ==ActionType.PAYBACKLOAN || AType ==ActionType.TAKEOUTLOAN)
+        if(AType ==ActionType.PAYBACKLOAN || AType ==ActionType.TAKEOUTLOAN||AType ==ActionType.REQUESTLOAN)
         {
             before = loans.get(cType).getAmount();
              after = before + transAmount; // +/- positive or negative
@@ -101,4 +159,51 @@ public abstract class Account {
        this.transactions.add( (new Date()).toString() + cType.toString() + before+ AType.toString()+ transAmount+ after);
     }
 
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public Map<CurrencyType, Deposit> getCurrenciesDeposit() {
+        return currenciesDeposit;
+    }
+
+    public void setCurrenciesDeposit(Map<CurrencyType, Deposit> currenciesDeposit) {
+        this.currenciesDeposit = currenciesDeposit;
+    }
+
+    public Map<CurrencyType, Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(Map<CurrencyType, Loan> loans) {
+        this.loans = loans;
+    }
+
+    public ArrayList<String> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(ArrayList<String> transactions) {
+        this.transactions = transactions;
+    }
+
+    public double getDepositInterestRate() {
+        return depositInterestRate;
+    }
+
+    public void setDepositInterestRate(double depositInterestRate) {
+        this.depositInterestRate = depositInterestRate;
+    }
+
+    public double getLoanInterestRate() {
+        return loanInterestRate;
+    }
+
+    public void setLoanInterestRate(double loanInterestRate) {
+        this.loanInterestRate = loanInterestRate;
+    }
 }

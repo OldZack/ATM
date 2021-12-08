@@ -3,7 +3,7 @@ import java.time.LocalDate;
 
 /**
  *
- *   Class Currency :
+ *   Predefined Class Currency:
  *
  *   Variables:
  *
@@ -12,7 +12,7 @@ import java.time.LocalDate;
  *
  *              double amount:
  *
- *              LocalDate startDate:
+ *              LocalDate startDate: https://docs.oracle.com/javase/tutorial/datetime/iso/period.html
  *
  *   Constructors:
  *
@@ -28,28 +28,31 @@ import java.time.LocalDate;
  *
  *  Variables:
  *
- *          LocalDate startDate :  https://docs.oracle.com/javase/tutorial/datetime/iso/period.html
- *
- *
- *
+ *              boolean hasBeenWithdrawn :
+
  *  Constructors:
  *
  *          Loan():
  *                                  create a loan started from now(Current date)
  *
+ *          Loan( CurrencyType currencyType,double amount):
+ *
  *  Methods:
  */
 public class Loan extends Currency{
 
+    private boolean hasBeenWithdrawn;
 
     public Loan()
     {
         super();
+        this.hasBeenWithdrawn=false;
         this.startDateOfLoan= LocalDate.now();; // Current date
     }
     public Loan( CurrencyType currencyType,double amount)
     {
         super();
+        this.hasBeenWithdrawn=false;
         this.startDateOfLoan= LocalDate.now();; // Current date
         this.typeOfCurrency=currencyType;
         this.amount=amount;
