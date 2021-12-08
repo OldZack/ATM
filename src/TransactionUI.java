@@ -17,8 +17,7 @@ public class TransactionUI extends JFrame {
     private JTextField transAmount;
     private JButton okButton;
     private JButton backButton;
-    private JLabel toUser;
-    private JTextField toUserID;
+
 
     public TransactionUI()
     {
@@ -34,8 +33,7 @@ public class TransactionUI extends JFrame {
         transAmount = new JTextField(30);
         okButton = new JButton("OK");
         backButton = new JButton("Back");
-        toUser = new JLabel("Receiver");
-        toUserID = new JTextField(30);
+
 
         this.add(panel);
         this.setTitle("Transaction Board");
@@ -49,14 +47,12 @@ public class TransactionUI extends JFrame {
 
     private void Init(JPanel panel){
         panel.setLayout(null);
-        fromType.setBounds(100,40,100,40);
-        selectFromType.setBounds(250,40,200,40);
-        toUser.setBounds(100,100,100,40);
-        toUserID.setBounds(250,100,200,40);
-        toType.setBounds(100,160,100,40);
-        selectToType.setBounds(250,160,200,40);
-        amount.setBounds(100,220,100,40);
-        transAmount.setBounds(250,220,200,40);
+        fromType.setBounds(100,50,100,50);
+        selectFromType.setBounds(250,50,200,50);
+        toType.setBounds(100,130,100,50);
+        selectToType.setBounds(250,130,200,50);
+        amount.setBounds(100,210,100,50);
+        transAmount.setBounds(250,210,200,50);
         okButton.setBounds(150,300,100,50);
         backButton.setBounds(350,300,100,50);
 
@@ -68,15 +64,13 @@ public class TransactionUI extends JFrame {
         panel.add(transAmount);
         panel.add(okButton);
         panel.add(backButton);
-        panel.add(toUser);
-        panel.add(toUserID);
 
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //dispose();
-                System.out.println("Success!");
-
+                JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                new CustomerUI();
                 /**
                  * Transfer the money and show feedback
                  */

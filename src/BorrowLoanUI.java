@@ -3,31 +3,27 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SaveUI extends JFrame {
-    private JPanel panel;
-    private JLabel accountType;
-    private JLabel amount;
-    private JTextField saveAmount;
-    private JComboBox<String> types;
-    private JScrollPane selectType;
+public class BorrowLoanUI extends JFrame{
 
+    private JPanel panel;
+    private JLabel loanInfo;
+    private JLabel choice;
     private JButton okButton;
     private JButton backButton;
+    private JTextField amount;
+    private JTextArea info;
 
-    public SaveUI()
-    {
+    public BorrowLoanUI(){
         panel = new JPanel();
-        accountType = new JLabel("Account Type");
-        amount = new JLabel("Amount");
-        String []act= {"Checking","Saving","Security"};
-        types = new JComboBox<String>(act);
-        selectType = new JScrollPane(types);
-        saveAmount = new JTextField(30);
         okButton = new JButton("OK");
         backButton = new JButton("Back");
+        amount = new JTextField(100);
+        loanInfo = new JLabel("Current Loan Information");
+        info = new JTextArea();
+        choice = new JLabel("How much do you want to borrow?");
 
         this.add(panel);
-        this.setTitle("Saving Board");
+        this.setTitle("Return Loan Board");
         this.setSize(600, 400);
         this.setLocation(200, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,19 +33,24 @@ public class SaveUI extends JFrame {
 
     private void Init(JPanel panel){
         panel.setLayout(null);
-        accountType.setBounds(100,100,100,40);
-        selectType.setBounds(250,100,200,40);
-        amount.setBounds(100,200,100,40);
-        saveAmount.setBounds(250,200,200,40);
+
+        info.setEditable(false);
+        info.setText("test");
+
         okButton.setBounds(150,300,100,50);
         backButton.setBounds(350,300,100,50);
+        info.setBounds(100,60,400,150);
+        loanInfo.setBounds(100,20,200,30);
+        choice.setBounds(100,240,250,50);
+        amount.setBounds(400,240,100,50);
 
-        panel.add(accountType);
-        panel.add(amount);
-        panel.add(selectType);
-        panel.add(saveAmount);
+        panel.add(loanInfo);
+        panel.add(choice);
+        panel.add(info);
         panel.add(okButton);
+        panel.add(amount);
         panel.add(backButton);
+
 
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -59,17 +60,22 @@ public class SaveUI extends JFrame {
                 new CustomerUI();
 
                 /**
-                 * Saving the money and show feedback
+                 * return the loan and show feedback
                  */
+
             }
         });
 
-            backButton.addActionListener(new ActionListener() {
+
+        backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CustomerUI();
+                new LoanUI();
             }
         });
     }
+
 }
+
+

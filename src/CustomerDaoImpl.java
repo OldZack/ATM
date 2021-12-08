@@ -8,8 +8,11 @@ public class CustomerDaoImpl implements CustomerDao{
         customers = new ArrayList<Customer>();
         Customer customer1 = new Customer("test1", "test1");
         Customer customer2 = new Customer("test2", "test2");
+        Customer customer3 = new Customer("1", "1");
+
         addCustomer(customer1);
         addCustomer(customer2);
+        addCustomer(customer3);
     }
 
     @Override

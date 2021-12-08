@@ -54,10 +54,9 @@ public class WithDrawUI extends JFrame{
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-//                dispose();
-                System.out.println("Success!");
-
+                JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                new CustomerUI();
                 /**
                  * Withdraw the money and show feedback
                  */
