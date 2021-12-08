@@ -3,8 +3,6 @@
  *
  *   Variables:
  *
- *              enum  CurrencyType :
- *                                          USD,CNY,EUR
  *
  *              CurrencyType typeOfCurrency:
  *

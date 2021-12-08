@@ -4,8 +4,15 @@
  *
  *   Variables:
  *
- *              ArrayList<Account> accounts: all the accounts of the bank
+ *              static ATM atm = new ATM()
  *
+ *              User currUser:
+ *
+ *              Account currAccount:
+ *
+ *              CustomerDao customerDao:
+ *
+ *              ManagerDao managerDao;
  *   Constructors:
  *
  *
@@ -54,5 +61,22 @@ public class ATM {
         }
         currUser = manager;
         return true;
+    }
+
+    public void askNewActionAfterLogin()
+    {
+        if(currAccount instanceof CheckingAccount)
+        {
+
+        }
+        else if(currAccount instanceof  SavingAccount)
+        {
+
+        }
+        else if (currAccount instanceof SecurityAccount)
+        {
+
+        }
+
     }
 }

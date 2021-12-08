@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 
-
 /**
  *
  *   Class Currency :
@@ -24,30 +23,17 @@ import java.time.LocalDate;
  *
  *
  *  ---------------------------------------------------------------------------------------------------------------------
- * Class Loan:
  *
- *  Variables:
- *
- *          LocalDate startDate :  https://docs.oracle.com/javase/tutorial/datetime/iso/period.html
- *
- *
- *
- *  Constructors:
- *
- *          Loan():
- *                                  create a loan started from now(Current date)
- *
- *  Methods:
  */
-public class Loan extends Currency{
+public class Deposit extends Currency{
 
 
-    public Loan()
+    public Deposit()
     {
         super();
         this.startDateOfLoan= LocalDate.now();; // Current date
     }
-    public Loan( CurrencyType currencyType,double amount)
+    public Deposit( CurrencyType currencyType,double amount)
     {
         super();
         this.startDateOfLoan= LocalDate.now();; // Current date
@@ -56,3 +42,4 @@ public class Loan extends Currency{
     }
 
 }
+

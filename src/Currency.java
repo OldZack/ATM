@@ -1,18 +1,17 @@
+import java.time.LocalDate;
+
 /**
  *
  *   Class Currency :
  *
  *   Variables:
  *
- *              enum  CurrencyType :
  *
- *                                      USD,CNY,EUR
- *
- *              String typeOfCurrency:
+ *              CurrencyType typeOfCurrency:
  *
  *              double amount:
  *
- *
+ *              LocalDate startDate:
  *
  *   Constructors:
  *
@@ -27,14 +26,12 @@
 
 
 public class Currency {
-    enum CurrencyType
-    {
-        USD, CNY, EUR;
-    }
 
     protected CurrencyType typeOfCurrency;
 
     protected double amount;
+
+    protected LocalDate startDateOfLoan;
 
     public Currency(){
 
