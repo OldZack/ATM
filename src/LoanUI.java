@@ -5,13 +5,21 @@ import java.awt.event.ActionListener;
 
 public class LoanUI extends JFrame{
     private JPanel panel;
-    private JButton okButton;
+    private JLabel loanInfo;
+    private JLabel choice;
+    private JButton borrowButton;
+    private JButton returnButton;
     private JButton backButton;
+    private JTextArea info;
 
     public LoanUI(){
         panel = new JPanel();
-        okButton = new JButton("OK");
+        borrowButton = new JButton("Borrow");
+        returnButton = new JButton("Return");
         backButton = new JButton("Back");
+        info = new JTextArea();
+        loanInfo = new JLabel("Current Loan Information");
+        choice = new JLabel("Do you want to borrow or return?");
 
         this.add(panel);
         this.setTitle("Loan Board");
@@ -24,21 +32,38 @@ public class LoanUI extends JFrame{
 
     private void Init(JPanel panel){
         panel.setLayout(null);
-        okButton.setBounds(150,300,100,50);
-        backButton.setBounds(350,300,100,50);
-        panel.add(okButton);
+
+        info.setEditable(false);
+        info.setText("test");
+
+        borrowButton.setBounds(100,310,100,50);
+        returnButton.setBounds(250,310,100,50);
+        backButton.setBounds(400,310,100,50);
+        info.setBounds(100,60,400,200);
+        loanInfo.setBounds(100,20,200,30);
+        choice.setBounds(100,250,300,50);
+
+        panel.add(loanInfo);
+        panel.add(choice);
+        panel.add(info);
+        panel.add(borrowButton);
+        panel.add(returnButton);
         panel.add(backButton);
 
-        okButton.addActionListener(new ActionListener() {
+
+        borrowButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
+                new BorrowLoanUI();
+            }
+        });
 
-//                dispose();
-                System.out.println("Success!");
-
-                /**
-                 * Loans and show feedback
-                 */
+        returnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new ReturnLoanUI();
             }
         });
 
