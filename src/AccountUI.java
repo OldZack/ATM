@@ -11,6 +11,9 @@ public class AccountUI extends JFrame{
     private JLabel currencyType;
     private JComboBox<String> currencyTypes;
     private JScrollPane selectCurrencyType;
+    private JLabel principal;
+    private JTextField amount;
+    private JLabel notice;
     private JButton okButton;
     private JButton backButton;
 
@@ -27,6 +30,10 @@ public class AccountUI extends JFrame{
         currencyTypes = new JComboBox<String>(ct);
         selectCurrencyType = new JScrollPane(currencyTypes);
 
+        principal = new JLabel("Principal: ");
+        amount = new JTextField(100);
+        notice = new JLabel();
+
         okButton = new JButton("OK");
         backButton = new JButton("Back");
 
@@ -42,10 +49,19 @@ public class AccountUI extends JFrame{
 
     private void Init(JPanel panel){
         panel.setLayout(null);
-        accountType.setBounds(100,60,100,40);
-        selectType.setBounds(250,60,200,40);
-        currencyType.setBounds(100,160,100,40);
-        selectCurrencyType.setBounds(250,160,200,40);
+        accountType.setBounds(100,40,100,40);
+        selectType.setBounds(250,40,200,40);
+        currencyType.setBounds(100,110,100,40);
+        selectCurrencyType.setBounds(250,110,200,40);
+//        String content = "";
+//        content += "Since a fee will be charged for creating an account, ";
+//        content += System.lineSeparator();
+//        content += "the actual principal might be less than the input.";
+//        notice.setText(content);
+
+        principal.setBounds(100,180,100,40);
+        amount.setBounds(250,180,200,40);
+        notice.setBounds(100,250,400,40);
         okButton.setBounds(150,280,100,50);
         backButton.setBounds(350,280,100,50);
 
@@ -53,14 +69,18 @@ public class AccountUI extends JFrame{
         panel.add(selectType);
         panel.add(currencyType);
         panel.add(selectCurrencyType);
+        panel.add(principal);
+        panel.add(amount);
+        panel.add(notice);
         panel.add(okButton);
         panel.add(backButton);
 
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                dispose();
-                System.out.println("Success!");
+                dispose();
+                JOptionPane.showMessageDialog(null, "Account Created Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                new CustomerUI();
             }
         });
 

@@ -4,14 +4,23 @@
  *
  *   Variables:
  *
- *              ArrayList<Account> accounts: all the accounts of the bank
+ *              static ATM atm = new ATM()
  *
+ *              User currUser:
+ *
+ *              Account currAccount:
+ *
+ *              CustomerDao customerDao:
+ *
+ *              ManagerDao managerDao;
  *   Constructors:
  *
  *
  *   Methods:
  *
  *              boolean login():   prompt user + password, return true if valid, false otherwise
+ *
+ *              void registerNewCustomer():     Add a new Customer object to DataBase
  *
  *              void askNewActionAfterLogin():
  *
@@ -34,6 +43,10 @@ public class ATM {
         this.managerDao = new ManagerDaoImpl();
     }
 
+    public CustomerDao getCustomerDao(){return customerDao; }
+
+    public ManagerDao getManagerDao(){return managerDao; }
+
     public static ATM getInstance(){ return atm; }
 
     public boolean customerLogin(String customerID, String password){
@@ -52,5 +65,22 @@ public class ATM {
         }
         currUser = manager;
         return true;
+    }
+
+    public void askNewActionAfterLogin()
+    {
+        if(currAccount instanceof CheckingAccount)
+        {
+
+        }
+        else if(currAccount instanceof  SavingAccount)
+        {
+
+        }
+        else if (currAccount instanceof SecurityAccount)
+        {
+
+        }
+
     }
 }

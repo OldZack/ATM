@@ -3,17 +3,25 @@
  *
  *   Variables:
  *
+ *              String userId:
+ *
+ *              String password:
+ *
+ *
+ *
  *   Constructors:
  *
+ *              User(String userName, String password):
  *
  *   Methods:
+ *              getters & setters
  *
  *
  */
 
 public abstract class User {
-    private String userId;
-    private String password;
+    protected String userId;
+    protected String password;
 
     public User(String userName, String password) {
         this.userId = userName;
