@@ -3,6 +3,12 @@
  *
  *   Variables:
  *
+ *              String name:
+ *
+ *              Double price:
+ *
+ *
+ *
  *   Constructors:
  *
  *

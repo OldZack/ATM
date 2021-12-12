@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,11 +17,7 @@ import java.util.Map;
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
-<<<<<<< HEAD
  *              Map<CurrencyType,Loan>      loans:
-=======
- *              ArrayList<Loan>     loans:
->>>>>>> origin/szy
  *
  *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
@@ -31,17 +29,6 @@ import java.util.Map;
  *
  *
  *   Methods:
-<<<<<<< HEAD
- *
- *      Account:
- *              void openAccount():
- *
- *              void closeAccount():
- *
- *      Deposit:
- *              abstract void makeDeposit(): maintain deposits in at least three different currencies
-=======
->>>>>>> origin/szy
  *
  *      Account:
  *              void openAccount(String accountType, String currencyType, double amount):
@@ -59,23 +46,11 @@ import java.util.Map;
  *
  *              void getTransferFrom(CurrencyType cType, double transAmount)
  *     Loan:
- *              abstract boolean requestLoan(double amount): request loan, return true if request get approved, otherwise false
- *
-<<<<<<< HEAD
- *              void transferTo( ): transfer money
- *
- *              void getTransferFrom(CurrencyType cType, double transAmount)
- *     Loan:
  *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
  *              abstract void takeOutLoan(): take out loans (if they have collateral)
  *
  *              abstract void payBackLoan(): pay the loans on this account
-=======
- *              abstract void takeOutLoan(double amount): take out loans (if they have collateral)
- *
- *              abstract void payBackLoan(double amount): pay the loans on this account
->>>>>>> origin/szy
  *
  *      DisplayInfo:
  *
@@ -108,8 +83,8 @@ public abstract class Account {
     protected Map<CurrencyType,Deposit> currenciesDeposit;
     protected Map<CurrencyType,Loan>  loans;
     protected ArrayList<String>  transactions;
-    protected double depositInterestRate;
-    protected double loanInterestRate;
+    protected double depositInterestRate=0.00001;
+    protected double loanInterestRate=0.00001;
 
     public Account(){
         this.currenciesDeposit=new HashMap<CurrencyType,Deposit>();
@@ -124,10 +99,7 @@ public abstract class Account {
 
     public void closeAccount() {
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/szy
     }
 
 
@@ -189,7 +161,10 @@ public abstract class Account {
              before = currenciesDeposit.get(cType).getAmount();
              after = before + transAmount; // +/- positive or negative
         }
-       this.transactions.add( (new Date()).toString() + cType.toString() + before+ AType.toString()+ transAmount+ after);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        this.transactions.add( (LocalDateTime.now().format(formatter)).toString() +","+ cType.toString()+"," + before+","+ AType.toString()+","+ transAmount+","+ after);
     }
 
     public String getAccountId() {

@@ -1,28 +1,17 @@
+
 /**
-<<<<<<< HEAD
- *   Predefined  Abstract Class Account:
-=======
- *   Abstract Class Account
->>>>>>> origin/szy
+ *   Predefined Abstract Class Account
  *
  *   Variables:
  *
  *              enum ActionType:
-<<<<<<< HEAD
  *                                  DEPOSIT, WITHDRAW,TRANSFEROUT,TRANSFERIN, REQUESTLOAN, TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
-=======
- *                                  DEPOSIT, WITHDRAW,  TRANSFEROUT,TRANSFERIN,REQUESTLOAN,TAKEOUTLOAN,  PAYBACKLOAN, INTEREST,SERVICEFEE
->>>>>>> origin/szy
  *
  *              String accountId:
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
-<<<<<<< HEAD
  *              Map<CurrencyType,Loan>      loans:
-=======
- *              ArrayList<Loan>     loans:
->>>>>>> origin/szy
  *
  *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
@@ -35,27 +24,22 @@
  *
  *   Methods:
  *
-<<<<<<< HEAD
  *      Account:
- *              void openAccount():
+ *              void openAccount(String accountType, String currencyType, double amount):
+ *              Parameter: the account type, currency type, and initial deposit.
  *
- *              void closeAccount():
+ *              void closeAccount(Account account):
  *
-=======
->>>>>>> origin/szy
  *      Deposit:
- *              abstract void makeDeposit(): maintain deposits in at least three different currencies
+ *              abstract void makeDeposit(Account account, double amount): maintain deposits in at least three different currencies
+ *              Parameter: account(which account to deposit in), amount(the money to deposit)
  *
- *              abstract void withdrawal(): withdraw money from the account
+ *              abstract void withdrawal(Account account, double amount): withdraw money from the account
  *
- *              void transferTo( ): transfer money
+ *              void transferTo(Account account, double amount): transfer money
  *
  *              void getTransferFrom(CurrencyType cType, double transAmount)
-<<<<<<< HEAD
  *     Loan:
-=======
- *      Loan:
->>>>>>> origin/szy
  *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
  *              abstract void takeOutLoan(): take out loans (if they have collateral)
@@ -71,21 +55,14 @@
  *      Helpers:
  *
  *              void writeToTransactionsLog(CurrencyType cType,ActionType AType, double transAmount):
-<<<<<<< HEAD
  *
  *              double calculateInterest( double interestRate, int durationDays, double baseAmountMoney):
  *
-=======
- *
- *              double calculateInterest( double interestRate, int durationDays, double baseAmountMoney):
- *
->>>>>>> origin/szy
  *              void beingCharged(CurrencyType cType ,double fee):  being charged a fee
  *
  *                                                    1.every time an account is opened or closed
  *                                                    2.every time a checking account transaction is made
  *                                                    3.every time any withdrawal is made
- *
  *
  *
  * ---------------------------------------------------------------------------------------------------------------------

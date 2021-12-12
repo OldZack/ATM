@@ -1,28 +1,17 @@
+
 /**
-<<<<<<< HEAD
- *   Predefined  Abstract Class Account:
-=======
- *   Abstract Class Account
->>>>>>> origin/szy
+ *   Predefined Abstract Class Account
  *
  *   Variables:
  *
  *              enum ActionType:
-<<<<<<< HEAD
  *                                  DEPOSIT, WITHDRAW,TRANSFEROUT,TRANSFERIN, REQUESTLOAN, TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
-=======
- *                                  DEPOSIT, WITHDRAW, TRANSFEROUT, TRANSFERIN, REQUESTLOAN,TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
->>>>>>> origin/szy
  *
  *              String accountId:
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
-<<<<<<< HEAD
  *              Map<CurrencyType,Loan>      loans:
-=======
- *              ArrayList<Loan>     loans:
->>>>>>> origin/szy
  *
  *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
@@ -35,23 +24,21 @@
  *
  *   Methods:
  *
-<<<<<<< HEAD
  *      Account:
- *              void openAccount():
+ *              void openAccount(String accountType, String currencyType, double amount):
+ *              Parameter: the account type, currency type, and initial deposit.
  *
- *              void closeAccount():
+ *              void closeAccount(Account account):
  *
-=======
->>>>>>> origin/szy
  *      Deposit:
- *              abstract void makeDeposit(): maintain deposits in at least three different currencies
+ *              abstract void makeDeposit(Account account, double amount): maintain deposits in at least three different currencies
+ *              Parameter: account(which account to deposit in), amount(the money to deposit)
  *
- *              abstract void withdrawal(): withdraw money from the account
+ *              abstract void withdrawal(Account account, double amount): withdraw money from the account
  *
- *              void transferTo( ): transfer money
+ *              void transferTo(Account account, double amount): transfer money
  *
  *              void getTransferFrom(CurrencyType cType, double transAmount)
-<<<<<<< HEAD
  *     Loan:
  *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
@@ -59,15 +46,6 @@
  *
  *              abstract void payBackLoan(): pay the loans on this account
  *
-=======
- *      Loan:
- *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
- *
- *              abstract void takeOutLoan(): take out loans (if they have collateral)
- *
- *              abstract void payBackLoan(): pay the loans on this account
- *
->>>>>>> origin/szy
  *      DisplayInfo:
  *
  *              abstract void viewTransactions():
@@ -75,30 +53,18 @@
  *              abstract void viewCurrentBalance():
  *
  *      Helpers:
-<<<<<<< HEAD
  *
  *              void writeToTransactionsLog(CurrencyType cType,ActionType AType, double transAmount):
  *
  *              double calculateInterest( double interestRate, int durationDays, double baseAmountMoney):
  *
-=======
- *
- *              void writeToTransactionsLog(CurrencyType cType,ActionType AType, double transAmount):
- *
- *              double calculateInterest( double interestRate, int durationDays, double baseAmountMoney):
- *
->>>>>>> origin/szy
  *              void beingCharged(CurrencyType cType ,double fee):  being charged a fee
  *
  *                                                    1.every time an account is opened or closed
  *                                                    2.every time a checking account transaction is made
  *                                                    3.every time any withdrawal is made
-<<<<<<< HEAD
  *
  *
- *
-=======
->>>>>>> origin/szy
  * ---------------------------------------------------------------------------------------------------------------------
  *   Class SavingAccount extends Account
  *
@@ -210,5 +176,34 @@ public class SavingAccount extends Account{
 
     //DisplayInfo:
 
+    // check if have more than 5000 USD
+    public boolean reachBalanceToGainInterest()
+    {
+        if(this.currenciesDeposit.containsKey(CurrencyType.USD))
+        {
+            return this.currenciesDeposit.get(CurrencyType.USD).getAmount() >5000.0 ? true : false;
+        }
+        return false;
+    }
+
+    // check if have more than 5000 USD
+    public boolean reachBalanceToPlayStock()
+    {
+        if(this.currenciesDeposit.containsKey(CurrencyType.USD))
+        {
+            return this.currenciesDeposit.get(CurrencyType.USD).getAmount() >5000.0 ? true : false;
+        }
+        return false;
+    }
+
+    // check if account will be less than 2500 USD after
+    public boolean willBeLowBalance(double tryToTransfer)
+    {
+        if(this.currenciesDeposit.containsKey(CurrencyType.USD))
+        {
+            return this.currenciesDeposit.get(CurrencyType.USD).getAmount()-tryToTransfer <2500.0 ? true : false;
+        }
+        return false;
+    }
 
 }
