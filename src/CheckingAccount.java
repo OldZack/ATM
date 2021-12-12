@@ -1,16 +1,28 @@
 /**
+<<<<<<< HEAD
  *   Predefined  Abstract Class Account:
+=======
+ *   Abstract Class Account
+>>>>>>> origin/szy
  *
  *   Variables:
  *
  *              enum ActionType:
+<<<<<<< HEAD
  *                                  DEPOSIT, WITHDRAW,TRANSFEROUT,TRANSFERIN, REQUESTLOAN, TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
+=======
+ *                                  DEPOSIT, WITHDRAW, TRANSFEROUT,TRANSFERIN, REQUESTLOAN,TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
+>>>>>>> origin/szy
  *
  *              String accountId:
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
+<<<<<<< HEAD
  *              Map<CurrencyType,Loan>      loans:
+=======
+ *              ArrayList<Loan>     loans:
+>>>>>>> origin/szy
  *
  *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
@@ -23,11 +35,14 @@
  *
  *   Methods:
  *
+<<<<<<< HEAD
  *      Account:
  *              void openAccount():
  *
  *              void closeAccount():
  *
+=======
+>>>>>>> origin/szy
  *      Deposit:
  *              abstract void makeDeposit(): maintain deposits in at least three different currencies
  *
@@ -36,7 +51,11 @@
  *              void transferTo( ): transfer money
  *
  *              void getTransferFrom(CurrencyType cType, double transAmount)
+<<<<<<< HEAD
  *     Loan:
+=======
+ *      Loan:
+>>>>>>> origin/szy
  *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
  *              abstract void takeOutLoan(): take out loans (if they have collateral)

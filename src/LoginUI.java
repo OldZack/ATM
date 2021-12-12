@@ -14,6 +14,7 @@ public class LoginUI extends JFrame{
     private JTextField idField;
     private JPasswordField passwordField;
     private String ID;
+    private JButton signUpButton;
     ATM atm = ATM.getInstance();
 
 
@@ -31,6 +32,7 @@ public class LoginUI extends JFrame{
         passwordField = new JPasswordField(30);
         loginButton = new JButton("Login");
         backButton = new JButton("Back");
+        signUpButton = new JButton("Sign Up");
 
         this.setTitle(ID + " Login Board");
         this.add(panel);
@@ -49,8 +51,9 @@ public class LoginUI extends JFrame{
         passwordLabel.setBounds(150,125,100,35);
         idField.setBounds(250,75,200,35);
         passwordField.setBounds(250,125,200,35);
-        loginButton.setBounds(175,250,100,50);
-        backButton.setBounds(325,250,100,50);
+        loginButton.setBounds(100,250,100,50);
+        backButton.setBounds(400,250,100,50);
+        signUpButton.setBounds(250,250,100,50);
 //        loginButton.setForeground(Color.BLUE);
 //        loginButton.setBackground(Color.BLUE);
 //        backButton.setForeground(Color.CYAN);
@@ -61,6 +64,18 @@ public class LoginUI extends JFrame{
         panel.add(passwordField);
         panel.add(loginButton);
         panel.add(backButton);
+        panel.add(signUpButton);
+
+        signUpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                if (ID.equalsIgnoreCase("Customer")){
+                    new SignUpUI(1);
+                } else{
+                    new SignUpUI(2);
+                }
+            }
+        });
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -95,7 +110,7 @@ public class LoginUI extends JFrame{
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                dispose();
+                dispose();
                 new WelcomeUI();
             }
         });

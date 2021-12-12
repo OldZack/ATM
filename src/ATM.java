@@ -43,6 +43,10 @@ public class ATM {
         this.managerDao = new ManagerDaoImpl();
     }
 
+    public CustomerDao getCustomerDao(){return customerDao; }
+
+    public ManagerDao getManagerDao(){return managerDao; }
+
     public static ATM getInstance(){ return atm; }
 
     public boolean customerLogin(String customerID, String password){

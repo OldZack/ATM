@@ -15,7 +15,11 @@ import java.util.Map;
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
+<<<<<<< HEAD
  *              Map<CurrencyType,Loan>      loans:
+=======
+ *              ArrayList<Loan>     loans:
+>>>>>>> origin/szy
  *
  *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
@@ -27,6 +31,7 @@ import java.util.Map;
  *
  *
  *   Methods:
+<<<<<<< HEAD
  *
  *      Account:
  *              void openAccount():
@@ -35,9 +40,28 @@ import java.util.Map;
  *
  *      Deposit:
  *              abstract void makeDeposit(): maintain deposits in at least three different currencies
+=======
+>>>>>>> origin/szy
  *
- *              abstract void withdrawal(): withdraw money from the account
+ *      Account:
+ *              void openAccount(String accountType, String currencyType, double amount):
+ *              Parameter: the account type, currency type, and initial deposit.
  *
+ *              void closeAccount(Account account):
+ *
+ *      Deposit:
+ *              abstract void makeDeposit(Account account, double amount): maintain deposits in at least three different currencies
+ *              Parameter: account(which account to deposit in), amount(the money to deposit)
+ *
+ *              abstract void withdrawal(Account account, double amount): withdraw money from the account
+ *
+ *              void transferTo(Account account, double amount): transfer money
+ *
+ *              void getTransferFrom(CurrencyType cType, double transAmount)
+ *     Loan:
+ *              abstract boolean requestLoan(double amount): request loan, return true if request get approved, otherwise false
+ *
+<<<<<<< HEAD
  *              void transferTo( ): transfer money
  *
  *              void getTransferFrom(CurrencyType cType, double transAmount)
@@ -47,6 +71,11 @@ import java.util.Map;
  *              abstract void takeOutLoan(): take out loans (if they have collateral)
  *
  *              abstract void payBackLoan(): pay the loans on this account
+=======
+ *              abstract void takeOutLoan(double amount): take out loans (if they have collateral)
+ *
+ *              abstract void payBackLoan(double amount): pay the loans on this account
+>>>>>>> origin/szy
  *
  *      DisplayInfo:
  *
@@ -95,7 +124,10 @@ public abstract class Account {
 
     public void closeAccount() {
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/szy
     }
 
 
