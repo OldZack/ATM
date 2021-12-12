@@ -15,7 +15,7 @@ import java.util.Map;
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
- *              ArrayList<Loan>     loans:
+ *              Map<CurrencyType,Loan>      loans:
  *
  *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
@@ -29,26 +29,24 @@ import java.util.Map;
  *   Methods:
  *
  *      Account:
- *              void openAccount(String accountType, String currencyType, double amount):
- *              Parameter: the account type, currency type, and initial deposit.
+ *              void openAccount():
  *
- *              void closeAccount(Account account):
+ *              void closeAccount():
  *
  *      Deposit:
- *              abstract void makeDeposit(Account account, double amount): maintain deposits in at least three different currencies
- *              Parameter: account(which account to deposit in), amount(the money to deposit)
+ *              abstract void makeDeposit(): maintain deposits in at least three different currencies
  *
- *              abstract void withdrawal(Account account, double amount): withdraw money from the account
+ *              abstract void withdrawal(): withdraw money from the account
  *
- *              void transferTo(Account account, double amount): transfer money
+ *              void transferTo( ): transfer money
  *
  *              void getTransferFrom(CurrencyType cType, double transAmount)
  *     Loan:
- *              abstract boolean requestLoan(double amount): request loan, return true if request get approved, otherwise false
+ *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
- *              abstract void takeOutLoan(double amount): take out loans (if they have collateral)
+ *              abstract void takeOutLoan(): take out loans (if they have collateral)
  *
- *              abstract void payBackLoan(double amount): pay the loans on this account
+ *              abstract void payBackLoan(): pay the loans on this account
  *
  *      DisplayInfo:
  *
@@ -96,6 +94,7 @@ public abstract class Account {
     }
 
     public void closeAccount() {
+
 
     }
 
