@@ -48,7 +48,7 @@ import java.util.List;
 
 public class Customer extends User{
 
-    private float balance;
+    //private float balance;
     //private List<Account> accountList;
     private SavingAccount savingAccount;
     private CheckingAccount checkingAccount;
@@ -71,10 +71,11 @@ public class Customer extends User{
         }
 
         // update to database
-        if(!Database.getUsers().contains(this))
+        if(Database.getUsers().get(this.getUserName())==null) {
             Database.addUser(this);
+        }
 
-        Database.WriteUserToLocal();
+        Database.WriteUserToLocal(this.getUserName());
 
     }
 

@@ -1,0 +1,1 @@
+{"savingAccount":{"currenciesDeposit":{"USD":{"typeOfCurrency":"USD","amount":95.0,"startDate":"2021-12-13 15:42:12"}},"loans":{},"transactions":[{"evenTime":"2021-12-13 15:42:12","currencyType":"USD","before":100.0,"actionType":"OPENACCOUNT","transactionAmount":-5.0,"after":95.0}],"depositInterestRate":1.0E-5,"loanInterestRate":1.0E-5},"userId":"A","password":"alan"}
