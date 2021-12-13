@@ -84,6 +84,12 @@ public abstract class Account {
         this.currenciesDeposit=new HashMap<CurrencyType,Deposit>();
         this.loans= new HashMap<CurrencyType,Loan>();
         this.transactions= new ArrayList<Transaction >();
+        this.currenciesDeposit.put(CurrencyType.USD,new Deposit(CurrencyType.USD,0));
+        this.currenciesDeposit.put(CurrencyType.CNY,new Deposit(CurrencyType.CNY,0));
+        this.currenciesDeposit.put(CurrencyType.EUR,new Deposit(CurrencyType.EUR,0));
+        this.loans.put(CurrencyType.USD,new Loan(CurrencyType.USD,0));
+        this.loans.put(CurrencyType.CNY,new Loan(CurrencyType.CNY,0));
+        this.loans.put(CurrencyType.EUR,new Loan(CurrencyType.EUR,0));
     }
 
     // Account:
@@ -117,14 +123,8 @@ public abstract class Account {
     //Deposit:
     abstract void makeDeposit(CurrencyType cType, double amount);
     abstract void withdrawal(CurrencyType cType, double amount);
-    public void transferTo()
+    public void transferTo(AccountType aType)
     {
-        //Ask user destination accountId
-
-        //Ask user type of currency
-
-        //Ask user amount
-
         //Charge a fee
 
         //Record above fee charging action into transactions

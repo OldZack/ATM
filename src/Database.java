@@ -46,7 +46,9 @@ public class Database {
     }
 
     public static void ReadUserFromLocal(String userName) throws IOException, URISyntaxException {
-        String path =curDir+"/"+userName+".json";
+        //String path =curDir+ "/ATM/"+userName+".json";
+
+        String path =curDir+ "/"+userName+".json";
 
         File f = new File(path);
 
@@ -79,8 +81,9 @@ public class Database {
 
     public static void WriteUserToLocal(String userName) throws IOException, URISyntaxException {
 
-        String path = curDir+ "/"+userName+".json";
+        //String path = curDir+ "/ATM/"+userName+".json";
 
+        String path =curDir+ "/"+userName+".json";
         File f = new File(path);
 
         if(!f.exists())

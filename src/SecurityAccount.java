@@ -89,6 +89,7 @@
  */
 public class SecurityAccount extends Account {
 
+
     //Constructor
     public SecurityAccount()
     {
