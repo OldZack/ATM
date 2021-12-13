@@ -86,4 +86,28 @@
  *
  */
 public class SecurityAccount extends Account {
+    @Override
+    void makeDeposit() {
+
+    }
+
+    @Override
+    void withdrawal() {
+
+    }
+
+    @Override
+    boolean requestLoan() {
+        return false;
+    }
+
+    @Override
+    void takeOutLoan() {
+
+    }
+
+    @Override
+    void payBackLoan() {
+
+    }
 }

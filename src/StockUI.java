@@ -8,14 +8,23 @@ public class StockUI extends JFrame{
     private JPanel panel;
     private JButton backButton;
     private JButton okButton;
+    private JButton searchButton;
+    private JLabel companyLabel;
+    private JTextField companyField;
+    private JTextArea info;
 
     public StockUI(){
         panel = new JPanel();
         backButton = new JButton("Back");
         okButton = new JButton("OK");
+        searchButton = new JButton("Search");
+
+        companyField = new JTextField(70);
+        companyLabel = new JLabel("Company Name: ");
+        info = new JTextArea();
 
         this.add(panel);
-        this.setTitle("Information Board");
+        this.setTitle("Stock Board");
         this.setSize(600, 400);
         this.setLocation(200, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,10 +34,24 @@ public class StockUI extends JFrame{
 
     private void Init(JPanel panel){
         panel.setLayout(null);
+
+        companyLabel.setBounds(75,20,100,35);
+        companyField.setBounds(175,20,200,35);
+
         okButton.setBounds(150,300,100,50);
         backButton.setBounds(350,300,100,50);
+        searchButton.setBounds(400, 20, 75, 30);
+        info.setBounds(100,60,400,200);
+
+        info.setEditable(false);
+        info.setText("test");
+
+        panel.add(companyLabel);
+        panel.add(companyField);
         panel.add(backButton);
         panel.add(okButton);
+        panel.add(searchButton);
+        panel.add(info);
 
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -48,6 +71,16 @@ public class StockUI extends JFrame{
                 new CustomerUI();
             }
         });
+
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new CustomerUI();
+            }
+        });
+
+
     }
 
 }
