@@ -1,86 +1,117 @@
-import javax.print.DocFlavor;
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.URISyntaxException;
-import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Class Database
  *
  *  Variables:
  *
+ *
+ *
+ *
+ *
+ *
  *  Constructors:
  *
  *  Methods:
  *
- *      List<String> ReadTransactionFromLocal(String fileName)
- *
- *      void WriteTransactionToLocal():
  *
  */
 
 
 public class Database {
 
-    private final static URL resource = ATM.class.getResource("Transactions.csv"); // xx.csv
+
+
+    private final static String curDir=  System.getProperty("user.dir");
+
+    private static List<User> users =  new ArrayList<User>() ;
+
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 
     // Empty constructor
     public Database() throws URISyntaxException {
     }
 
-    public static List<String> ReadTransactionFromLocal() throws IOException, URISyntaxException {
+    public static void ReadUserFromLocal() throws IOException, URISyntaxException {
 
-        String path = Paths.get(resource.toURI()).toString();
+        //reset
+        users =  new ArrayList<User>() ;
 
         //read
-        BufferedReader csvReader = new BufferedReader( new FileReader(path));
+        Reader reader = Files.newBufferedReader( Paths.get(curDir+ "/ATM/Users.json"));
 
-        //csvReader.readLine();// read command try to consume the first(Header) line
+        Type listOfUserObject = new TypeToken<ArrayList<Customer>>() {}.getType();
 
-        String row;
+        Gson gson = new Gson();
 
-        ArrayList<String> transactions = new ArrayList<String>();
+        List<User> outputList = gson.fromJson(reader, listOfUserObject);
 
-        while (( row = csvReader.readLine()) != null) {
-            //String oneTransaction = String.join(" ",row.split(",",5));
-            transactions.add(row);
+
+    if(outputList!=null)
+        for( User u : outputList)
+        {
+
+            // insert local record to list
+            users.add(u);
         }
-        csvReader.close();
-
-        return transactions;
+        reader.close();
 
     }
 
-    public static void WriteTransactionToLocal(String transaction) throws IOException, URISyntaxException {
+    public static void WriteUserToLocal() throws IOException, URISyntaxException {
 
-        String path = Paths.get(resource.toURI()).toString();
+        String path = curDir+ "/ATM/Users.json";
+
 
         //write
-        FileWriter csvWriter = new FileWriter(path, true);
+        FileWriter jsonWriter = new FileWriter(path,false);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        Gson gson = new Gson();
 
-        csvWriter.append((LocalDateTime.now().format(formatter)).toString() + "," + transaction + "\n");
 
-        csvWriter.flush();
-        csvWriter.close();
+
+        String jsonString = gson.toJson(users);
+
+        jsonWriter.append(jsonString);
+
+        jsonWriter.flush();
+        jsonWriter.close();
     }
-//    public static void main( String args[]) throws IOException, URISyntaxException {
-//        WriteTransactionToLocal("hello i am jeff");
-//        List<String > temp = ReadTransactionFromLocal();
-//
-//        for ( String s: temp)
-//        {
-//            System.out.println(s);
-//        }
-//
-//    }
+
+    public static List<User> getUsers() {
+        return users;
+    }
+    public static void addUser(User u)
+    {
+        users.add(u);
+    }
+
+    public static void setUsers(List<User> users) {
+        Database.users = users;
+    }
+
+    public static void main(String args[]) throws IOException, URISyntaxException {
+        User u = new Customer("alansun","alan");
+        Customer c = (Customer) u ;
+        c.createccount(AccountType.SAVING,CurrencyType.USD,100);
+        User u2 = new Customer("alan","alan");
+        Customer c2 = (Customer) u2 ;
+        c2.createccount(AccountType.SAVING,CurrencyType.USD,100);
+       // Transaction temp = new Transaction("hello",LocalDateTime.now(),CurrencyType.USD,200,ActionType.TRANSFEROUT,-100,100);
+        ReadUserFromLocal();
+        //WriteUserToLocal();
+        System.out.println(users.size());
+    }
 
     }

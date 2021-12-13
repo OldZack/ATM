@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -11,7 +12,7 @@ import java.time.LocalDate;
  *
  *              double amount:
  *
- *              LocalDate startDate: https://docs.oracle.com/javase/tutorial/datetime/iso/period.html
+ *              LocalDateTime startDate: https://docs.oracle.com/javase/tutorial/datetime/iso/period.html
  *
  *   Constructors:
  *
@@ -39,12 +40,13 @@ public class Deposit extends Currency{
     public Deposit()
     {
         super();
-        this.startDateOfLoan= LocalDate.now();; // Current date
+        this.startDate= LocalDateTime.now().format(Database.formatter);; // Current date
     }
+
     public Deposit( CurrencyType currencyType,double amount)
     {
         super();
-        this.startDateOfLoan= LocalDate.now();; // Current date
+        this.startDate= LocalDateTime.now().format(Database.formatter);; // Current date
         this.typeOfCurrency=currencyType;
         this.amount=amount;
     }

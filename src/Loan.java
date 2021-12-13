@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 /**
@@ -47,15 +48,22 @@ public class Loan extends Currency{
     {
         super();
         this.hasBeenWithdrawn=false;
-        this.startDateOfLoan= LocalDate.now();; // Current date
+        this.startDate= LocalDateTime.now().format(Database.formatter);; // Current date
     }
     public Loan( CurrencyType currencyType,double amount)
     {
         super();
         this.hasBeenWithdrawn=false;
-        this.startDateOfLoan= LocalDate.now();; // Current date
+        this.startDate= LocalDateTime.now().format(Database.formatter);; // Current date
         this.typeOfCurrency=currencyType;
         this.amount=amount;
     }
 
+    public boolean isHasBeenWithdrawn() {
+        return hasBeenWithdrawn;
+    }
+
+    public void setHasBeenWithdrawn(boolean hasBeenWithdrawn) {
+        this.hasBeenWithdrawn = hasBeenWithdrawn;
+    }
 }

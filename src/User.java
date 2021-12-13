@@ -23,6 +23,11 @@ public abstract class User {
     protected String userId;
     protected String password;
 
+    public User()
+    { this.userId = " ";
+        this.password = " ";
+
+    }
     public User(String userName, String password) {
         this.userId = userName;
         this.password = password;

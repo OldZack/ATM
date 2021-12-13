@@ -1,17 +1,15 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  *   Abstract Class Account
  *
  *   Variables:
  *
- *              enum ActionType:
- *                                  DEPOSIT, WITHDRAW,TRANSFEROUT,TRANSFERIN, REQUESTLOAN, TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
+ *
  *
  *              String accountId:
  *
@@ -19,7 +17,7 @@ import java.util.Map;
  *
  *              Map<CurrencyType,Loan>      loans:
  *
- *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
+ *              List<Transaction>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
  *              double depositInterestRate:
  *
@@ -76,36 +74,50 @@ import java.util.Map;
 
 
 public abstract class Account {
-    protected enum ActionType{
-        DEPOSIT,WITHDRAW,TRANSFEROUT,TRANSFERIN,REQUESTLOAN,TAKEOUTLOAN,PAYBACKLOAN, INTEREST, SERVICEFEE
-    }
+
     protected String accountId;
     protected Map<CurrencyType,Deposit> currenciesDeposit;
     protected Map<CurrencyType,Loan>  loans;
-    protected ArrayList<String>  transactions;
+    protected List<Transaction> transactions;
     protected double depositInterestRate=0.00001;
     protected double loanInterestRate=0.00001;
 
     public Account(){
         this.currenciesDeposit=new HashMap<CurrencyType,Deposit>();
         this.loans= new HashMap<CurrencyType,Loan>();
-        this.transactions= new ArrayList<String >();
+        this.transactions= new ArrayList<Transaction >();
     }
 
     // Account:
-    public void openAccount(){
+    public void openAccount(CurrencyType cType){
+        double fee = 5;
+
+
+        //Record  fee charging action into transactions
+        writeToTransactionsLog(cType,ActionType.OPENACCOUNT,-1*fee);
+
+        //Charge a fee
+        this.currenciesDeposit.get(cType).deductedBy(fee);
 
     }
 
-    public void closeAccount() {
+    public void closeAccount(CurrencyType cType) {
 
+        double fee = 5;
+
+
+        //Record  fee charging action into transactions
+        writeToTransactionsLog(cType,ActionType.CLOSEACCOUNT,-1*fee);
+
+        //Charge a fee
+        this.currenciesDeposit.get(cType).deductedBy(fee);
 
     }
 
 
     //Deposit:
-    abstract void makeDeposit();
-    abstract void withdrawal();
+    abstract void makeDeposit(CurrencyType cType, double amount);
+    abstract void withdrawal(CurrencyType cType, double amount);
     public void transferTo()
     {
         //Ask user destination accountId
@@ -132,9 +144,9 @@ public abstract class Account {
     }
 
     //Loan:
-    abstract boolean requestLoan();
-    abstract void takeOutLoan();
-    abstract void payBackLoan();
+    abstract boolean requestLoan(CurrencyType cType, double amount);
+    abstract void takeOutLoan(CurrencyType cType, double amount);
+    abstract void payBackLoan(CurrencyType cType, double amount);
 
     //DisplayInfo:
 //    abstract void viewTransactions();
@@ -151,7 +163,7 @@ public abstract class Account {
 
     {   double before,after;
         // Loan
-        if(AType ==ActionType.PAYBACKLOAN || AType ==ActionType.TAKEOUTLOAN||AType ==ActionType.REQUESTLOAN)
+        if(AType ==ActionType.PAYBACKLOAN ||AType ==ActionType.REQUESTLOAN)
         {
             before = loans.get(cType).getAmount();
              after = before + transAmount; // +/- positive or negative
@@ -162,10 +174,19 @@ public abstract class Account {
              after = before + transAmount; // +/- positive or negative
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        this.transactions.add( (LocalDateTime.now().format(formatter)).toString() +","+ cType.toString()+"," + before+","+ AType.toString()+","+ transAmount+","+ after);
+        this.transactions.add( new Transaction( this.accountId,LocalDateTime.now(), cType,before, AType,transAmount, after));
     }
+
+    public int calculatePeriod( String startDate)
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDate date = LocalDate.parse(startDate, formatter);
+        return Period.between(date,LocalDate.now()).getDays();
+    }
+
+
 
     public String getAccountId() {
         return accountId;
@@ -191,11 +212,11 @@ public abstract class Account {
         this.loans = loans;
     }
 
-    public ArrayList<String> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(ArrayList<String> transactions) {
+    public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 
