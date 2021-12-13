@@ -1,6 +1,10 @@
 
 /**
+<<<<<<< HEAD
  *   Predefined Abstract Class Account
+=======
+ *   Predefined  Abstract Class Account:
+>>>>>>> origin/zack
  *
  *   Variables:
  *

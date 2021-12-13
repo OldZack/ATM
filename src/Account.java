@@ -27,19 +27,21 @@ import java.util.*;
  *
  *
  *   Methods:
+<<<<<<< HEAD
+=======
  *
  *      Account:
- *              void openAccount(String accountType, String currencyType, double amount):
- *              Parameter: the account type, currency type, and initial deposit.
+ *              void openAccount():
  *
- *              void closeAccount(Account account):
+ *              void closeAccount():
  *
  *      Deposit:
- *              abstract void makeDeposit(Account account, double amount): maintain deposits in at least three different currencies
- *              Parameter: account(which account to deposit in), amount(the money to deposit)
+ *              abstract void makeDeposit(): maintain deposits in at least three different currencies
+>>>>>>> origin/zack
  *
- *              abstract void withdrawal(Account account, double amount): withdraw money from the account
+ *              abstract void withdrawal(): withdraw money from the account
  *
+<<<<<<< HEAD
  *              void transferTo(Account account, double amount): transfer money
  *
  *              void getTransferFrom(CurrencyType cType, double transAmount)
@@ -111,6 +113,7 @@ public abstract class Account {
 
         //Charge a fee
         this.currenciesDeposit.get(cType).deductedBy(fee);
+
 
     }
 

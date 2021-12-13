@@ -26,7 +26,7 @@ public class AccountUI extends JFrame{
         selectType = new JScrollPane(types);
 
         currencyType = new JLabel("Currency Type");
-        String []ct= {"USD","RMB","EUR"};
+        String []ct= {"USD","CNY","EUR"};
         currencyTypes = new JComboBox<String>(ct);
         selectCurrencyType = new JScrollPane(currencyTypes);
 
