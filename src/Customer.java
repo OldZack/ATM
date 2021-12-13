@@ -59,7 +59,7 @@ public class Customer extends User{
     }
 
 
-    public void  createccount(AccountType accountType, CurrencyType cType, double amount) throws IOException, URISyntaxException {
+    public void  createAccount(AccountType accountType, CurrencyType cType, double amount) throws IOException, URISyntaxException {
 
         switch(accountType)// set this.xxxAccount
         {

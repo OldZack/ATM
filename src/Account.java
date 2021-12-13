@@ -9,13 +9,11 @@ import java.util.*;
  *
  *   Variables:
  *
- *
- *
  *              String accountId:
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
- *              Map<CurrencyType,Loan>      loans:
+ *              Map<CurrencyType,Loan>     loans:
  *
  *              List<Transaction>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
@@ -27,8 +25,6 @@ import java.util.*;
  *
  *
  *   Methods:
-<<<<<<< HEAD
-=======
  *
  *      Account:
  *              void openAccount():

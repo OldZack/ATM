@@ -104,10 +104,10 @@ public class Database {
     public static void main(String args[]) throws IOException, URISyntaxException {
         User u = new Customer("alansun","alan");
         Customer c = (Customer) u ;
-        c.createccount(AccountType.SAVING,CurrencyType.USD,100);
+        c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
         User u2 = new Customer("alan","alan");
         Customer c2 = (Customer) u2 ;
-        c2.createccount(AccountType.SAVING,CurrencyType.USD,100);
+        c2.createAccount(AccountType.SAVING,CurrencyType.USD,100);
        // Transaction temp = new Transaction("hello",LocalDateTime.now(),CurrencyType.USD,200,ActionType.TRANSFEROUT,-100,100);
         ReadUserFromLocal();
         //WriteUserToLocal();
