@@ -57,20 +57,19 @@ public class Database {
 
     public static final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    private static List<Transaction>  transactionsOfOneDate = new ArrayList<Transaction>();
 
     // Empty constructor
     public Database() throws URISyntaxException {
     }
 
-    public static void ReadTransActionFromLocal(LocalDateTime date) throws IOException, URISyntaxException {
+    public static List<Transaction> ReadOneDateTransactionFromLocal(String date) throws IOException, URISyntaxException {
 
 
-        String dateName = date.format(formatter2).toString();
+
 
         //String path =curDir+ "/ATM/"+dateName+".json";
 
-        String path =curDir+ "/"+dateName+".json";
+        String path =curDir+ "/"+date+".json";
 
         File f = new File(path);
 
@@ -87,7 +86,6 @@ public class Database {
 
         Gson gson = new Gson();
 
-        transactionsOfOneDate= gson.fromJson(reader,listOfTransactionObject);
 
 
 //    if(outputList!=null)
@@ -99,9 +97,12 @@ public class Database {
 //        }
         reader.close();
 
+        return gson.fromJson(reader,listOfTransactionObject);
+
     }
 
-    public static void WriteTransactionLocal(LocalDateTime date) throws IOException, URISyntaxException {
+    public static void WriteTransactionLocal(LocalDateTime date, Transaction t) throws IOException, URISyntaxException {
+
 
         String dateName = date.format(formatter2).toString();
 
@@ -117,11 +118,11 @@ public class Database {
         }
 
         //write
-        FileWriter jsonWriter = new FileWriter(path,false);
+        FileWriter jsonWriter = new FileWriter(path,true);
 
         Gson gson = new Gson();
 
-        String jsonString = gson.toJson(transactionsOfOneDate);//https://www.baeldung.com/gson-list
+        String jsonString = gson.toJson(t);//https://www.baeldung.com/gson-list
 
         jsonWriter.append(jsonString);
 
@@ -201,6 +202,7 @@ public class Database {
         Database.users.put(u.getUserName(),u);
     }
 
+
     public static void main(String args[]) throws IOException, URISyntaxException {
         ReadUserFromLocal("C");
 //        User u = new Customer("C","alan");
@@ -210,8 +212,7 @@ public class Database {
 
         Customer c =  users.get("C");
         //c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
-        for( Transaction t : c.getSavingAccount().getTransactions())
-        System.out.println(t);
+
        // c.getSavingAccount().requestLoan(CurrencyType.USD,300);
 
         //WriteUserToLocal(c.getUserName());

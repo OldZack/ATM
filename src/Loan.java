@@ -60,7 +60,7 @@ public class Loan extends Currency{
         this.hasBeenWithdrawn=false;
         this.startDate= LocalDateTime.now().format(Database.formatter);; // Current date
         this.typeOfCurrency=currencyType;
-        this.amount=amount;
+        this.amount=-1*amount;
     }
 
     public boolean isHasBeenWithdrawn() {

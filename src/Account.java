@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -234,7 +236,16 @@ public abstract class Account {
 
         //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        this.transactions.add( new Transaction( this.accountId,LocalDateTime.now(), cType,before, AType,transAmount, after));
+        Transaction t =new Transaction( this.accountId,LocalDateTime.now(), cType,before, AType,transAmount, after);
+        this.transactions.add( t);
+
+        try {
+            Database.WriteTransactionLocal(LocalDateTime.now(),t);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     public int calculatePeriod( String startDate)
