@@ -106,26 +106,40 @@ public class Database {
 
         String dateName = date.format(formatter2).toString();
 
+
+
+
         //String path =curDir+ "/ATM/"+dateName+".json";
 
         String path =curDir+ "/"+dateName+".json";
 
         File f = new File(path);
 
+        List<Transaction> tempTransaction;
+
+        Gson gson = new Gson();
+
         if(!f.exists())
         {
             f.createNewFile();
+            tempTransaction = new ArrayList<Transaction>();
+            tempTransaction.add(t);
         }
+        else {
+            //try read previous
+            Reader reader = Files.newBufferedReader(Paths.get(path));
 
-        //read previous 
-        List<Transaction> tempTransaction = ReadOneDateTransactionFromLocal(dateName);
+            Type listOfTransactionObject = new TypeToken<ArrayList<Transaction>>() {
+            }.getType();
 
-        tempTransaction.add(t);
+            tempTransaction = gson.fromJson(reader, listOfTransactionObject);
 
+
+            tempTransaction.add(t);
+
+        }
         //write
         FileWriter jsonWriter = new FileWriter(path,false);
-
-        Gson gson = new Gson();
 
         String jsonString = gson.toJson(tempTransaction);//https://www.baeldung.com/gson-list
 
@@ -213,10 +227,11 @@ public class Database {
 //        User u = new Customer("C","alan");
 //        Customer c = (Customer) u ;
 //
-//        c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
 
         Customer c =  users.get("C");
+        //c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
         c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
+        WriteUserToLocal(c.getUserName());
 
        // c.getSavingAccount().requestLoan(CurrencyType.USD,300);
 
