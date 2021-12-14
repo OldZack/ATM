@@ -57,7 +57,7 @@ public class Database {
 
     public static final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    private static List<Transaction>  transactions = new ArrayList<Transaction>();
+    private static List<Transaction>  transactionsOfOneDate = new ArrayList<Transaction>();
 
     // Empty constructor
     public Database() throws URISyntaxException {
@@ -87,7 +87,7 @@ public class Database {
 
         Gson gson = new Gson();
 
-        transactions= gson.fromJson(reader,listOfTransactionObject);
+        transactionsOfOneDate= gson.fromJson(reader,listOfTransactionObject);
 
 
 //    if(outputList!=null)
@@ -121,7 +121,7 @@ public class Database {
 
         Gson gson = new Gson();
 
-        String jsonString = gson.toJson(transactions);//https://www.baeldung.com/gson-list
+        String jsonString = gson.toJson(transactionsOfOneDate);//https://www.baeldung.com/gson-list
 
         jsonWriter.append(jsonString);
 
