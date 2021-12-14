@@ -239,7 +239,9 @@ public class SavingAccount extends Account{
 
 
         //remove the loan from this.loans
-        this.loans.remove(cType);
+        if(this.loans.get(cType).getAmount() == 0){
+            this.loans.remove(cType);
+        }
     }
 
 
