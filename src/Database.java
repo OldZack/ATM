@@ -51,7 +51,7 @@ public class Database {
 
     private final static String curDir=  System.getProperty("user.dir");
 
-    private static Map<String,User> users =  new HashMap<String,User>() ;
+    private static Map<String,Customer> users =  new HashMap<String,Customer>() ;
 
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -120,21 +120,24 @@ public class Database {
         jsonWriter.close();
     }
 
-    public static Map<String, User> getUsers() {
+    public static Map<String, Customer> getUsers() {
         return users;
     }
 
-    public static void setUsers(Map<String, User> users) {
+    public static void setUsers(Map<String, Customer> users) {
         Database.users = users;
     }
-    public static void addUser(User u)
+    public static void addUser(Customer u)
     {
         Database.users.put(u.getUserName(),u);
     }
 
     public static void main(String args[]) throws IOException, URISyntaxException {
-        User u = new Customer("C","alan");
-        Customer c = (Customer) u ;
+        ReadUserFromLocal("C");
+        //User u = new Customer("C","alan");
+        //Customer c = (Customer) u ;
+
+        Customer c = (Customer) users.get("C");
         c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
 
         c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
@@ -144,7 +147,7 @@ public class Database {
 //        c2.createAccount(AccountType.SAVING,CurrencyType.USD,100);
 
        // Transaction temp = new Transaction("hello",LocalDateTime.now(),CurrencyType.USD,200,ActionType.TRANSFEROUT,-100,100);
-        ReadUserFromLocal("alan");
+
         //WriteUserToLocal();
         System.out.println(users.size());
 
