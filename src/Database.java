@@ -117,12 +117,17 @@ public class Database {
             f.createNewFile();
         }
 
+        //read previous 
+        List<Transaction> tempTransaction = ReadOneDateTransactionFromLocal(dateName);
+
+        tempTransaction.add(t);
+
         //write
-        FileWriter jsonWriter = new FileWriter(path,true);
+        FileWriter jsonWriter = new FileWriter(path,false);
 
         Gson gson = new Gson();
 
-        String jsonString = gson.toJson(t);//https://www.baeldung.com/gson-list
+        String jsonString = gson.toJson(tempTransaction);//https://www.baeldung.com/gson-list
 
         jsonWriter.append(jsonString);
 
@@ -211,7 +216,7 @@ public class Database {
 //        c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
 
         Customer c =  users.get("C");
-        //c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
+        c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
 
        // c.getSavingAccount().requestLoan(CurrencyType.USD,300);
 
