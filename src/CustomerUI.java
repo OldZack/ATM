@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CustomerUI extends JFrame{
     private JPanel panel;
@@ -13,6 +17,10 @@ public class CustomerUI extends JFrame{
     private JButton loanButton;
     private JButton stockButton;
     private JButton logOutButton;
+    private JLabel time;
+    private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private static String temp = df.format(new Date());
+    ATM atm = ATM.getInstance();
 
     public CustomerUI(){
 
@@ -26,6 +34,7 @@ public class CustomerUI extends JFrame{
         loanButton = new JButton("Loan");
         stockButton = new JButton("Stock");
         logOutButton = new JButton("Log Out");
+        time = new JLabel();
 
         this.setTitle("Customer Board");
         this.add(panel);
@@ -38,17 +47,18 @@ public class CustomerUI extends JFrame{
 
     public void Init(JPanel panel){
         panel.setLayout(null);
+        time.setText(temp);
         textLabel.setBounds(300,175,100,50);
         createAccountButton.setBounds(0,40,150,50);
         saveButton.setBounds(0,130,150,50);
         withdrawButton.setBounds(0,220,150,50);
         transactionButton.setBounds(0,310,150,50);
-
         informationButton.setBounds(450,40,150,50);
         loanButton.setBounds(450,130,150,50);
         stockButton.setBounds(450,220,150,50);
         logOutButton.setBounds(450,310,150,50);
-
+        time.setBounds(10,10,200,30);
+        panel.add(time);
         panel.add(textLabel);
         panel.add(createAccountButton);
         panel.add(saveButton);
@@ -116,6 +126,15 @@ public class CustomerUI extends JFrame{
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                Customer c = (Customer) atm.getCurrUser();
+                try {
+                    Database.WriteUserToLocal(c.getUserName());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (URISyntaxException ex) {
+                    ex.printStackTrace();
+                }
                 dispose();
                 new WelcomeUI();
             }

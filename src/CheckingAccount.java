@@ -138,7 +138,7 @@ public class CheckingAccount extends Account {
         this.currenciesDeposit.get(cType).deductedBy(fee);
 
         //Record Deposit action into transactions
-        writeToTransactionsLog(cType,ActionType.WITHDRAW,amount);
+        writeToTransactionsLog(cType,ActionType.WITHDRAW,-1*amount);
 
         // Perform actual balance decrement at this.currenciesDeposit
         this.currenciesDeposit.get(cType).deductedBy(amount);

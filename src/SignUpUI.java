@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class SignUpUI extends JFrame{
 
@@ -15,7 +18,10 @@ public class SignUpUI extends JFrame{
     private JPasswordField passwordField;
     private JPasswordField confirmField;
     private String type;
+    private JLabel time;
     ATM atm = ATM.getInstance();
+    private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private static String temp = df.format(new Date());
 
 
     public SignUpUI(int identity) {
@@ -34,6 +40,7 @@ public class SignUpUI extends JFrame{
         confirmField = new JPasswordField(200);
         okButton = new JButton("OK");
         backButton = new JButton("Back");
+        time = new JLabel();
 
 
         this.setTitle("Sign Up Board");
@@ -48,7 +55,7 @@ public class SignUpUI extends JFrame{
     private void Init(JPanel panel){
 
         panel.setLayout(null);
-
+        time.setText(temp);
         idLabel.setBounds(60,50,150,40);
         passwordLabel.setBounds(60,110,150,40);
         confirmLabel.setBounds(60,170,150,40);
@@ -57,8 +64,9 @@ public class SignUpUI extends JFrame{
         confirmField.setBounds(250,170,200,40);
         okButton.setBounds(175,280,100,50);
         backButton.setBounds(325,280,100,50);
+        time.setBounds(10,10,200,30);
 
-
+        panel.add(time);
         panel.add(idLabel);
         panel.add(passwordLabel);
         panel.add(confirmLabel);
@@ -76,19 +84,31 @@ public class SignUpUI extends JFrame{
                 String confirm = String.valueOf(confirmField.getPassword());
                 if( password.length() == 0 || userId.length() == 0) {
                     JOptionPane.showMessageDialog(null, "Empty username or password! Please try again.", "Sign Up Error", JOptionPane.ERROR_MESSAGE);
+                    dispose();
+                    if (type.equalsIgnoreCase("Customer")){
+                        new SignUpUI(1);
+                    } else{
+                        new SignUpUI(2);
+                    }
                 }
 
-                if (!password.equals(confirm)){
+                else if (!password.equals(confirm)){
                     JOptionPane.showMessageDialog(null, "Password Inconsistent! Please try again.", "Sign Up Error", JOptionPane.ERROR_MESSAGE);
+                    dispose();
+                    if (type.equalsIgnoreCase("Customer")){
+                        new SignUpUI(1);
+                    } else{
+                        new SignUpUI(2);
+                    }
                 }
 
-                if (type.equalsIgnoreCase("Customer")){
+                else if (type.equalsIgnoreCase("Customer")){
                     atm.getCustomerDao().addCustomer(new Customer(userId, password));
                     JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     dispose();
                     new LoginUI(1);
                 }
-                else{
+                else if (type.equalsIgnoreCase("Manager")){
                     atm.getManagerDao().addManager(new Manager(userId, password));
                     JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     dispose();
@@ -105,3 +125,6 @@ public class SignUpUI extends JFrame{
         });
     }
 }
+
+
+

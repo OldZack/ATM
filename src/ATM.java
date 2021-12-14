@@ -43,6 +43,8 @@ public class ATM {
         this.managerDao = new ManagerDaoImpl();
     }
 
+    public User getCurrUser() { return currUser;}
+
     public CustomerDao getCustomerDao(){return customerDao; }
 
     public ManagerDao getManagerDao(){return managerDao; }
