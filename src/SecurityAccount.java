@@ -95,9 +95,9 @@ public class SecurityAccount extends Account {
     {
 
     }
-    public SecurityAccount(CurrencyType cType, double amount)
+    public SecurityAccount(CurrencyType cType, double amount,String ownerName)
     {
-        super();
+        super( ownerName);
         this.currenciesDeposit.put(cType,new Deposit(cType,  amount));
         openAccount(cType);
 

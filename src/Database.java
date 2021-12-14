@@ -3,6 +3,7 @@ import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,6 +85,7 @@ public class Database {
         //String path = curDir+ "/ATM/"+userName+".json";
 
         String path =curDir+ "/"+userName+".json";
+
         File f = new File(path);
 
         if(!f.exists())
@@ -129,6 +131,9 @@ public class Database {
        // ReadUserFromLocal("alan");
         //WriteUserToLocal();
         System.out.println(users.size());
+
+
+        System.out.println(LocalDateTime.now().format(Database.formatter).toString());
     }
 
     }

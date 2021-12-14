@@ -71,8 +71,12 @@ import java.util.*;
 
 
 
+
+
+
 public abstract class Account {
 
+    protected String ownerName;
     protected String accountId;
     protected Map<CurrencyType,Deposit> currenciesDeposit;
     protected Map<CurrencyType,Loan>  loans;
@@ -81,6 +85,19 @@ public abstract class Account {
     protected double loanInterestRate=0.00001;
 
     public Account(){
+        this.currenciesDeposit=new HashMap<CurrencyType,Deposit>();
+        this.loans= new HashMap<CurrencyType,Loan>();
+        this.transactions= new ArrayList<Transaction >();
+        this.currenciesDeposit.put(CurrencyType.USD,new Deposit(CurrencyType.USD,0));
+        this.currenciesDeposit.put(CurrencyType.CNY,new Deposit(CurrencyType.CNY,0));
+        this.currenciesDeposit.put(CurrencyType.EUR,new Deposit(CurrencyType.EUR,0));
+        this.loans.put(CurrencyType.USD,new Loan(CurrencyType.USD,0));
+        this.loans.put(CurrencyType.CNY,new Loan(CurrencyType.CNY,0));
+        this.loans.put(CurrencyType.EUR,new Loan(CurrencyType.EUR,0));
+    }
+
+    public Account(String ownerName){
+        this.ownerName= ownerName;
         this.currenciesDeposit=new HashMap<CurrencyType,Deposit>();
         this.loans= new HashMap<CurrencyType,Loan>();
         this.transactions= new ArrayList<Transaction >();
@@ -123,24 +140,67 @@ public abstract class Account {
     //Deposit:
     abstract void makeDeposit(CurrencyType cType, double amount);
     abstract void withdrawal(CurrencyType cType, double amount);
-    public void transferTo(AccountType aType)
-    {
-        //Charge a fee
 
-        //Record above fee charging action into transactions
+    public void transferTo(AccountType aType,CurrencyType cType,double amount)
+    {
+        double fee = 5;
+
+        //Saving to Security special term apply
+        if(this instanceof SavingAccount && aType ==AccountType.SECURITY )
+        {
+            SavingAccount s = (SavingAccount) this;
+            if(s.willBeLowBalance(amount+fee))
+                return;
+
+        }
+
+        //Record  fee charging action into transactions
+        writeToTransactionsLog(cType,ActionType.CLOSEACCOUNT,-1*fee);
+
+        //Charge a fee
+        this.currenciesDeposit.get(cType).deductedBy(fee);
 
         //Record TRANSFEROUT action into transactions
+        writeToTransactionsLog(cType, ActionType.TRANSFEROUT,-1*amount);
 
         // Perform actual balance decrement at this.currenciesDeposit
+        this.currenciesDeposit.get(cType).deductedBy(amount);
 
-    }
-    public void getTransferFrom(CurrencyType cType, double transAmount)
-    {
+        Account receiver;
+
+        switch (aType)
+        {
+            case SAVING -> {
+                receiver= ((Customer)Database.getUsers().get(ownerName)).getSavingAccount();
+                break;
+            }
+
+            case CHECKING -> {
+                receiver= ((Customer)Database.getUsers().get(ownerName)).getCheckingAccount();
+                break;
+            }
+
+            case SECURITY -> {
+                receiver= ((Customer)Database.getUsers().get(ownerName)).getSecurityAccount();
+                break;
+            }
+
+            default -> receiver= this;
+        }
+
         //Record TRANSFERIN action into transactions
+        receiver.writeToTransactionsLog(cType, ActionType.TRANSFERIN,amount);
 
-        // Perform actual balance decrement at this.currenciesDeposit
-
+        // Perform actual balance increment at this.currenciesDeposit
+        receiver.currenciesDeposit.get(cType).increasedBy(amount);
     }
+//    public void getTransferFrom(AccountType aType,CurrencyType cType, double transAmount)
+//    {
+//        //Record TRANSFERIN action into transactions
+//
+//        // Perform actual balance decrement at this.currenciesDeposit
+//
+//    }
 
     //Loan:
     abstract boolean requestLoan(CurrencyType cType, double amount);

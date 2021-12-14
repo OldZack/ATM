@@ -104,9 +104,9 @@ public class SavingAccount extends Account{
     {
 
     }
-    public SavingAccount(CurrencyType cType, double amount)
+    public SavingAccount(CurrencyType cType, double amount,String ownerName)
     {
-        super();
+        super( ownerName);
         this.currenciesDeposit.put(cType,new Deposit(cType,  amount));
         openAccount(cType);
 

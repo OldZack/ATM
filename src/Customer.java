@@ -54,6 +54,31 @@ public class Customer extends User{
     private CheckingAccount checkingAccount;
     private SecurityAccount securityAccount;
 
+    public SavingAccount getSavingAccount() {
+        return savingAccount;
+    }
+
+    public void setSavingAccount(SavingAccount savingAccount) {
+        this.savingAccount = savingAccount;
+    }
+
+    public CheckingAccount getCheckingAccount() {
+        return checkingAccount;
+    }
+
+    public void setCheckingAccount(CheckingAccount checkingAccount) {
+        this.checkingAccount = checkingAccount;
+    }
+
+    public SecurityAccount getSecurityAccount() {
+        return securityAccount;
+    }
+
+    public void setSecurityAccount(SecurityAccount securityAccount) {
+        this.securityAccount = securityAccount;
+    }
+
+
     public Customer(String customerId, String password){
         super(customerId, password);
     }
@@ -63,11 +88,53 @@ public class Customer extends User{
 
         switch(accountType)// set this.xxxAccount
         {
-            case SAVING ->   this.savingAccount = new SavingAccount(cType, amount);
+            case SAVING -> {
+                this.savingAccount = new SavingAccount(cType, amount,this.getUserName());
 
-            case CHECKING -> this.checkingAccount = new CheckingAccount(cType, amount);
+                break;
+            }
 
-            case SECURITY -> this.securityAccount = new SecurityAccount(cType, amount);
+            case CHECKING -> {
+                this.checkingAccount = new CheckingAccount(cType, amount,this.getUserName());
+                break;
+            }
+
+            case SECURITY -> {
+                this.securityAccount = new SecurityAccount(cType, amount,this.getUserName());
+                break;
+            }
+        }
+
+        // update to database
+        if(Database.getUsers().get(this.getUserName())==null) {
+            Database.addUser(this);
+        }
+
+        Database.WriteUserToLocal(this.getUserName());
+
+    }
+
+    public void  close(AccountType accountType, CurrencyType cType) throws IOException, URISyntaxException
+    {
+        switch(accountType)// set this.xxxAccount
+        {
+            case SAVING -> {
+                this.savingAccount.closeAccount(cType);
+                this.savingAccount=null;
+                break;
+            }
+
+            case CHECKING -> {
+                this.checkingAccount.closeAccount(cType);
+                this.checkingAccount=null;
+                break;
+            }
+
+            case SECURITY -> {
+                this.securityAccount.closeAccount(cType);
+                this.securityAccount=null;
+                break;
+            }
         }
 
         // update to database
