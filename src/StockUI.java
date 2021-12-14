@@ -2,6 +2,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class StockUI extends JFrame{
 
@@ -12,13 +14,17 @@ public class StockUI extends JFrame{
     private JLabel companyLabel;
     private JTextField companyField;
     private JTextArea info;
+    private JLabel time;
+    private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private static String temp = df.format(new Date());
+    ATM atm = ATM.getInstance();
 
     public StockUI(){
         panel = new JPanel();
         backButton = new JButton("Back");
         okButton = new JButton("OK");
         searchButton = new JButton("Search");
-
+        time = new JLabel();
         companyField = new JTextField(70);
         companyLabel = new JLabel("Company Name: ");
         info = new JTextArea();
@@ -35,17 +41,18 @@ public class StockUI extends JFrame{
     private void Init(JPanel panel){
         panel.setLayout(null);
 
+        info.setEditable(false);
+        info.setText("test");
+        time.setText(temp);
+
         companyLabel.setBounds(75,20,100,35);
         companyField.setBounds(175,20,200,35);
-
         okButton.setBounds(150,300,100,50);
         backButton.setBounds(350,300,100,50);
         searchButton.setBounds(400, 20, 75, 30);
         info.setBounds(100,60,400,200);
-
-        info.setEditable(false);
-        info.setText("test");
-
+        time.setBounds(10,10,200,30);
+        panel.add(time);
         panel.add(companyLabel);
         panel.add(companyField);
         panel.add(backButton);
@@ -84,3 +91,5 @@ public class StockUI extends JFrame{
     }
 
 }
+
+

@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class LoginUI extends JFrame{
@@ -15,6 +17,9 @@ public class LoginUI extends JFrame{
     private JPasswordField passwordField;
     private String ID;
     private JButton signUpButton;
+    private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private static String temp = df.format(new Date());
+    private JLabel time;
     ATM atm = ATM.getInstance();
 
 
@@ -33,6 +38,7 @@ public class LoginUI extends JFrame{
         loginButton = new JButton("Login");
         backButton = new JButton("Back");
         signUpButton = new JButton("Sign Up");
+        time = new JLabel();
 
         this.setTitle(ID + " Login Board");
         this.add(panel);
@@ -46,6 +52,7 @@ public class LoginUI extends JFrame{
     private void Init(JPanel panel){
 
         panel.setLayout(null);
+        time.setText(temp);
 
         idLabel.setBounds(150,75,100,35);
         passwordLabel.setBounds(150,125,100,35);
@@ -54,10 +61,8 @@ public class LoginUI extends JFrame{
         loginButton.setBounds(100,250,100,50);
         backButton.setBounds(400,250,100,50);
         signUpButton.setBounds(250,250,100,50);
-//        loginButton.setForeground(Color.BLUE);
-//        loginButton.setBackground(Color.BLUE);
-//        backButton.setForeground(Color.CYAN);
-
+        time.setBounds(10,10,200,30);
+        panel.add(time);
         panel.add(idLabel);
         panel.add(passwordLabel);
         panel.add(idField);

@@ -2,6 +2,10 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AccountUI extends JFrame{
     private JPanel panel;
@@ -16,6 +20,11 @@ public class AccountUI extends JFrame{
     private JLabel notice;
     private JButton okButton;
     private JButton backButton;
+    private JLabel time;
+    private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    private static String temp = df.format(new Date());
+    ATM atm = ATM.getInstance();
+
 
     public AccountUI()
     {
@@ -36,6 +45,7 @@ public class AccountUI extends JFrame{
 
         okButton = new JButton("OK");
         backButton = new JButton("Back");
+        time = new JLabel();
 
         this.add(panel);
         this.setTitle("Create Account Board");
@@ -53,6 +63,7 @@ public class AccountUI extends JFrame{
         selectType.setBounds(250,40,200,40);
         currencyType.setBounds(100,110,100,40);
         selectCurrencyType.setBounds(250,110,200,40);
+        time.setText(temp);
 //        String content = "";
 //        content += "Since a fee will be charged for creating an account, ";
 //        content += System.lineSeparator();
@@ -64,7 +75,8 @@ public class AccountUI extends JFrame{
         notice.setBounds(100,250,400,40);
         okButton.setBounds(150,280,100,50);
         backButton.setBounds(350,280,100,50);
-
+        time.setBounds(10,10,200,30);
+        panel.add(time);
         panel.add(accountType);
         panel.add(selectType);
         panel.add(currencyType);
@@ -78,6 +90,66 @@ public class AccountUI extends JFrame{
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String typeTemp = types.getItemAt(types.getSelectedIndex());
+                String currencyTemp = currencyTypes.getItemAt(currencyTypes.getSelectedIndex());
+                double amountTemp = Double.valueOf(amount.getText()).doubleValue();
+                System.out.println(typeTemp);
+                System.out.println(currencyTemp);
+                System.out.println(amountTemp);
+
+                Customer currUser = (Customer) atm.getCurrUser();
+                CurrencyType cTemp;
+                AccountType aTemp;
+
+                switch (typeTemp){
+//                    case "Checking" -> {
+//                        aTemp = AccountType.CHECKING;
+//                        break;
+//                    }
+                    case "Saving" -> {
+                        aTemp = AccountType.SAVING;
+                        break;
+                    }
+                    case "Security" -> {
+                        aTemp = AccountType.SECURITY;
+                        break;
+                    }
+                    default -> {
+                        aTemp = AccountType.CHECKING;
+                        break;
+                    }
+                }
+
+                switch (currencyTemp){
+                    case "USD" -> {
+                        cTemp = CurrencyType.USD;
+                        break;
+                    }
+//                    case "CNY" -> {
+//                        cTemp = CurrencyType.CNY;
+//                        break;
+//                    }
+
+                    case "EUR" -> {
+                        cTemp = CurrencyType.EUR;
+                        break;
+                    }
+                    default -> {
+                        cTemp = CurrencyType.CNY;
+                        break;
+                    }
+                }
+
+
+                try {
+                    currUser.createAccount(aTemp, cTemp, amountTemp);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (URISyntaxException ex) {
+                    ex.printStackTrace();
+                }
+
+
                 dispose();
                 JOptionPane.showMessageDialog(null, "Account Created Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 new CustomerUI();
@@ -93,4 +165,9 @@ public class AccountUI extends JFrame{
         });
     }
 }
+
+
+
+
+
 
