@@ -95,9 +95,11 @@ public class Database {
 //            // insert local record to list
 //            users.add(u);
 //        }
+        List<Transaction> result =gson.fromJson(reader,listOfTransactionObject);
+
         reader.close();
 
-        return gson.fromJson(reader,listOfTransactionObject);
+        return result;
 
     }
 
@@ -136,6 +138,8 @@ public class Database {
 
 
             tempTransaction.add(t);
+
+            reader.close();
 
         }
         //write
@@ -223,18 +227,22 @@ public class Database {
 
 
     public static void main(String args[]) throws IOException, URISyntaxException {
-        ReadUserFromLocal("C");
+       // ReadUserFromLocal("C");
 //        User u = new Customer("C","alan");
 //        Customer c = (Customer) u ;
 //
 
-        Customer c =  users.get("C");
+  //     Customer c =  users.get("C");
         //c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
-        c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
-        WriteUserToLocal(c.getUserName());
+//        c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
+//        WriteUserToLocal(c.getUserName());
 
        // c.getSavingAccount().requestLoan(CurrencyType.USD,300);
 
+//        for(Transaction t :ReadOneDateTransactionFromLocal ("2021-12-14"))
+//        {
+//            System.out.println(t.toString());
+//        }
         //WriteUserToLocal(c.getUserName());
 //        User u2 = new Customer("B","alan");
 //        Customer c2 = (Customer) u2 ;
