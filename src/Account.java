@@ -154,7 +154,7 @@ public abstract class Account {
         }
 
         //Record  fee charging action into transactions
-        writeToTransactionsLog(cType,ActionType.CLOSEACCOUNT,-1*fee);
+        writeToTransactionsLog(cType,ActionType.SERVICEFEE,-1*fee);
 
         //Charge a fee
         this.currenciesDeposit.get(cType).deductedBy(fee);

@@ -134,13 +134,13 @@ public class Database {
 
     public static void main(String args[]) throws IOException, URISyntaxException {
         ReadUserFromLocal("C");
-        //User u = new Customer("C","alan");
-        //Customer c = (Customer) u ;
-        // c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
+        User u = new Customer("C","alan");
+        Customer c = (Customer) u ;
 
-        Customer c = (Customer) users.get("C");
+        c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
 
-        //c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
+        //Customer c =  users.get("C");
+        c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
        // c.getSavingAccount().requestLoan(CurrencyType.USD,300);
 
         //WriteUserToLocal(c.getUserName());
