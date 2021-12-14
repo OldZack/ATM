@@ -8,6 +8,7 @@ import java.util.*;
  *   Abstract Class Account
  *
  *   Variables:
+ *              String ownerName:
  *
  *              String accountId:
  *
@@ -22,25 +23,25 @@ import java.util.*;
  *              double loanInterestRate:
  *
  *   Constructors:
+ *              Account():
  *
+ *              Account(String ownerName):
  *
  *   Methods:
  *
  *      Account:
- *              void openAccount():
+ *              void openAccount(CurrencyType cType):  start an account with deposit in cType currency
  *
- *              void closeAccount():
+ *              void closeAccount(CurrencyType cType):
  *
  *      Deposit:
  *              abstract void makeDeposit(): maintain deposits in at least three different currencies
->>>>>>> origin/zack
  *
  *              abstract void withdrawal(): withdraw money from the account
  *
-<<<<<<< HEAD
- *              void transferTo(Account account, double amount): transfer money
+ *              void transferTo(AccountType aType, CurrencyType cType,double amount): transfer money
  *
- *              void getTransferFrom(CurrencyType cType, double transAmount)
+ *
  *     Loan:
  *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
@@ -50,21 +51,19 @@ import java.util.*;
  *
  *      DisplayInfo:
  *
- *              abstract void viewTransactions():
+ *              //abstract void viewTransactions():
  *
- *              abstract void viewCurrentBalance():
+ *              //abstract void viewCurrentBalance():
  *
  *      Helpers:
  *
- *              void writeToTransactionsLog(CurrencyType cType,ActionType AType, double transAmount):
+ *              void writeToTransactionsLogCurrencyType cType,ActionType AType, double transAmount)
  *
  *              double calculateInterest( double interestRate, int durationDays, double baseAmountMoney):
  *
- *              void beingCharged(CurrencyType cType ,double fee):  being charged a fee
+ *              int calculatePeriod( String startDate):
  *
- *                                                    1.every time an account is opened or closed
- *                                                    2.every time a checking account transaction is made
- *                                                    3.every time any withdrawal is made
+ *              getters & setters
  *
  *
  */

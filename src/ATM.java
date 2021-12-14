@@ -18,11 +18,11 @@
  *
  *   Methods:
  *
- *              boolean login():   prompt user + password, return true if valid, false otherwise
+ *              boolean customerLogin(String customerID, String password){
  *
- *              void registerNewCustomer():     Add a new Customer object to DataBase
+ *              boolean managerLogin(String managerID, String password){
  *
- *              void askNewActionAfterLogin():
+ *
  *
  *
  *
@@ -67,20 +67,5 @@ public class ATM {
         return true;
     }
 
-    public void askNewActionAfterLogin()
-    {
-        if(currAccount instanceof CheckingAccount)
-        {
 
-        }
-        else if(currAccount instanceof  SavingAccount)
-        {
-
-        }
-        else if (currAccount instanceof SecurityAccount)
-        {
-
-        }
-
-    }
 }

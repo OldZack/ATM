@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  *
  *              double amount:
  *
- *              LocalDate startDate: https://docs.oracle.com/javase/tutorial/datetime/iso/period.html
+ *              String startDate: LocalDateTime formatted
  *
  *   Constructors:
  *
@@ -21,8 +21,12 @@ import java.time.LocalDateTime;
  *                                  empty constructor
  *
  *   Methods:
- *              getters & setters
  *
+ *              void deductedBy(double d):
+ *
+ *              void increasedBy(double d):
+ *
+ *              getters & setters
  *
  *  ---------------------------------------------------------------------------------------------------------------------
  * Class Loan:

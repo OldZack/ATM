@@ -3,42 +3,40 @@
  *   Predefined Abstract Class Account
  *
  *   Variables:
- *
- *              enum ActionType:
- *                                  DEPOSIT, WITHDRAW,TRANSFEROUT,TRANSFERIN, REQUESTLOAN, TAKEOUTLOAN,  PAYBACKLOAN, INTEREST, SERVICEFEE
+ *              String ownerName:
  *
  *              String accountId:
  *
  *              Map<CurrencyType,Deposit> currenciesDeposit:
  *
- *              Map<CurrencyType,Loan>      loans:
+ *              Map<CurrencyType,Loan>     loans:
  *
- *              ArrayList<String>  transactions:  date ,currencyType, before, action type, transaction amount, after
+ *              List<Transaction>  transactions:  date ,currencyType, before, action type, transaction amount, after
  *
  *              double depositInterestRate:
  *
  *              double loanInterestRate:
  *
  *   Constructors:
+ *              Account():
  *
+ *              Account(String ownerName):
  *
  *   Methods:
  *
  *      Account:
- *              void openAccount(String accountType, String currencyType, double amount):
- *              Parameter: the account type, currency type, and initial deposit.
+ *              void openAccount(CurrencyType cType):  start an account with deposit in cType currency
  *
- *              void closeAccount(Account account):
+ *              void closeAccount(CurrencyType cType):
  *
  *      Deposit:
- *              abstract void makeDeposit(Account account, double amount): maintain deposits in at least three different currencies
- *              Parameter: account(which account to deposit in), amount(the money to deposit)
+ *              abstract void makeDeposit(): maintain deposits in at least three different currencies
  *
- *              abstract void withdrawal(Account account, double amount): withdraw money from the account
+ *              abstract void withdrawal(): withdraw money from the account
  *
- *              void transferTo(Account account, double amount): transfer money
+ *              void transferTo(AccountType aType, CurrencyType cType,double amount): transfer money
  *
- *              void getTransferFrom(CurrencyType cType, double transAmount)
+ *
  *     Loan:
  *              abstract boolean requestLoan(): request loan, return true if request get approved, otherwise false
  *
@@ -48,21 +46,19 @@
  *
  *      DisplayInfo:
  *
- *              abstract void viewTransactions():
+ *              //abstract void viewTransactions():
  *
- *              abstract void viewCurrentBalance():
+ *              //abstract void viewCurrentBalance():
  *
  *      Helpers:
  *
- *              void writeToTransactionsLog(CurrencyType cType,ActionType AType, double transAmount):
+ *              void writeToTransactionsLogCurrencyType cType,ActionType AType, double transAmount)
  *
  *              double calculateInterest( double interestRate, int durationDays, double baseAmountMoney):
  *
- *              void beingCharged(CurrencyType cType ,double fee):  being charged a fee
+ *              int calculatePeriod( String startDate):
  *
- *                                                    1.every time an account is opened or closed
- *                                                    2.every time a checking account transaction is made
- *                                                    3.every time any withdrawal is made
+ *              getters & setters
  *
  *
  * ---------------------------------------------------------------------------------------------------------------------
@@ -72,9 +68,24 @@
  *
  *   Constructors:
  *
+ *              CheckingAccount():
+ *
+ *              CheckingAccount(CurrencyType cType, double amount,String ownerName):
+ *
+ *                  Note: cType just the currency type of the first deposit made. One CheckingAccount can have 3 types of currency deposits at the same time.
+ *
  *
  *   Methods:
  *
+ *              void makeDeposit(CurrencyType cType, double amount):
+ *
+ *              void withdrawal(CurrencyType cType, double amount):
+ *
+ *              boolean requestLoan(CurrencyType cType, double amount):
+ *
+ *              void takeOutLoan(CurrencyType cType,double amount):
+ *
+ *              void payBackLoan(CurrencyType cType,double amount):
  *
  *
  *
@@ -85,6 +96,8 @@ public class CheckingAccount extends Account {
     //Constructor
     public CheckingAccount()
     {
+        super();
+
 
     }
     public CheckingAccount(CurrencyType cType, double amount,String ownerName)

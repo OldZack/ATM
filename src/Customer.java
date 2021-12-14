@@ -42,7 +42,9 @@ import java.util.List;
  *
  *   Methods:
  *
- *              createccount(AccountType accountType, CurrencyType cType, double amount):
+ *              createAccount(AccountType accountType, CurrencyType cType, double amount):
+ *
+ *              closeAccount(AccountType accountType, CurrencyType cType):
  *
  */
 
@@ -114,7 +116,7 @@ public class Customer extends User{
 
     }
 
-    public void  close(AccountType accountType, CurrencyType cType) throws IOException, URISyntaxException
+    public void  closeAccount(AccountType accountType, CurrencyType cType) throws IOException, URISyntaxException
     {
         switch(accountType)// set this.xxxAccount
         {

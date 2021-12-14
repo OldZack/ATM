@@ -3,6 +3,36 @@ import java.time.format.DateTimeFormatter;
 
 /**
  *  Class Transaction:
+ *
+ *  Variables:
+ *
+ *          static final DateTimeFormatter formatter
+ *
+ *          String accountId:
+ *
+ *          String evenTime:
+ *
+ *          CurrencyType currencyType:
+ *
+ *          double before:
+ *
+ *          ActionType actionType:
+ *
+ *          double transactionAmount:
+ *
+ *          double after:
+ *
+ *  Constructor:
+ *                  Transaction():
+ *
+ *
+ *                  Transaction( String accountId,LocalDateTime evenTime, CurrencyType currencyType, double before, ActionType actionType,double transactionAmount, double after)
+ *
+ *  Methods:
+ *
+ *            @override String toString()
+ *
+ *            getters & setters
  */
 
 public class Transaction {
@@ -22,6 +52,8 @@ public class Transaction {
     private double after;
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    public Transaction(){};
 
     public Transaction( String accountId,LocalDateTime evenTime, CurrencyType currencyType, double before, ActionType actionType,double transactionAmount, double after)
     {

@@ -17,16 +17,30 @@ import com.google.gson.reflect.TypeToken;
  * Class Database
  *
  *  Variables:
+ *              final static String curDir: System.getProperty("user.dir")
  *
+ *              static Map<String,User> users:  these User s are indeed all Customer s
  *
- *
- *
+ *              static final DateTimeFormatter formatter:
  *
  *
  *  Constructors:
  *
+ *          Database():
+ *
  *  Methods:
  *
+ *          void ReadUserFromLocal(String userName):
+ *
+ *                  try to read userName.json from local, if not found create such a file
+ *
+ *         void WriteUserToLocal(String userName):
+ *
+ *                 try to write userName.json from local, if not found create such a file then write
+ *
+ *         void addUser(User u):
+ *
+ *                  add a new User to users
  *
  */
 
@@ -47,9 +61,9 @@ public class Database {
     }
 
     public static void ReadUserFromLocal(String userName) throws IOException, URISyntaxException {
-        //String path =curDir+ "/ATM/"+userName+".json";
+        String path =curDir+ "/ATM/"+userName+".json";
 
-        String path =curDir+ "/"+userName+".json";
+        //String path =curDir+ "/"+userName+".json";
 
         File f = new File(path);
 
@@ -82,9 +96,9 @@ public class Database {
 
     public static void WriteUserToLocal(String userName) throws IOException, URISyntaxException {
 
-        //String path = curDir+ "/ATM/"+userName+".json";
+        String path = curDir+ "/ATM/"+userName+".json";
 
-        String path =curDir+ "/"+userName+".json";
+        //String path =curDir+ "/"+userName+".json";
 
         File f = new File(path);
 
@@ -128,7 +142,7 @@ public class Database {
         c2.createAccount(AccountType.SAVING,CurrencyType.USD,100);
 
        // Transaction temp = new Transaction("hello",LocalDateTime.now(),CurrencyType.USD,200,ActionType.TRANSFEROUT,-100,100);
-       // ReadUserFromLocal("alan");
+        ReadUserFromLocal("alan");
         //WriteUserToLocal();
         System.out.println(users.size());
 
