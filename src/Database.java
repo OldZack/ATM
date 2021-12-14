@@ -136,12 +136,14 @@ public class Database {
         ReadUserFromLocal("C");
         //User u = new Customer("C","alan");
         //Customer c = (Customer) u ;
+        // c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
 
         Customer c = (Customer) users.get("C");
-        c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
 
-        c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
-        WriteUserToLocal(c.getUserName());
+        //c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
+       // c.getSavingAccount().requestLoan(CurrencyType.USD,300);
+
+        //WriteUserToLocal(c.getUserName());
 //        User u2 = new Customer("B","alan");
 //        Customer c2 = (Customer) u2 ;
 //        c2.createAccount(AccountType.SAVING,CurrencyType.USD,100);
