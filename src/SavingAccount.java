@@ -117,6 +117,23 @@ public class SavingAccount extends Account{
     //Deposit:
     public void makeDeposit(CurrencyType cType, double amount)
     {
+
+        //interest
+        if(reachBalanceToGainInterest()) // apply only to USD
+        {
+
+            //calculate
+            int duration = calculatePeriod(this.currenciesDeposit.get(cType).getStartDate());
+            double baseAmount = this.currenciesDeposit.get(cType).getAmount();
+            double interest = calculateInterest(depositInterestRate,duration, baseAmount);
+
+            //log
+            writeToTransactionsLog(cType,ActionType.INTEREST,interest);
+
+            //actual increment
+            this.currenciesDeposit.get(cType).increasedBy(interest);
+        }
+
         //Record Deposit action into transactions
         writeToTransactionsLog(cType,ActionType.DEPOSIT,amount);
 

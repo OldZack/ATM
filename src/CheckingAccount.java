@@ -109,7 +109,9 @@ public class CheckingAccount extends Account {
     }
     //Deposit:
     public void makeDeposit(CurrencyType cType, double amount)
-    {   double fee = 1;
+    {
+
+        double fee = 1;
 
         //Record  fee charging action into transactions
         writeToTransactionsLog(cType,ActionType.SERVICEFEE,-1*fee);

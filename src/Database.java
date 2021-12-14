@@ -61,9 +61,9 @@ public class Database {
     }
 
     public static void ReadUserFromLocal(String userName) throws IOException, URISyntaxException {
-        String path =curDir+ "/ATM/"+userName+".json";
+        //String path =curDir+ "/ATM/"+userName+".json";
 
-        //String path =curDir+ "/"+userName+".json";
+        String path =curDir+ "/"+userName+".json";
 
         File f = new File(path);
 
@@ -96,9 +96,9 @@ public class Database {
 
     public static void WriteUserToLocal(String userName) throws IOException, URISyntaxException {
 
-        String path = curDir+ "/ATM/"+userName+".json";
+        //String path = curDir+ "/ATM/"+userName+".json";
 
-        //String path =curDir+ "/"+userName+".json";
+        String path =curDir+ "/"+userName+".json";
 
         File f = new File(path);
 
@@ -135,11 +135,13 @@ public class Database {
     public static void main(String args[]) throws IOException, URISyntaxException {
         User u = new Customer("C","alan");
         Customer c = (Customer) u ;
-
         c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
-        User u2 = new Customer("B","alan");
-        Customer c2 = (Customer) u2 ;
-        c2.createAccount(AccountType.SAVING,CurrencyType.USD,100);
+
+        c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
+        WriteUserToLocal(c.getUserName());
+//        User u2 = new Customer("B","alan");
+//        Customer c2 = (Customer) u2 ;
+//        c2.createAccount(AccountType.SAVING,CurrencyType.USD,100);
 
        // Transaction temp = new Transaction("hello",LocalDateTime.now(),CurrencyType.USD,200,ActionType.TRANSFEROUT,-100,100);
         ReadUserFromLocal("alan");
