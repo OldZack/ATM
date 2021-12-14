@@ -55,9 +55,78 @@ public class Database {
 
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    public static final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    private static List<Transaction>  transactions = new ArrayList<Transaction>();
 
     // Empty constructor
     public Database() throws URISyntaxException {
+    }
+
+    public static void ReadTransActionFromLocal(LocalDateTime date) throws IOException, URISyntaxException {
+
+
+        String dateName = date.format(formatter2).toString();
+
+        //String path =curDir+ "/ATM/"+dateName+".json";
+
+        String path =curDir+ "/"+dateName+".json";
+
+        File f = new File(path);
+
+        if(!f.exists())
+        {
+            f.createNewFile();
+        }
+
+
+        //read
+        Reader reader = Files.newBufferedReader( Paths.get(path));
+
+        Type listOfTransactionObject = new TypeToken<ArrayList<Transaction>>() {}.getType();
+
+        Gson gson = new Gson();
+
+        transactions= gson.fromJson(reader,listOfTransactionObject);
+
+
+//    if(outputList!=null)
+//        for( User u : outputList)
+//        {
+//
+//            // insert local record to list
+//            users.add(u);
+//        }
+        reader.close();
+
+    }
+
+    public static void WriteTransactionLocal(LocalDateTime date) throws IOException, URISyntaxException {
+
+        String dateName = date.format(formatter2).toString();
+
+        //String path =curDir+ "/ATM/"+dateName+".json";
+
+        String path =curDir+ "/"+dateName+".json";
+
+        File f = new File(path);
+
+        if(!f.exists())
+        {
+            f.createNewFile();
+        }
+
+        //write
+        FileWriter jsonWriter = new FileWriter(path,false);
+
+        Gson gson = new Gson();
+
+        String jsonString = gson.toJson(transactions);//https://www.baeldung.com/gson-list
+
+        jsonWriter.append(jsonString);
+
+        jsonWriter.flush();
+        jsonWriter.close();
     }
 
     public static void ReadUserFromLocal(String userName) throws IOException, URISyntaxException {
@@ -134,13 +203,15 @@ public class Database {
 
     public static void main(String args[]) throws IOException, URISyntaxException {
         ReadUserFromLocal("C");
-        User u = new Customer("C","alan");
-        Customer c = (Customer) u ;
+//        User u = new Customer("C","alan");
+//        Customer c = (Customer) u ;
+//
+//        c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
 
-        c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
-
-        //Customer c =  users.get("C");
-        c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
+        Customer c =  users.get("C");
+        //c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
+        for( Transaction t : c.getSavingAccount().getTransactions())
+        System.out.println(t);
        // c.getSavingAccount().requestLoan(CurrencyType.USD,300);
 
         //WriteUserToLocal(c.getUserName());
@@ -154,7 +225,7 @@ public class Database {
         System.out.println(users.size());
 
 
-        System.out.println(LocalDateTime.now().format(Database.formatter).toString());
+        //System.out.println(LocalDateTime.now().format(Database.formatter).toString());
     }
 
     }
