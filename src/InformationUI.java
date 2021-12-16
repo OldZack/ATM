@@ -1,9 +1,11 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.awt.Color;
 
 public class InformationUI extends JFrame{
 
@@ -14,6 +16,8 @@ public class InformationUI extends JFrame{
     private JTextArea transaction;
     private JButton backButton;
     private JLabel time;
+    private JLabel accountHeader;
+    private JLabel transHeader;
     private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     private static String content = df.format(new Date());
     private ArrayList<Transaction> transList;
@@ -28,10 +32,14 @@ public class InformationUI extends JFrame{
         info = new JTextArea();
         transaction = new JTextArea();
         transList = new ArrayList<Transaction>();
+        accountHeader = new JLabel();
+        transHeader = new JLabel();
+        account.setForeground(Color.BLUE);
+        trans.setForeground(Color.BLUE);
 
         this.add(panel);
         this.setTitle("Information Board");
-        this.setSize(800, 600);
+        this.setSize(800, 700);
         this.setLocation(200, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -40,18 +48,7 @@ public class InformationUI extends JFrame{
 
     private void Init(JPanel panel){
 
-
         String temp = "";
-//        for (Map.Entry<String,Customer> entry : Database.getUsers().entrySet()) {
-//            //Customer object
-//
-//            Customer cs = entry.getValue();
-//
-//            //Name
-//            String cName = cs.getUserName();
-
-            //Deposit and loan
-
         Customer cs = (Customer) atm.getCurrUser();
         String cName = cs.getUserName();
         double cSavingBalance,cCheckingBalance,cSecurityBalance;
@@ -60,7 +57,7 @@ public class InformationUI extends JFrame{
             cSavingBalance = cs.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
             cSavingLoan = cs.getSavingAccount().getLoans().get(CurrencyType.USD).getAmount();
             temp += cName;
-            temp += "  Saving  ";
+            temp += "  Saving Account  ";
             temp += "  " + cSavingBalance + "  ";
             temp += "  " + cSavingLoan;
             temp += "\n";
@@ -69,7 +66,7 @@ public class InformationUI extends JFrame{
             cCheckingBalance=cs.getCheckingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
             cCheckingLoan=cs.getCheckingAccount().getLoans().get(CurrencyType.USD).getAmount();
             temp += cName;
-            temp += "  Checking  ";
+            temp += "  Checking Account  ";
             temp += "  " + cCheckingBalance + "  ";
             temp += "  " + cCheckingLoan;
             temp += "\n";
@@ -79,20 +76,28 @@ public class InformationUI extends JFrame{
             cSecurityBalance = cs.getSecurityAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
             cSecurityLoan = cs.getSecurityAccount().getLoans().get(CurrencyType.USD).getAmount();
             temp += cName;
-            temp += "  Security  ";
+            temp += "  Security Account  ";
             temp += "  " + cSecurityBalance + "  ";
             temp += "  " + cSecurityLoan;
             temp += "\n";
         }
 
-        Customer c = (Customer) atm.getCurrUser();
-        transList.addAll(c.getCheckingAccount().getTransactions());
-        transList.addAll(c.getSavingAccount().getTransactions());
-        transList.addAll(c.getSecurityAccount().getTransactions());
+
+        if (cs.getCheckingAccount() != null){
+            transList.addAll(cs.getCheckingAccount().getTransactions());
+        }
+        if (cs.getSavingAccount() != null){
+            transList.addAll(cs.getSavingAccount().getTransactions());
+        }
+        if (cs.getSecurityAccount() != null){
+            transList.addAll(cs.getSecurityAccount().getTransactions());
+        }
 
         String tr = "";
-        for (Transaction t : transList){
-            tr += (t.toString()) + "\n";
+        if (!transList.isEmpty()){
+            for (Transaction t : transList){
+                tr += (t.toString()) + "\n";
+            }
         }
 
         panel.setLayout(null);
@@ -101,14 +106,21 @@ public class InformationUI extends JFrame{
         time.setText(content);
         info.setText(temp);
         transaction.setText(tr);
+        accountHeader.setText("Name  |  Account Type  |  Balance  |  Load");
+        transHeader.setText("Name  |  Account Type  |  Transaction Time  |  Currency  |  Original  |  Action  |  Fee  |  Balance");
 
-        backButton.setBounds(250,300,100,50);
+
+        backButton.setBounds(350,620,100,50);
         time.setBounds(10,10,200,30);
-        account.setBounds(100,30,200,30);
-        info.setBounds(100,80,600,150);
-        trans.setBounds(100,270,200,30);
-        transaction.setBounds(100,300,600,150);
+        account.setBounds(100,30,200,20);
+        accountHeader.setBounds(100,70,600,20);
+        info.setBounds(100,90,600,100);
+        trans.setBounds(100,210,200,20);
+        transHeader.setBounds(100,250,600,20);
+        transaction.setBounds(100,270,600,330);
 
+        panel.add(accountHeader);
+        panel.add(transHeader);
         panel.add(transaction);
         panel.add(account);
         panel.add(trans);

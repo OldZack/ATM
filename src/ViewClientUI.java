@@ -42,7 +42,7 @@ public class ViewClientUI extends JFrame{
 
     private void Init(JPanel panel){
 
-
+        panel.setLayout(null);
         String temp = "";
         for (Map.Entry<String,Customer> entry : Database.getUsers().entrySet()) {
             //Customer object
@@ -84,13 +84,14 @@ public class ViewClientUI extends JFrame{
                 temp += "\n";
             }
         }
-        panel.setLayout(null);
+
         clientList.setEditable(false);
         time.setText(content);
         header.setText("Customer Name  |  Account  |  Balance  |  Loan");
 
         clientList.setText(temp);
         list.setBounds(100,20,200,30);
+        list.setForeground(Color.BLUE);
         header.setBounds(100,70,400,20);
         clientList.setBounds(100,100,400,200);
         backButton.setBounds(250,320,100,50);

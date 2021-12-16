@@ -44,7 +44,8 @@ public class WelcomeUI extends JFrame{
 
         panel.setLayout(null);
         time.setText(temp);
-
+        welcomeLabel.setForeground(Color.BLUE);
+        identityLabel.setForeground(Color.BLUE);
 
         welcomeLabel.setBounds(200,50,300,100);
         identityLabel.setBounds(225,75,300,100);

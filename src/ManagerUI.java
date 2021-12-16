@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class ManagerUI extends JFrame{
 
     public ManagerUI(){
         panel = new JPanel();
-        textLabel = new JLabel("Welcome");
+        textLabel = new JLabel();
         viewClientButton = new JButton("View Client");
         dailyReportButton = new JButton("Daily Report");
         logOutButton = new JButton("Log Out");
@@ -36,8 +37,11 @@ public class ManagerUI extends JFrame{
 
     public void Init(JPanel panel){
         panel.setLayout(null);
+        String TC = "Welcome " + atm.getCurrUser().getUserName();
         time.setText(temp);
-        textLabel.setBounds(200,40,200,40);
+        textLabel.setText(TC);
+        textLabel.setForeground(Color.BLUE);
+        textLabel.setBounds(200,50,200,40);
         viewClientButton.setBounds(200,160,200,40);
         dailyReportButton.setBounds(200,240,200,40);
         logOutButton.setBounds(200,320,200,40);
