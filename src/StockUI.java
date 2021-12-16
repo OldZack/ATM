@@ -58,13 +58,13 @@ public class StockUI extends JFrame{
 
         time.setText(temp);
 
-        companyLabel.setBounds(75,20,100,35);
-        companyField.setBounds(175,20,200,35);
+        companyLabel.setBounds(80,25,200,35);
+        companyField.setBounds(185,25,200,35);
 
-        buyButton.setBounds(100,300,100,50);
-        sellButton.setBounds(225, 300, 100, 50);
-        backButton.setBounds(350,300,100,50);
-        searchButton.setBounds(400, 20, 75, 30);
+        buyButton.setBounds(120,300,100,50);
+        sellButton.setBounds(245, 300, 100, 50);
+        backButton.setBounds(370,300,100,50);
+        searchButton.setBounds(400, 25, 75, 30);
         time.setBounds(10,10,200,30);
         stockInfo.setBounds(100,75, 400,200);
         stockInfo.setLineWrap(true);

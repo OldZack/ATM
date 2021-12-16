@@ -52,8 +52,8 @@ public class ViewStockUI extends JFrame{
 
         time.setText(temp);
 
-        companyLabel.setBounds(75,20,100,35);
-        companyField.setBounds(175,20,200,35);
+        companyLabel.setBounds(80,20,200,35);
+        companyField.setBounds(185,20,200,35);
 
         backButton.setBounds(250,300,100,50);
         searchButton.setBounds(400, 20, 75, 30);
