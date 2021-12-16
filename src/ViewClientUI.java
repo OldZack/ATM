@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class ViewClientUI extends JFrame{
 
@@ -16,8 +17,9 @@ public class ViewClientUI extends JFrame{
     private JButton backButton;
     private JLabel list;
     private JTextArea clientList;
+    private JLabel header;
     private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-    private static String temp = df.format(new Date());
+    private static String content = df.format(new Date());
     private JLabel time;
     ATM atm = ATM.getInstance();
 
@@ -27,6 +29,7 @@ public class ViewClientUI extends JFrame{
         list = new JLabel("Clients Information");
         clientList = new JTextArea();
         time = new JLabel();
+        header = new JLabel();
 
         this.add(panel);
         this.setTitle("Client Info Board");
@@ -38,19 +41,63 @@ public class ViewClientUI extends JFrame{
     }
 
     private void Init(JPanel panel){
+
+
+        String temp = "";
+        for (Map.Entry<String,Customer> entry : Database.getUsers().entrySet()) {
+            //Customer object
+
+            Customer cs = entry.getValue();
+
+            //Name
+            String cName = cs.getUserName();
+
+            //Deposit and loan
+            double cSavingBalance,cCheckingBalance,cSecurityBalance;
+            double cSavingLoan,cCheckingLoan,cSecurityLoan;
+            if(cs.getSavingAccount()!=null) {
+                cSavingBalance = cs.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
+                cSavingLoan = cs.getSavingAccount().getLoans().get(CurrencyType.USD).getAmount();
+                temp += cName;
+                temp += "  Saving  ";
+                temp += "  " + cSavingBalance + "  ";
+                temp += "  " + cSavingLoan;
+                temp += "\n";
+            }
+            if(cs.getCheckingAccount()!=null) {
+                cCheckingBalance=cs.getCheckingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
+                cCheckingLoan=cs.getCheckingAccount().getLoans().get(CurrencyType.USD).getAmount();
+                temp += cName;
+                temp += "  Checking  ";
+                temp += "  " + cCheckingBalance + "  ";
+                temp += "  " + cCheckingLoan;
+                temp += "\n";
+            }
+
+            if(cs.getSecurityAccount()!=null) {
+                cSecurityBalance = cs.getSecurityAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
+                cSecurityLoan = cs.getSecurityAccount().getLoans().get(CurrencyType.USD).getAmount();
+                temp += cName;
+                temp += "  Security  ";
+                temp += "  " + cSecurityBalance + "  ";
+                temp += "  " + cSecurityLoan;
+                temp += "\n";
+            }
+        }
         panel.setLayout(null);
         clientList.setEditable(false);
-        String content = "";
-        content += "Index" + " | " + "CustomerID" + " | " + "Balance" + " | " + "Loan";
-        content += System.lineSeparator();
-        time.setText(temp);
+        time.setText(content);
+        header.setText("Customer Name  |  Account  |  Balance  |  Loan");
 
-        clientList.setText(content);
-        list.setBounds(100,30,200,30);
-        clientList.setBounds(100,80,400,200);
-        backButton.setBounds(250,300,100,50);
+        clientList.setText(temp);
+        list.setBounds(100,20,200,30);
+        header.setBounds(100,70,400,20);
+        clientList.setBounds(100,100,400,200);
+        backButton.setBounds(250,320,100,50);
         time.setBounds(10,10,200,30);
+
         panel.add(time);
+        panel.add(header);
         panel.add(list);
         panel.add(clientList);
         panel.add(backButton);

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -58,7 +60,13 @@ public class ManagerUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new DailyReportUI();
+                try {
+                    new DailyReportUI();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (URISyntaxException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 

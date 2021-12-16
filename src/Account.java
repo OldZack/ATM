@@ -249,8 +249,8 @@ public abstract class Account {
             accountId_tail="SecurityAccount";
         }
 
-        Transaction t =new Transaction( this.ownerName+"'s"+accountId_tail,LocalDateTime.now(), cType,before, AType,transAmount, after);
-        this.transactions.add( t);
+        Transaction t =new Transaction( this.ownerName+"'s  " + accountId_tail,LocalDateTime.now(), cType,before, AType,transAmount, after);
+        this.transactions.add(t);
 
         try {
             Database.WriteTransactionLocal(LocalDateTime.now(),t);
