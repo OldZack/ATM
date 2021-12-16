@@ -63,7 +63,6 @@ public class BuyStockUI extends JFrame {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Here");
                 int num = Integer.parseInt(amount.getText().trim());
                 if (num == 0 || num > currentStock.getVolume()){
                     JOptionPane.showMessageDialog(null, "Incorrect Stock Amount!", "Failed", JOptionPane.INFORMATION_MESSAGE);

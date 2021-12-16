@@ -174,7 +174,6 @@ public class Customer extends User{
         s.changeAvgPrice(s.getPrice());
         this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount - s.getPrice()*num);
         stocks.add(s);
-        System.out.println(stocks);
         return true;
     }
 
