@@ -239,10 +239,10 @@ public class Database {
 
        // c.getSavingAccount().requestLoan(CurrencyType.USD,300);
 
-//        for(Transaction t :ReadOneDateTransactionFromLocal ("2021-12-14"))
-//        {
-//            System.out.println(t.toString());
-//        }
+        for(Transaction t :ReadOneDateTransactionFromLocal ("2021-12-14"))
+        {
+            System.out.println(t.toString());
+        }
         //WriteUserToLocal(c.getUserName());
 //        User u2 = new Customer("B","alan");
 //        Customer c2 = (Customer) u2 ;
