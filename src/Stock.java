@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 /**
  *   Class Stock :
@@ -64,13 +65,13 @@ public class Stock implements Comparable<Stock> {
         return volume;
     }
 
-    public String print () {
-        return "Symbol: " + this.companyName + "\nPrice: " + this.price + "\nVolume: " + this.volume + "\nYour Holding: " + this.holding + "\nYour Profit:   " + this.holding*(this.price-this.avgPrice);
+    public String toString () {
+        return "Symbol: " + this.companyName + "\nPrice: " + this.price + "\nVolume: " + this.volume + "\nYour Holding: " + this.holding + "\nYour Profit:   " + (double) this.holding*(this.price-this.avgPrice);
     }
 
     @Override
     public int compareTo (Stock o){
-        if (this.companyName == o.companyName) {
+        if (Objects.equals(this.companyName, o.companyName)) {
             return 0;
         }
         return 1;

@@ -115,7 +115,10 @@ public class StockUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String CompanyName = companyField.getText().trim();
-                String path = "https://financialmodelingprep.com/api/v3/quote-short/"+ CompanyName + "?apikey=8c2e87d9de958123a08420ecd0c747bf";
+
+                String path = "https://financialmodelingprep.com/api/v3/search-name?query=meta&limit=10&exchange=NASDAQ&apikey=8c2e87d9de958123a08420ecd0c747bf";
+
+                path = "https://financialmodelingprep.com/api/v3/quote-short/"+ CompanyName + "?apikey=8c2e87d9de958123a08420ecd0c747bf";
                 URL url = null;
                 try {
                     url = new URL(path);
@@ -136,8 +139,13 @@ public class StockUI extends JFrame{
                         int volume = new JsonParser().parse(result).getAsJsonArray().get(0).getAsJsonObject().get("volume").getAsInt();
                         double price = new JsonParser().parse(result).getAsJsonArray().get(0).getAsJsonObject().get("price").getAsDouble();
                         s = new Stock(name, volume, price);
-                        System.out.println(s);
-                        stockInfo.setText(s.print());
+                        stockInfo.setText(s.toString());
+                        for (Stock st : c.getStocks()){
+                            if (st.compareTo(s) == 0){
+                                stockInfo.setText(st.toString());
+                            }
+                        }
+
 //                        l = new DefaultListModel<>();
 //                        l.addElement(s.print());
 //                        stockList = new JList<String>(l);

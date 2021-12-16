@@ -156,12 +156,13 @@ public class Customer extends User{
     }
 
     public boolean add_stock(Stock s, int num){
+        System.out.println();
         double amount = this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
         if (s.getPrice()*num > amount){
             return false;
         }
         for (Stock o : stocks){
-            if (o == s){
+            if (o.compareTo(s) == 0){
                 double totalValue = o.getAvgPrice()*o.getHolding();
                 o.add_holding(num);
                 o.changeAvgPrice((totalValue + num*s.getPrice())/o.getHolding());
@@ -173,13 +174,14 @@ public class Customer extends User{
         s.changeAvgPrice(s.getPrice());
         this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount - s.getPrice()*num);
         stocks.add(s);
+        System.out.println(stocks);
         return true;
     }
 
     public boolean remove_stock(Stock s, int num){
         double amount = this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
         for (Stock o : stocks){
-            if (o == s){
+            if (o.compareTo(s) == 0){
                 if (num > o.getHolding()){
                     return false;
                 }

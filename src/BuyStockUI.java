@@ -38,10 +38,10 @@ public class BuyStockUI extends JFrame {
         panel.setLayout(null);
 
         info.setEditable(false);
-        info.setText(currentStock.print());
+        info.setText(currentStock.toString());
         for (Stock st : c.getStocks()){
-            if (st == currentStock){
-                info.setText(st.print());
+            if (st.compareTo(currentStock) == 0){
+                info.setText(st.toString());
             }
         }
 
