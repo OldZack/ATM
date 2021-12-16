@@ -30,20 +30,34 @@ public class Stock implements Comparable<Stock> {
     private int volume;
     private int holding;
     private double price;
+    private double avgPrice;
 
     Stock(String n, int vol, double pri) throws IOException {
         this.companyName = n;
         this.volume = vol;
         this.price = pri;
         this.holding = 0;
+        this.avgPrice = 0;
     }
 
     public void add_holding ( int hol){
         this.holding += hol;
     }
 
+    public void changeAvgPrice( double p ){ avgPrice = p; }
+
     public double getPrice () {
         return price;
+    }
+
+    public void setPrice( double p ) { this.price = p; }
+
+    public int getHolding () {
+        return holding;
+    }
+
+    public double getAvgPrice () {
+        return avgPrice;
     }
 
     public double getVolume () {
@@ -51,7 +65,7 @@ public class Stock implements Comparable<Stock> {
     }
 
     public String print () {
-        return "Symbol: " + this.companyName + "  Price: " + this.price + " Volume: " + this.volume;
+        return "Symbol: " + this.companyName + "\nPrice: " + this.price + "\nVolume: " + this.volume + "\nYour Holding: " + this.holding + "\nYour Profit:   " + this.holding*(this.price-this.avgPrice);
     }
 
     @Override

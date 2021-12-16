@@ -68,9 +68,4 @@ public class ATM {
         currUser = manager;
         return true;
     }
-
-
-    public User getCurrentUser() {
-        return currUser;
-    }
 }

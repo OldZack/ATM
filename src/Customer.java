@@ -82,6 +82,10 @@ public class Customer extends User{
         this.securityAccount = securityAccount;
     }
 
+    public ArrayList<Stock> getStocks() {
+        return stocks;
+    }
+
 
     public Customer(String customerId, String password){
         super(customerId, password);
@@ -152,21 +156,43 @@ public class Customer extends User{
     }
 
     public boolean add_stock(Stock s, int num){
-        double amount = this.securityAccount.getCurrenciesDeposit().get("USD").getAmount();
+        double amount = this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
         if (s.getPrice()*num > amount){
             return false;
         }
         for (Stock o : stocks){
             if (o == s){
+                double totalValue = o.getAvgPrice()*o.getHolding();
                 o.add_holding(num);
-                this.securityAccount.getCurrenciesDeposit().get("USD").setAmount(amount - s.getPrice()*num);
-                return false;
+                o.changeAvgPrice((totalValue + num*s.getPrice())/o.getHolding());
+                this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount - s.getPrice()*num);
+                return true;
             }
         }
         s.add_holding(num);
-        this.securityAccount.getCurrenciesDeposit().get("USD").setAmount(amount - s.getPrice()*num);
+        s.changeAvgPrice(s.getPrice());
+        this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount - s.getPrice()*num);
         stocks.add(s);
         return true;
+    }
+
+    public boolean remove_stock(Stock s, int num){
+        double amount = this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
+        for (Stock o : stocks){
+            if (o == s){
+                if (num > o.getHolding()){
+                    return false;
+                }
+                else{
+                    double totalValue = o.getAvgPrice()*o.getHolding();
+                    o.add_holding(-num);
+                    o.changeAvgPrice((totalValue - num*s.getPrice())/o.getHolding());
+                    this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount + s.getPrice()*num);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 

@@ -12,7 +12,7 @@ public class BuyStockUI extends JFrame {
     private JTextField amount;
     private JTextArea info;
     private Stock currentStock;
-    Customer c = (Customer) ATM.getInstance().getCurrentUser();
+    Customer c = (Customer) ATM.getInstance().getCurrUser();
 
     public BuyStockUI(Stock s){
         panel = new JPanel();
@@ -39,6 +39,11 @@ public class BuyStockUI extends JFrame {
 
         info.setEditable(false);
         info.setText(currentStock.print());
+        for (Stock st : c.getStocks()){
+            if (st == currentStock){
+                info.setText(st.print());
+            }
+        }
 
         okButton.setBounds(150,300,100,50);
         backButton.setBounds(350,300,100,50);
@@ -60,12 +65,11 @@ public class BuyStockUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Here");
                 int num = Integer.parseInt(amount.getText().trim());
-                System.out.println(num);
                 if (num == 0 || num > currentStock.getVolume()){
                     JOptionPane.showMessageDialog(null, "Incorrect Stock Amount!", "Failed", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
-                    if (!c.add_stock(currentStock, Integer.parseInt(amount.getText().trim()))){
+                    if (!c.add_stock(currentStock, num)){
                         JOptionPane.showMessageDialog(null, "Not Enough Balance!", "Failed", JOptionPane.INFORMATION_MESSAGE);
                     }
                     else{

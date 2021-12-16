@@ -119,8 +119,14 @@ public class CustomerUI extends JFrame{
         stockButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                new StockUI();
+                Customer c = (Customer)atm.getCurrUser();
+                if (c.getSecurityAccount() == null){
+                    JOptionPane.showMessageDialog(null, "You need a security account to invest in stocks.", "No Stock Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    dispose();
+                    new StockUI();
+                }
             }
         });
         logOutButton.addActionListener(new ActionListener() {

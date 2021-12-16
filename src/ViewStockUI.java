@@ -13,13 +13,11 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class StockUI extends JFrame{
+public class ViewStockUI extends JFrame{
 
     private JPanel panel;
     private JButton backButton;
-    private JButton sellButton;
     private JButton searchButton;
-    private JButton buyButton;
     private JLabel companyLabel;
     private JTextField companyField;
     //private JList stockList;
@@ -29,15 +27,11 @@ public class StockUI extends JFrame{
     private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     private static String temp = df.format(new Date());
 
-    //DefaultListModel<String> l;
-    Customer c = (Customer) ATM.getInstance().getCurrUser();
-    Stock s = null;
+    DefaultListModel<String> l;
 
-    public StockUI(){
+    public ViewStockUI(){
         panel = new JPanel();
         backButton = new JButton("Back");
-        buyButton = new JButton("Buy");
-        sellButton = new JButton("Sell");
         searchButton = new JButton("Search");
         time = new JLabel();
         companyField = new JTextField(70);
@@ -61,9 +55,7 @@ public class StockUI extends JFrame{
         companyLabel.setBounds(75,20,100,35);
         companyField.setBounds(175,20,200,35);
 
-        buyButton.setBounds(100,300,100,50);
-        sellButton.setBounds(225, 300, 100, 50);
-        backButton.setBounds(350,300,100,50);
+        backButton.setBounds(250,300,100,50);
         searchButton.setBounds(400, 20, 75, 30);
         time.setBounds(10,10,200,30);
         stockInfo.setBounds(100,75, 400,200);
@@ -72,42 +64,14 @@ public class StockUI extends JFrame{
         panel.add(companyLabel);
         panel.add(companyField);
         panel.add(backButton);
-        panel.add(buyButton);
-        panel.add(sellButton);
         panel.add(searchButton);
         panel.add(stockInfo);
-
-        buyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (s == null){
-                    JOptionPane.showMessageDialog(null, "Please search the stock you want to buy.", "No Stock Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else{
-                    dispose();
-                    new BuyStockUI(s);
-                }
-            }
-        });
-
-        sellButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (s == null){
-                    JOptionPane.showMessageDialog(null, "Please search the stock you want to sell.", "No Stock Error", JOptionPane.ERROR_MESSAGE);
-                }
-                else{
-                    dispose();
-                    new SellStockUI(s);
-                }
-            }
-        });
 
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new CustomerUI();
+                new ManagerUI();
             }
         });
 
@@ -135,11 +99,10 @@ public class StockUI extends JFrame{
                         String name = new JsonParser().parse(result).getAsJsonArray().get(0).getAsJsonObject().get("symbol").getAsString();
                         int volume = new JsonParser().parse(result).getAsJsonArray().get(0).getAsJsonObject().get("volume").getAsInt();
                         double price = new JsonParser().parse(result).getAsJsonArray().get(0).getAsJsonObject().get("price").getAsDouble();
-                        s = new Stock(name, volume, price);
-                        System.out.println(s);
-                        stockInfo.setText(s.print());
+                        String str = "Symbol: " + name + "  Price: " + price + " Volume: " + volume;
+                        stockInfo.setText(str);
 //                        l = new DefaultListModel<>();
-//                        l.addElement(s.print());
+//                        l.addElement(str);
 //                        stockList = new JList<String>(l);
 //                        stockList.setBounds(100,75, 400,200);
 //                        panel.add(stockList);
