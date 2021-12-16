@@ -168,8 +168,6 @@ public class CheckingAccount extends Account {
         writeToTransactionsLog(cType,ActionType.REQUESTLOAN,0);
 
 
-
-
         return false;
     }
     public void takeOutLoan(CurrencyType cType,double amount)

@@ -55,9 +55,102 @@ public class Database {
 
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    public static final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
     // Empty constructor
     public Database() throws URISyntaxException {
+    }
+
+    public static List<Transaction> ReadOneDateTransactionFromLocal(String date) throws IOException, URISyntaxException {
+
+
+
+
+        //String path =curDir+ "/ATM/"+dateName+".json";
+
+        String path =curDir+ "/"+date+".json";
+
+        File f = new File(path);
+
+        if(!f.exists())
+        {
+            f.createNewFile();
+        }
+
+
+        //read
+        Reader reader = Files.newBufferedReader( Paths.get(path));
+
+        Type listOfTransactionObject = new TypeToken<ArrayList<Transaction>>() {}.getType();
+
+        Gson gson = new Gson();
+
+
+
+//    if(outputList!=null)
+//        for( User u : outputList)
+//        {
+//
+//            // insert local record to list
+//            users.add(u);
+//        }
+        List<Transaction> result =gson.fromJson(reader,listOfTransactionObject);
+
+        reader.close();
+
+        return result;
+
+    }
+
+    public static void WriteTransactionLocal(LocalDateTime date, Transaction t) throws IOException, URISyntaxException {
+
+
+        String dateName = date.format(formatter2).toString();
+
+
+
+
+        //String path =curDir+ "/ATM/"+dateName+".json";
+
+        String path =curDir+ "/"+dateName+".json";
+
+        File f = new File(path);
+
+        List<Transaction> tempTransaction;
+
+        Gson gson = new Gson();
+
+        if(!f.exists())
+        {
+            f.createNewFile();
+            tempTransaction = new ArrayList<Transaction>();
+            tempTransaction.add(t);
+        }
+        else {
+            //try read previous
+            Reader reader = Files.newBufferedReader(Paths.get(path));
+
+            Type listOfTransactionObject = new TypeToken<ArrayList<Transaction>>() {
+            }.getType();
+
+            tempTransaction = gson.fromJson(reader, listOfTransactionObject);
+
+
+            tempTransaction.add(t);
+
+            reader.close();
+
+        }
+        //write
+        FileWriter jsonWriter = new FileWriter(path,false);
+
+        String jsonString = gson.toJson(tempTransaction);//https://www.baeldung.com/gson-list
+
+        jsonWriter.append(jsonString);
+
+        jsonWriter.flush();
+        jsonWriter.close();
     }
 
     public static void ReadUserFromLocal(String userName) throws IOException, URISyntaxException {
@@ -132,16 +225,25 @@ public class Database {
         Database.users.put(u.getUserName(),u);
     }
 
+
     public static void main(String args[]) throws IOException, URISyntaxException {
-        ReadUserFromLocal("C");
-        //User u = new Customer("C","alan");
-        //Customer c = (Customer) u ;
+       // ReadUserFromLocal("C");
+//        User u = new Customer("C","alan");
+//        Customer c = (Customer) u ;
+//
 
-        Customer c = (Customer) users.get("C");
-        c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
+  //     Customer c =  users.get("C");
+        //c.createAccount(AccountType.SAVING,CurrencyType.USD,100);
+//        c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
+//        WriteUserToLocal(c.getUserName());
 
-        c.getSavingAccount().makeDeposit(CurrencyType.USD,6000);
-        WriteUserToLocal(c.getUserName());
+       // c.getSavingAccount().requestLoan(CurrencyType.USD,300);
+
+//        for(Transaction t :ReadOneDateTransactionFromLocal ("2021-12-14"))
+//        {
+//            System.out.println(t.toString());
+//        }
+        //WriteUserToLocal(c.getUserName());
 //        User u2 = new Customer("B","alan");
 //        Customer c2 = (Customer) u2 ;
 //        c2.createAccount(AccountType.SAVING,CurrencyType.USD,100);
@@ -152,7 +254,7 @@ public class Database {
         System.out.println(users.size());
 
 
-        System.out.println(LocalDateTime.now().format(Database.formatter).toString());
+        //System.out.println(LocalDateTime.now().format(Database.formatter).toString());
     }
 
     }
