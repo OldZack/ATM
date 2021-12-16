@@ -24,21 +24,41 @@ import java.net.URL;
  *
  */
 
-public class Stock {
+public class Stock implements Comparable<Stock> {
 
-    public void LookUpStock(String CompanyName) throws MalformedURLException {
-        String path = "https://financialmodelingprep.com/api/v3/search-name?query="+ CompanyName + "&limit=10&exchange=NASDAQ&apikey=8c2e87d9de958123a08420ecd0c747bf";
-        URL url = new URL(path);
+    private String companyName;
+    private int volume;
+    private int holding;
+    private double price;
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"))) {
-            for (String line; (line = reader.readLine()) != null;) {
-                System.out.println(line);
-            }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    Stock(String n, int vol, double pri) throws IOException {
+        this.companyName = n;
+        this.volume = vol;
+        this.price = pri;
+        this.holding = 0;
     }
 
+    public void add_holding ( int hol){
+        this.holding += hol;
+    }
+
+    public double getPrice () {
+        return price;
+    }
+
+    public double getVolume () {
+        return volume;
+    }
+
+    public String print () {
+        return "Symbol: " + this.companyName + "  Price: " + this.price + " Volume: " + this.volume;
+    }
+
+    @Override
+    public int compareTo (Stock o){
+        if (this.companyName == o.companyName) {
+            return 0;
+        }
+        return 1;
+    }
 }

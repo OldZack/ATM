@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -52,6 +53,7 @@ public class Customer extends User{
 
     //private float balance;
     //private List<Account> accountList;
+    private ArrayList<Stock> stocks;
     private SavingAccount savingAccount;
     private CheckingAccount checkingAccount;
     private SecurityAccount securityAccount;
@@ -83,6 +85,7 @@ public class Customer extends User{
 
     public Customer(String customerId, String password){
         super(customerId, password);
+        stocks = new ArrayList<>();
     }
 
 
@@ -146,6 +149,24 @@ public class Customer extends User{
 
         Database.WriteUserToLocal(this.getUserName());
 
+    }
+
+    public boolean add_stock(Stock s, int num){
+        double amount = this.securityAccount.getCurrenciesDeposit().get("USD").getAmount();
+        if (s.getPrice()*num > amount){
+            return false;
+        }
+        for (Stock o : stocks){
+            if (o == s){
+                o.add_holding(num);
+                this.securityAccount.getCurrenciesDeposit().get("USD").setAmount(amount - s.getPrice()*num);
+                return false;
+            }
+        }
+        s.add_holding(num);
+        this.securityAccount.getCurrenciesDeposit().get("USD").setAmount(amount - s.getPrice()*num);
+        stocks.add(s);
+        return true;
     }
 
 

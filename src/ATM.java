@@ -70,4 +70,7 @@ public class ATM {
     }
 
 
+    public User getCurrentUser() {
+        return currUser;
+    }
 }
