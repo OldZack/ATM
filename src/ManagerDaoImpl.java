@@ -5,13 +5,15 @@ public class ManagerDaoImpl implements ManagerDao{
     List<Manager> managers;
 
     public ManagerDaoImpl(){
-        managers = new ArrayList<Manager>();
+//        managers = new ArrayList<Manager>();
+        managers = FileUtils.readManager();
         Manager manager1 = new Manager("test1", "test1");
         Manager manager2 = new Manager("test2", "test2");
         Manager manager3 = new Manager("1", "1");
         addManager(manager1);
         addManager(manager2);
         addManager(manager3);
+
     }
 
     @Override
