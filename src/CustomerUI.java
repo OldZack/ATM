@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class CustomerUI extends JFrame{
     public CustomerUI(){
 
         panel = new JPanel();
-        textLabel = new JLabel("Welcome");
+        textLabel = new JLabel();
         createAccountButton = new JButton("Create Account");
         saveButton = new JButton("Save");
         withdrawButton = new JButton("Withdraw");
@@ -45,10 +46,15 @@ public class CustomerUI extends JFrame{
         Init(panel);
     }
 
+
     public void Init(JPanel panel){
         panel.setLayout(null);
+
+        String TC = "Welcome, " + atm.getCurrUser().getUserName();
         time.setText(temp);
-        textLabel.setBounds(300,175,100,50);
+        textLabel.setText(TC);
+        textLabel.setForeground(Color.BLUE);
+        textLabel.setBounds(200,150,200,50);
         createAccountButton.setBounds(0,40,150,50);
         saveButton.setBounds(0,130,150,50);
         withdrawButton.setBounds(0,220,150,50);
