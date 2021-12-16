@@ -70,7 +70,7 @@ public class Transaction {
     @Override
     public String toString()
     {   String temp = "   ";
-        return String.format(evenTime+ temp+currencyType.toString()+ temp+before+ temp+actionType.toString()+ temp+transactionAmount+ temp+after);
+        return String.format(accountId+temp +evenTime+ temp+currencyType.toString()+ temp+before+ temp+actionType.toString()+ temp+transactionAmount+ temp+after);
     }
     public String getAccountId() {
         return accountId;

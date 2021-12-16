@@ -236,7 +236,20 @@ public abstract class Account {
 
         //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        Transaction t =new Transaction( this.accountId,LocalDateTime.now(), cType,before, AType,transAmount, after);
+        //get account type
+        String accountId_tail="";
+        if (this instanceof SavingAccount)
+        {accountId_tail="SavingAccount";
+
+        }else if (this instanceof CheckingAccount)
+        {
+            accountId_tail="CheckingAccount";
+        }else if (this instanceof SecurityAccount)
+        {
+            accountId_tail="SecurityAccount";
+        }
+
+        Transaction t =new Transaction( this.ownerName+"'s"+accountId_tail,LocalDateTime.now(), cType,before, AType,transAmount, after);
         this.transactions.add( t);
 
         try {
