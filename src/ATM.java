@@ -32,22 +32,14 @@
 public class ATM {
     private static ATM instance;
     private User currUser;
-    private Account currAccount;
     private CustomerDao customerDao;
     private ManagerDao managerDao;
 
     public ATM(){
         this.currUser = null;
-        this.currAccount = null;
         this.customerDao = new CustomerDaoImpl();
         this.managerDao = new ManagerDaoImpl();
     }
-
-    public User getCurrUser() { return currUser;}
-
-    public CustomerDao getCustomerDao(){return customerDao; }
-
-    public ManagerDao getManagerDao(){return managerDao; }
 
     public static ATM getInstance(){
         if (instance == null){
@@ -55,6 +47,12 @@ public class ATM {
         }
         return instance;
     }
+
+    public User getCurrUser() { return currUser;}
+
+    public CustomerDao getCustomerDao(){return customerDao; }
+
+    public ManagerDao getManagerDao(){return managerDao; }
 
     public boolean customerLogin(String customerID, String password){
         Customer customer = customerDao.searchCustomer(customerID, password);
