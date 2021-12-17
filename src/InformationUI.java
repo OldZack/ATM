@@ -49,37 +49,100 @@ public class InformationUI extends JFrame{
     private void Init(JPanel panel){
 
         String temp = "";
-        Customer cs = (Customer) atm.getCurrUser();
+        Customer c = (Customer) atm.getCurrUser();
+        Customer cs = (Customer) Database.getUsers().get(c.getUserName());
         String cName = cs.getUserName();
-        double cSavingBalance,cCheckingBalance,cSecurityBalance;
-        double cSavingLoan,cCheckingLoan,cSecurityLoan;
+        double cSavingBalanceUSD, cSavingBalanceEUR, cSavingBalanceCNY;
+        double cCheckingBalanceUSD, cCheckingBalanceEUR, cCheckingBalanceCNY;
+        double cSecurityBalanceUSD, cSecurityBalanceEUR, cSecurityBalanceCNY;
+        double cSavingLoan,cCheckingLoan, cSecurityLoan;
         if(cs.getSavingAccount()!=null) {
-            cSavingBalance = cs.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
+            cSavingBalanceUSD = cs.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
+            cSavingBalanceEUR = cs.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.EUR).getAmount();
+            cSavingBalanceCNY = cs.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.CNY).getAmount();
             cSavingLoan = cs.getSavingAccount().getLoans().get(CurrencyType.USD).getAmount();
-            temp += cName;
-            temp += "  Saving Account  ";
-            temp += "  " + cSavingBalance + "  ";
-            temp += "  " + cSavingLoan;
-            temp += "\n";
+            if (cSavingBalanceUSD > 0){
+                temp += cName;
+                temp += "  Saving Account  ";
+                temp += "  " + cSavingBalanceUSD + "  ";
+                temp += "  " + cSavingLoan;
+                temp += "\n";
+            }
+
+            if (cSavingBalanceEUR > 0){
+                temp += cName;
+                temp += "  Saving Account  ";
+                temp += "  " + cSavingBalanceEUR + "  ";
+                temp += "  " + cSavingLoan;
+                temp += "\n";
+            }
+
+            if (cSavingBalanceCNY > 0){
+                temp += cName;
+                temp += "  Saving Account  ";
+                temp += "  " + cSavingBalanceCNY + "  ";
+                temp += "  " + cSavingLoan;
+                temp += "\n";
+            }
+
         }
         if(cs.getCheckingAccount()!=null) {
-            cCheckingBalance=cs.getCheckingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
+            cCheckingBalanceUSD = cs.getCheckingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
+            cCheckingBalanceEUR = cs.getCheckingAccount().getCurrenciesDeposit().get(CurrencyType.EUR).getAmount();
+            cCheckingBalanceCNY = cs.getCheckingAccount().getCurrenciesDeposit().get(CurrencyType.CNY).getAmount();
             cCheckingLoan=cs.getCheckingAccount().getLoans().get(CurrencyType.USD).getAmount();
-            temp += cName;
-            temp += "  Checking Account  ";
-            temp += "  " + cCheckingBalance + "  ";
-            temp += "  " + cCheckingLoan;
-            temp += "\n";
+
+            if(cCheckingBalanceUSD > 0){
+                temp += cName;
+                temp += "  Checking Account  ";
+                temp += "  " + cCheckingBalanceUSD + "  ";
+                temp += "  " + cCheckingLoan;
+                temp += "\n";
+            }
+            if(cCheckingBalanceEUR > 0){
+                temp += cName;
+                temp += "  Checking Account  ";
+                temp += "  " + cCheckingBalanceEUR + "  ";
+                temp += "  " + cCheckingLoan;
+                temp += "\n";
+            }
+            if(cCheckingBalanceCNY > 0){
+                temp += cName;
+                temp += "  Checking Account  ";
+                temp += "  " + cCheckingBalanceCNY + "  ";
+                temp += "  " + cCheckingLoan;
+                temp += "\n";
+            }
+
         }
 
         if(cs.getSecurityAccount()!=null) {
-            cSecurityBalance = cs.getSecurityAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
+            cSecurityBalanceUSD = cs.getSecurityAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
+            cSecurityBalanceEUR = cs.getSecurityAccount().getCurrenciesDeposit().get(CurrencyType.EUR).getAmount();
+            cSecurityBalanceCNY = cs.getSecurityAccount().getCurrenciesDeposit().get(CurrencyType.CNY).getAmount();
             cSecurityLoan = cs.getSecurityAccount().getLoans().get(CurrencyType.USD).getAmount();
-            temp += cName;
-            temp += "  Security Account  ";
-            temp += "  " + cSecurityBalance + "  ";
-            temp += "  " + cSecurityLoan;
-            temp += "\n";
+            if (cSecurityBalanceUSD > 0){
+                temp += cName;
+                temp += "  Security Account  ";
+                temp += "  " + cSecurityBalanceUSD + "  ";
+                temp += "  " + cSecurityLoan;
+                temp += "\n";
+            }
+            if (cSecurityBalanceEUR > 0){
+                temp += cName;
+                temp += "  Security Account  ";
+                temp += "  " + cSecurityBalanceEUR + "  ";
+                temp += "  " + cSecurityLoan;
+                temp += "\n";
+            }
+            if (cSecurityBalanceCNY > 0){
+                temp += cName;
+                temp += "  Security Account  ";
+                temp += "  " + cSecurityBalanceCNY + "  ";
+                temp += "  " + cSecurityLoan;
+                temp += "\n";
+            }
+
         }
 
 
@@ -106,7 +169,7 @@ public class InformationUI extends JFrame{
         time.setText(content);
         info.setText(temp);
         transaction.setText(tr);
-        accountHeader.setText("Name  |  Account Type  |  Balance  |  Load");
+        accountHeader.setText("Name  |  Account Type  |  Balance  |  Loan");
         transHeader.setText("Name  |  Account Type  |  Transaction Time  |  Currency  |  Original  |  Action  |  Fee  |  Balance");
 
 

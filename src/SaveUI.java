@@ -108,26 +108,50 @@ public class SaveUI extends JFrame {
 
                 switch (typeTemp){
                     case "Saving" -> {
-                        c.getSavingAccount().makeDeposit(cTemp, amountTemp);
+                        if (c.getSavingAccount() != null){
+                            c.getSavingAccount().makeDeposit(cTemp, amountTemp);
+                            JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            if (c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() > 5000.0){
+                                JOptionPane.showMessageDialog(null, "You have enough balance to enjoy the stock market! Go make some money!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            dispose();
+                            new CustomerUI();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No Saving Account!", "Empty Account Error", JOptionPane.ERROR_MESSAGE);
+                            dispose();
+                            new SaveUI();
+                        }
                         break;
                     }
                     case "Security" -> {
-                        c.getSecurityAccount().makeDeposit(cTemp, amountTemp);
+                        if (c.getSecurityAccount() != null){
+                            c.getSecurityAccount().makeDeposit(cTemp, amountTemp);
+                            JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            new CustomerUI();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No Security Account!", "Empty Account Error", JOptionPane.ERROR_MESSAGE);
+                            dispose();
+                            new SaveUI();
+                        }
                         break;
                     }
                     default -> {
-                        c.getCheckingAccount().makeDeposit(cTemp, amountTemp);
+                        if (c.getCheckingAccount() != null){
+                            c.getCheckingAccount().makeDeposit(cTemp, amountTemp);
+                            JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            new CustomerUI();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No Checking Account!", "Empty Account Error", JOptionPane.ERROR_MESSAGE);
+                            dispose();
+                            new SaveUI();
+                        }
                         break;
                     }
                 }
 
-                JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-                new CustomerUI();
 
-                /**
-                 * Saving the money and show feedback
-                 */
             }
         });
 
