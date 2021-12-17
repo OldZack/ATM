@@ -166,12 +166,21 @@ public class Customer extends User{
                 double totalValue = o.getAvgPrice()*o.getHolding();
                 o.add_holding(num);
                 o.changeAvgPrice((totalValue + num*s.getPrice())/o.getHolding());
+
+                //Record BuyStock action into transactions
+                this.securityAccount.writeToTransactionsLog(CurrencyType.USD,ActionType.BUYSTOCK,-1*s.getPrice()*num);
+
                 this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount - s.getPrice()*num);
                 return true;
             }
         }
         s.add_holding(num);
         s.changeAvgPrice(s.getPrice());
+
+        //Record BuyStock action into transactions
+        this.securityAccount.writeToTransactionsLog(CurrencyType.USD,ActionType.BUYSTOCK,-1*s.getPrice()*num);
+
+
         this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount - s.getPrice()*num);
         stocks.add(s);
         return true;
@@ -188,6 +197,11 @@ public class Customer extends User{
                     double totalValue = o.getAvgPrice()*o.getHolding();
                     o.add_holding(-num);
                     o.changeAvgPrice((totalValue - num*s.getPrice())/o.getHolding());
+
+                    //Record BuyStock action into transactions
+                    this.securityAccount.writeToTransactionsLog(CurrencyType.USD,ActionType.SELLSTOCK,s.getPrice()*num);
+
+
                     this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount + s.getPrice()*num);
                     return true;
                 }
