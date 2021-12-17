@@ -24,6 +24,7 @@ public class StockUI extends JFrame{
     private JTextField companyField;
     //private JList stockList;
     private JTextArea stockInfo;
+    private JLabel profit;
 
     private JLabel time;
     private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -43,6 +44,9 @@ public class StockUI extends JFrame{
         companyField = new JTextField(70);
         companyLabel = new JLabel("Company Symbol: ");
         stockInfo = new JTextArea("");
+        Customer currUser = Database.getUsers().get(c.getUserName());
+        profit = new JLabel("Realized Profit: "+currUser.getProfit());
+
 
         this.add(panel);
         this.setTitle("Stock Board");
@@ -68,6 +72,7 @@ public class StockUI extends JFrame{
         time.setBounds(10,10,200,30);
         stockInfo.setBounds(100,75, 400,200);
         stockInfo.setLineWrap(true);
+        profit.setBounds(360,265,200,35);
         panel.add(time);
         panel.add(companyLabel);
         panel.add(companyField);
@@ -76,6 +81,7 @@ public class StockUI extends JFrame{
         panel.add(sellButton);
         panel.add(searchButton);
         panel.add(stockInfo);
+        panel.add(profit);
 
         buyButton.addActionListener(new ActionListener() {
             @Override

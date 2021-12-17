@@ -53,10 +53,13 @@ public class Customer extends User{
 
     //private float balance;
     //private List<Account> accountList;
+    private double profit;
     private ArrayList<Stock> stocks;
     private SavingAccount savingAccount;
     private CheckingAccount checkingAccount;
     private SecurityAccount securityAccount;
+
+    public double getProfit() { return this.profit; }
 
     public SavingAccount getSavingAccount() {
         return savingAccount;
@@ -90,6 +93,7 @@ public class Customer extends User{
     public Customer(String customerId, String password){
         super(customerId, password);
         stocks = new ArrayList<>();
+        profit = 0;
     }
 
 
@@ -204,6 +208,7 @@ public class Customer extends User{
                     double totalValue = o.getAvgPrice()*o.getHolding();
                     o.add_holding(-num);
                     o.changeAvgPrice((totalValue - num*s.getPrice())/o.getHolding());
+                    this.profit += (o.getPrice()-o.getAvgPrice())*num;
 
                     //Record BuyStock action into transactions
                     double nb = s.getPrice()*num;
