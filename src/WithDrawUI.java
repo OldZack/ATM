@@ -108,27 +108,46 @@ public class WithDrawUI extends JFrame{
 
                 switch (typeTemp){
                     case "Saving" -> {
-                        c.getSavingAccount().withdrawal(cTemp, amountTemp);
+                        if (c.getSavingAccount() != null){
+                            c.getSavingAccount().withdrawal(cTemp, amountTemp);
+                            JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            new CustomerUI();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No Saving Account!", "Empty Account Error", JOptionPane.ERROR_MESSAGE);
+                            dispose();
+                            new WithDrawUI();
+                        }
                         break;
                     }
                     case "Security" -> {
-                        c.getSecurityAccount().withdrawal(cTemp, amountTemp);
+                        if (c.getSecurityAccount() != null){
+                            c.getSecurityAccount().withdrawal(cTemp, amountTemp);
+                            JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            new CustomerUI();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No Security Account!", "Empty Account Error", JOptionPane.ERROR_MESSAGE);
+                            dispose();
+                            new WithDrawUI();
+                        }
                         break;
                     }
                     default -> {
-                        c.getCheckingAccount().withdrawal(cTemp, amountTemp);
+                        if (c.getCheckingAccount() != null){
+                            c.getCheckingAccount().withdrawal(cTemp, amountTemp);
+                            JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            new CustomerUI();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No Checking Account!", "Empty Account Error", JOptionPane.ERROR_MESSAGE);
+                            dispose();
+                            new WithDrawUI();
+                        }
                         break;
                     }
                 }
 
-
-
-                JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-                new CustomerUI();
-                /**
-                 * Withdraw the money and show feedback
-                 */
             }
         });
 

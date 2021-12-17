@@ -1,80 +1,73 @@
-# CS611-Legends-part2: Legends_of_Valor
-
+# 2021-fall CS611 Final-Project: Online ATM #
 Name & ID
 -------------------------------------------------------------------------------------------------
-Name: Yiying Hu
-Email: yiyinghu@bu.edu
-BU ID: U60458791
+Name: Zimou Sun
+Email:
+BU ID:
 
 Name: Ziyang Sheng
 Email: shengzy@bu.edu
 BU ID: U95910439
 
-Name: Osho Rawal
-Email: orawal@bu.edu
-BU ID: U95297774
+Name: Wanzhi Wang
+Email:
+BU ID:
 
 
 Files(42 classes in total)
 -------------------------------------------------------------------------------------------------
-<Armor.java> -- The Armory for heroes in the game
-<ascii_art.java> -- The ascii graphics in the terminal
-<battle.java> -- The interface for characters who have the ability to fight
-<BushCell.java> -- The bush cells
-<CaveCell.java> -- The cave cells
-<Cell_factory.java> -- The factory pattern to generate new cells
-<Cell.java> -- The cell of the board
-<Character.java> -- The abstract class for characters in this game
-<ColorUtils.java> -- The class for adding colors in the terminal
-<Dragon.java> -- The dragon monsters
-<Equipment.java> -- The superclass for all kinds of items in the market
-<Exoskeleton.java> -- The exoskeleton monsters
-<FileUtils.java> -- The class for utility functions on loading files
-<FireSpell.java> -- The fire spells
-<Game.java> -- The abstract class for games
-<GameLoader.java> -- The class for loading the game
-<Hero.java> -- In charge of heroes of the game
-<HeroTeam.java> -- The team of heroes
-<IceSpell.java> -- The ice spell
-<InaccessCell.java> -- The inaccessible cells
-<Inventory.java> -- The class for the inventory of heroes
-<KoulouCell.java> -- The koulou cells
-<Lane.java> -- The class for a single lane
-<LegendGame.java> -- The class for the main process of this game
-<LightningSpell.java> -- The lightning spells
-<Main.java> -- The game entrance
-<Market.java> -- In charge of the market and trade in the game
-<Monster.java> -- The superclass for all kinds of monsters in this game
-<MonsterTeam.java> -- The team of monsters
-<NexusCell.java> -- The nexus cells
-<Paladin.java> -- The paladin heroes
-<PlainCell.java> -- The plain cells
-<Potion.java> -- The potions
-<RpgGame.java> -- The abstract class for the RPG game
-<Sorcerer.java> -- The sorcerer heroes
-<Spell.java> -- The superclass for all kinds of spells.
-<Spirit.java> -- The spirit monsters
-<Team.java> -- The abstract class for all kinds of teams in the game
-<Utils.java> -- The class for some utility functions for the game
-<Warrior.java> -- The warrior heroes
-<Weapon.java> -- The weapons
-<World.java> -- The class for the game world
+<Account.java> -- The abstract class for all types of accounts.
+<AccountType.java> -- The enum class for three account types.
+<AccountUI.java> -- The user interface for customers to create a new account.
+<ATM.java> -- The manager class for both customer and manager login.
+<BorrowLoanUI.java> -- The user interface for customers to apply for a loan.
+<CheckingAccount.java> -- The class for checking account.
+<Currency.java> -- The class in charge of all kinds of currency.
+<CurrencyType.java> -- The enum class for three currency types.
+<Customer.java> -- The class in charge of customers.
+<CustomerDao.java> -- The Interface for customer DAO.
+<CustomerDaoImpl.java> -- The class in charge of the operations on file "Customer.csv".
+<CustomerUI.java> -- The user interface for customers to choose an action.
+<DailyReportUI.java> -- The user interface for the manager to view daily transaction record.
+<Database.java> -- The database that stores all the user data in this system.
+<Deposit.java> -- The class for customer's savings.
+<FileUtils.java> -- The class for utility functions on csv files.
+<InformationUI.java> -- The user interface for customers to view their account information.
+<Loan.java> -- The class in charge the loan business.
+<LoanUI.java> -- The user interface for loan business.
+<LoginUI.java> -- The user interface for customer/manager login.
+<Main.java> -- The Main class of the whole system.
+<Manager.java> -- The class in charge of managers.
+<ManagerDao.java> -- The Interface for manager DAO.
+<ManagerDaoImpl.java> -- The class in charge of the operations on file "Manager.csv".
+<ManagerUI.java> -- The user interface for managers to choose an action.
+<ReturnLoanUI.java> -- The user interface for customers to return the loan.
+<SaveUI.java> -- The user interface for customers to make a deposit.
+<SavingAccount.java> -- The class for saving account.
+<SecurityAccount.java> -- The class for security account.
+<SignUpUI.java> -- The user interface for users to sign up.
+<Stock.java> -- The class in charge of the stock business.
+<StockUI.java> -- The user interface for the stock business.
+<Transaction.java> -- The class in charge of all kinds of transactions.
+<TransactionUI.java> -- The user interface for customers to make transactions.
+<User.java> -- The abstract class for all kinds of users.
+<ViewClientUI.java> -- The user interface for managers to view customer information.
+<WelcomeUI.java> -- The entrance of the whole system and the welcome interface.
+<WithDrawUI.java> -- The user interface for customers to withdraw money.
+<.java> -- The .
+<.java> -- The .
+<.java> -- The .
+<.java> -- The .
 
 
 Notes & Highlights ( BONUS ):
 -------------------------------------------------------------------------------------------------
-1. Added background in the game.
-2. Added colorful terminal experience.
-3. Added graphics in the game i.e ( ASCII art ).
-4. Added 2 design patterns in the game,  Singleton ( For World class ) and Factory design pattern ( For Cell class).
+
 
 
 Compile Instruction:
 -------------------------------------------------------------------------------------------------
-1. Navigate to the directory after downloading the project
-2. Run the following instructions on command line:
-	javac *.java
-	java Main.java
+
 
 
 

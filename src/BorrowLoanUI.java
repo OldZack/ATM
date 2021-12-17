@@ -4,6 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+/**
+ * @ClassName AccountUI
+ * @Description This is the interface for creating account.
+ * @Author Ziyang Sheng
+ */
 
 public class BorrowLoanUI extends JFrame {
     private JPanel panel;
@@ -18,16 +23,20 @@ public class BorrowLoanUI extends JFrame {
     private JScrollPane selectCurrencyType;
     private JButton okButton;
     private JButton backButton;
+    ATM atm = ATM.getInstance();
 
+    // display time
     private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     private static String temp = df.format(new Date());
-    ATM atm = ATM.getInstance();
+
 
     public BorrowLoanUI()
     {
         panel = new JPanel();
         accountType = new JLabel("Account Type");
         amount = new JLabel("Amount");
+
+        // three types of account
         String []act= {"Checking","Saving","Security"};
         types = new JComboBox<String>(act);
         selectType = new JScrollPane(types);
@@ -35,6 +44,8 @@ public class BorrowLoanUI extends JFrame {
         okButton = new JButton("OK");
         backButton = new JButton("Back");
         time = new JLabel();
+
+        // three types of currency
         currencyType = new JLabel("Currency Type");
         String []ct= {"USD","CNY","EUR"};
         currencyTypes = new JComboBox<String>(ct);
@@ -54,17 +65,13 @@ public class BorrowLoanUI extends JFrame {
         time.setText(temp);
         accountType.setBounds(100,50,100,40);
         selectType.setBounds(250,50,200,40);
-
         currencyType.setBounds(100,130,100,40);
         selectCurrencyType.setBounds(250,130,200,40);
-
         amount.setBounds(100,210,100,40);
         saveAmount.setBounds(250,210,200,40);
-
         okButton.setBounds(150,300,100,50);
         backButton.setBounds(350,300,100,50);
         time.setBounds(10,10,200,30);
-
 
         panel.add(currencyType);
         panel.add(selectCurrencyType);
@@ -76,21 +83,24 @@ public class BorrowLoanUI extends JFrame {
         panel.add(okButton);
         panel.add(backButton);
 
+
+        // pressing the ok button
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 String typeTemp = types.getItemAt(types.getSelectedIndex());
                 String currencyTemp = currencyTypes.getItemAt(currencyTypes.getSelectedIndex());
                 double amountTemp = Double.valueOf(saveAmount.getText()).doubleValue();
-                System.out.println(typeTemp);
-                System.out.println(amountTemp);
-
                 String currId = atm.getCurrUser().getUserName();
                 Customer c = Database.getUsers().get(currId);
-                System.out.println(c);
-
                 CurrencyType cTemp;
+
+                // the loan requested every time cannot exceed (10 * saving balance)
+                if (amountTemp >  10 * c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount()){
+                    JOptionPane.showMessageDialog(null, "The requested loan cannot exceed (10 * saving balance)!", "Not Matching Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+                // select the currency type of the loan
                 switch (currencyTemp){
                     case "USD" -> {
                         cTemp = CurrencyType.USD;
@@ -106,6 +116,7 @@ public class BorrowLoanUI extends JFrame {
                     }
                 }
 
+                // take out a loan in the selected account
                 switch (typeTemp){
                     case "Saving" -> {
                         c.getSavingAccount().requestLoan(cTemp, amountTemp);
@@ -123,17 +134,13 @@ public class BorrowLoanUI extends JFrame {
                         break;
                     }
                 }
-
                 JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
                 new CustomerUI();
-
-                /**
-                 * Saving the money and show feedback
-                 */
             }
         });
 
+        // pressing the back button
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -1,14 +1,6 @@
 /**
- *   Class name :
- *
- *   Variables:
- *
- *   Constructors:
- *
- *
- *   Methods:
- *
- *
+ * @ClassName Main
+ * @Description This is the Main class.
  */
 
 public class Main {

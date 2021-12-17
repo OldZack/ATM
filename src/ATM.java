@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 /**
  *   Class ATM :
  *
@@ -60,6 +63,13 @@ public class ATM {
             return false;
         }
         currUser = customer;
+        try {
+            Database.ReadUserFromLocal(currUser.getUserName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 
@@ -69,6 +79,13 @@ public class ATM {
             return false;
         }
         currUser = manager;
+        try {
+            Database.ReadUserFromLocal(currUser.getUserName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         return true;
     }
 }
