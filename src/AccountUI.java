@@ -107,7 +107,7 @@ public class AccountUI extends JFrame{
                 // create account according to the input account type
                 switch (typeTemp){
                     case "Saving" -> {
-                        if (currUser.getSavingAccount() == null){
+                        if (currUser == null || currUser.getSavingAccount() == null){
                             aTemp = AccountType.SAVING;
                         } else{
                             System.out.println(currUser.getSavingAccount());
@@ -117,7 +117,7 @@ public class AccountUI extends JFrame{
                         break;
                     }
                     case "Security" -> {
-                        if (currUser.getSecurityAccount() == null){
+                        if (currUser == null || currUser.getSecurityAccount() == null){
                             aTemp = AccountType.SECURITY;
                         } else{
                             JOptionPane.showMessageDialog(null, "Security Account already exist!", "Account repetition Error", JOptionPane.ERROR_MESSAGE);
@@ -126,7 +126,7 @@ public class AccountUI extends JFrame{
                         break;
                     }
                     default -> {
-                        if (currUser.getCheckingAccount() == null){
+                        if (currUser == null || currUser.getCheckingAccount() == null){
                             aTemp = AccountType.CHECKING;
                         } else{
                             JOptionPane.showMessageDialog(null, "Checking Account already exist!", "Account repetition Error", JOptionPane.ERROR_MESSAGE);

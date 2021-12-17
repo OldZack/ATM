@@ -21,10 +21,10 @@ Files(42 classes in total)
 <AccountUI.java> -- The user interface for customers to create a new account.
 <ATM.java> -- The manager class for both customer and manager login.
 <BorrowLoanUI.java> -- The user interface for customers to apply for a loan.
-<CheckingAccount.java> -- The class for checking accounts.
+<CheckingAccount.java> -- The class for checking account.
 <Currency.java> -- The class in charge of all kinds of currency.
 <CurrencyType.java> -- The enum class for three currency types.
-<Customer.java> -- The class for adding colors in the terminal
+<Customer.java> -- The class in charge of customers.
 <CustomerDao.java> -- The Interface for customer DAO.
 <CustomerDaoImpl.java> -- The class in charge of the operations on file "Customer.csv".
 <CustomerUI.java> -- The user interface for customers to choose an action.
@@ -32,7 +32,32 @@ Files(42 classes in total)
 <Database.java> -- The database that stores all the user data in this system.
 <Deposit.java> -- The class for customer's savings.
 <FileUtils.java> -- The class for utility functions on csv files.
-
+<InformationUI.java> -- The user interface for customers to view their account information.
+<Loan.java> -- The class in charge the loan business.
+<LoanUI.java> -- The user interface for loan business.
+<LoginUI.java> -- The user interface for customer/manager login.
+<Main.java> -- The Main class of the whole system.
+<Manager.java> -- The class in charge of managers.
+<ManagerDao.java> -- The Interface for manager DAO.
+<ManagerDaoImpl.java> -- The class in charge of the operations on file "Manager.csv".
+<ManagerUI.java> -- The user interface for managers to choose an action.
+<ReturnLoanUI.java> -- The user interface for customers to return the loan.
+<SaveUI.java> -- The user interface for customers to make a deposit.
+<SavingAccount.java> -- The class for saving account.
+<SecurityAccount.java> -- The class for security account.
+<SignUpUI.java> -- The user interface for users to sign up.
+<Stock.java> -- The class in charge of the stock business.
+<StockUI.java> -- The user interface for the stock business.
+<Transaction.java> -- The class in charge of all kinds of transactions.
+<TransactionUI.java> -- The user interface for customers to make transactions.
+<User.java> -- The abstract class for all kinds of users.
+<ViewClientUI.java> -- The user interface for managers to view customer information.
+<WelcomeUI.java> -- The entrance of the whole system and the welcome interface.
+<WithDrawUI.java> -- The user interface for customers to withdraw money.
+<.java> -- The .
+<.java> -- The .
+<.java> -- The .
+<.java> -- The .
 
 
 Notes & Highlights ( BONUS ):
