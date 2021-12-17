@@ -125,7 +125,8 @@ public class CustomerUI extends JFrame{
         stockButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Customer c = (Customer)atm.getCurrUser();
+                Customer currUser = (Customer)atm.getCurrUser();
+                Customer c = Database.getUsers().get(currUser.getUserName());
                 if (c.getSecurityAccount() == null){
                     JOptionPane.showMessageDialog(null, "You need a security account to invest in stocks.", "No Stock Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -140,7 +141,7 @@ public class CustomerUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 Customer c = (Customer) atm.getCurrUser();
-                try {
+                try { Database.WriteCustomersToLocal();
                     Database.WriteUserToLocal(c.getUserName());
                 } catch (IOException ex) {
                     ex.printStackTrace();

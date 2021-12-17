@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class BuyStockUI extends JFrame {
 
@@ -39,7 +41,8 @@ public class BuyStockUI extends JFrame {
 
         info.setEditable(false);
         info.setText(currentStock.toString());
-        for (Stock st : c.getStocks()){
+        Customer currUser = Database.getUsers().get(c.getUserName());
+        for (Stock st : currUser.getStocks()){
             if (st.compareTo(currentStock) == 0){
                 info.setText(st.toString());
             }
@@ -63,18 +66,25 @@ public class BuyStockUI extends JFrame {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Customer currUser = Database.getUsers().get(c.getUserName());
                 int num = Integer.parseInt(amount.getText().trim());
                 if (num == 0 || num > currentStock.getVolume()){
                     JOptionPane.showMessageDialog(null, "Incorrect Stock Amount!", "Failed", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
-                    if (!c.add_stock(currentStock, num)){
-                        JOptionPane.showMessageDialog(null, "Not Enough Balance!", "Failed", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                        dispose();
-                        new StockUI();
+                    try {
+                        if (!currUser.add_stock(currentStock, num)){
+                            JOptionPane.showMessageDialog(null, "Not Enough Balance!", "Failed", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            new StockUI();
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (URISyntaxException ex) {
+                        ex.printStackTrace();
                     }
                 }
             }

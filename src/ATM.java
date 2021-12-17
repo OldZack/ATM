@@ -65,6 +65,13 @@ public class ATM {
         currUser = customer;
         try {
             Database.ReadUserFromLocal(currUser.getUserName());
+            Database.ReadCustomersFromLocal();
+            if(Database.getUsers().get(currUser.getUserName())==null)
+            {
+                Database.addUser((Customer) currUser);
+                Database.WriteUserToLocal(currUser.getUserName());
+                Database.WriteCustomersToLocal();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
@@ -81,6 +88,7 @@ public class ATM {
         currUser = manager;
         try {
             Database.ReadUserFromLocal(currUser.getUserName());
+            Database.ReadCustomersFromLocal();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {

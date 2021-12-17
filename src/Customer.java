@@ -120,6 +120,7 @@ public class Customer extends User{
         }
 
         Database.WriteUserToLocal(this.getUserName());
+        Database.WriteCustomersToLocal();
 
     }
 
@@ -152,10 +153,10 @@ public class Customer extends User{
         }
 
         Database.WriteUserToLocal(this.getUserName());
-
+        Database.WriteCustomersToLocal();
     }
 
-    public boolean add_stock(Stock s, int num){
+    public boolean add_stock(Stock s, int num) throws IOException, URISyntaxException {
         System.out.println();
         double amount = this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
         if (s.getPrice()*num > amount){
@@ -168,9 +169,12 @@ public class Customer extends User{
                 o.changeAvgPrice((totalValue + num*s.getPrice())/o.getHolding());
 
                 //Record BuyStock action into transactions
-                this.securityAccount.writeToTransactionsLog(CurrencyType.USD,ActionType.BUYSTOCK,-1*s.getPrice()*num);
-
-                this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount - s.getPrice()*num);
+                double nb = s.getPrice()*num;
+                nb = (Math.round(nb*100)/100.0);
+                this.securityAccount.writeToTransactionsLog(CurrencyType.USD,ActionType.BUYSTOCK,-1*nb);
+                this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount - nb);
+                Database.WriteUserToLocal(this.getUserName());
+                Database.WriteCustomersToLocal();
                 return true;
             }
         }
@@ -178,15 +182,18 @@ public class Customer extends User{
         s.changeAvgPrice(s.getPrice());
 
         //Record BuyStock action into transactions
-        this.securityAccount.writeToTransactionsLog(CurrencyType.USD,ActionType.BUYSTOCK,-1*s.getPrice()*num);
 
-
-        this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount - s.getPrice()*num);
+        double nb = s.getPrice()*num;
+        nb = (Math.round(nb*100)/100.0);
+        this.securityAccount.writeToTransactionsLog(CurrencyType.USD,ActionType.BUYSTOCK,-1*nb);
+        this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount - nb);
         stocks.add(s);
+        Database.WriteUserToLocal(this.getUserName());
+        Database.WriteCustomersToLocal();
         return true;
     }
 
-    public boolean remove_stock(Stock s, int num){
+    public boolean remove_stock(Stock s, int num) throws IOException, URISyntaxException {
         double amount = this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).getAmount();
         for (Stock o : stocks){
             if (o.compareTo(s) == 0){
@@ -199,10 +206,12 @@ public class Customer extends User{
                     o.changeAvgPrice((totalValue - num*s.getPrice())/o.getHolding());
 
                     //Record BuyStock action into transactions
-                    this.securityAccount.writeToTransactionsLog(CurrencyType.USD,ActionType.SELLSTOCK,s.getPrice()*num);
-
-
-                    this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount + s.getPrice()*num);
+                    double nb = s.getPrice()*num;
+                    nb = (Math.round(nb*100)/100.0);
+                    this.securityAccount.writeToTransactionsLog(CurrencyType.USD,ActionType.SELLSTOCK,nb);
+                    this.securityAccount.getCurrenciesDeposit().get(CurrencyType.USD).setAmount(amount + nb);
+                    Database.WriteUserToLocal(this.getUserName());
+                    Database.WriteCustomersToLocal();
                     return true;
                 }
             }

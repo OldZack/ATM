@@ -96,45 +96,46 @@ public class BorrowLoanUI extends JFrame {
                 CurrencyType cTemp;
 
                 // the loan requested every time cannot exceed (10 * saving balance)
-                if (amountTemp >  10 * c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount()){
+                if (c.getSavingAccount() == null || amountTemp >  10 * c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount()){
                     JOptionPane.showMessageDialog(null, "The requested loan cannot exceed (10 * saving balance)!", "Not Matching Error", JOptionPane.ERROR_MESSAGE);
                 }
+                else {
+                    // select the currency type of the loan
+                    switch (currencyTemp) {
+                        case "USD" -> {
+                            cTemp = CurrencyType.USD;
+                            break;
+                        }
+                        case "EUR" -> {
+                            cTemp = CurrencyType.EUR;
+                            break;
+                        }
+                        default -> {
+                            cTemp = CurrencyType.CNY;
+                            break;
+                        }
+                    }
 
-                // select the currency type of the loan
-                switch (currencyTemp){
-                    case "USD" -> {
-                        cTemp = CurrencyType.USD;
-                        break;
+                    // take out a loan in the selected account
+                    switch (typeTemp) {
+                        case "Saving" -> {
+                            c.getSavingAccount().requestLoan(cTemp, amountTemp);
+                            c.getSavingAccount().takeOutLoan(cTemp, amountTemp);
+                            break;
+                        }
+                        case "Security" -> {
+                            c.getSecurityAccount().requestLoan(cTemp, amountTemp);
+                            c.getSecurityAccount().takeOutLoan(cTemp, amountTemp);
+                            break;
+                        }
+                        default -> {
+                            c.getCheckingAccount().requestLoan(cTemp, amountTemp);
+                            c.getCheckingAccount().takeOutLoan(cTemp, amountTemp);
+                            break;
+                        }
                     }
-                    case "EUR" -> {
-                        cTemp = CurrencyType.EUR;
-                        break;
-                    }
-                    default -> {
-                        cTemp = CurrencyType.CNY;
-                        break;
-                    }
+                    JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
-
-                // take out a loan in the selected account
-                switch (typeTemp){
-                    case "Saving" -> {
-                        c.getSavingAccount().requestLoan(cTemp, amountTemp);
-                        c.getSavingAccount().takeOutLoan(cTemp, amountTemp);
-                        break;
-                    }
-                    case "Security" -> {
-                        c.getSecurityAccount().requestLoan(cTemp, amountTemp);
-                        c.getSecurityAccount().takeOutLoan(cTemp, amountTemp);
-                        break;
-                    }
-                    default -> {
-                        c.getCheckingAccount().requestLoan(cTemp, amountTemp);
-                        c.getCheckingAccount().takeOutLoan(cTemp, amountTemp);
-                        break;
-                    }
-                }
-                JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
                 new CustomerUI();
             }

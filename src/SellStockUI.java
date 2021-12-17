@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class SellStockUI extends JFrame {
 
@@ -39,7 +41,8 @@ public class SellStockUI extends JFrame {
 
         info.setEditable(false);
         info.setText(currentStock.toString());
-        for (Stock st : c.getStocks()){
+        Customer currUser = Database.getUsers().get(c.getUserName());
+        for (Stock st : currUser.getStocks()){
             if (st.compareTo(currentStock) == 0){
                 st.setPrice(currentStock.getPrice());
                 info.setText(st.toString());
@@ -71,13 +74,20 @@ public class SellStockUI extends JFrame {
                     JOptionPane.showMessageDialog(null, "Incorrect Stock Amount!", "Failed", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
-                    if (!c.remove_stock(currentStock, num)){
-                        JOptionPane.showMessageDialog(null, "Not Enough Holdings!", "Failed", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                        dispose();
-                        new StockUI();
+                    Customer currUser = Database.getUsers().get(c.getUserName());
+                    try {
+                        if (!currUser.remove_stock(currentStock, num)){
+                            JOptionPane.showMessageDialog(null, "Not Enough Holdings!", "Failed", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            new StockUI();
+                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (URISyntaxException ex) {
+                        ex.printStackTrace();
                     }
                 }
             }

@@ -225,6 +225,62 @@ public class Database {
         Database.users.put(u.getUserName(),u);
     }
 
+    public static void ReadCustomersFromLocal() throws IOException, URISyntaxException {
+
+        //String path =curDir+ "/ATM/"+dateName+".json";
+
+        String path =curDir+ "/Customers.json";
+
+        File f = new File(path);
+
+        Gson gson = new Gson();
+
+        if(!f.exists())
+        {
+            f.createNewFile();
+        }
+        else {
+            //try read previous
+            Reader reader = Files.newBufferedReader(Paths.get(path));
+
+            Type MapCustomerObject = new TypeToken<HashMap<String, Customer>>() {
+            }.getType();
+
+            users = gson.fromJson(reader, MapCustomerObject);
+
+            // in case no customer
+            if(users==null)
+            {
+                users=new HashMap<String,Customer>() ;
+            }
+
+            reader.close();
+
+        }
+    }
+
+    public static void WriteCustomersToLocal() throws IOException, URISyntaxException {
+
+
+
+        String path =curDir+ "/"+"Customers"+".json";
+
+        File f = new File(path);
+
+        Gson gson = new Gson();
+
+        //ReadCustomersFromLocal();
+
+        //write
+        FileWriter jsonWriter = new FileWriter(path,false);
+
+        String jsonString = gson.toJson(users);//https://www.baeldung.com/gson-list
+
+        jsonWriter.append(jsonString);
+
+        jsonWriter.flush();
+        jsonWriter.close();
+    }
 
     public static void main(String args[]) throws IOException, URISyntaxException {
        // ReadUserFromLocal("C");

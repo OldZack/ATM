@@ -235,15 +235,19 @@ public class SavingAccount extends Account{
         writeToTransactionsLog(cType,ActionType.PAYBACKLOAN,amount);
 
         //Perform actual balance decrement at this.currenciesDeposit
-        this.currenciesDeposit.get(cType).deductedBy(amount);
-
+        this.currenciesDeposit.get(cType).deductedBy(amount+interest);
 
         //remove the loan from this.loans
-        if(this.loans.get(cType).getAmount() == 0){
+        if(this.loans.get(cType).getAmount() == interest){
             this.loans.remove(cType);
         }
-    }
+        else
+        {
+            this.loans.get(cType).increasedBy(amount+interest);
 
+        }
+
+    }
 
 
 

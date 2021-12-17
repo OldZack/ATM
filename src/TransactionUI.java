@@ -161,6 +161,15 @@ public class TransactionUI extends JFrame {
                                 new CustomerUI();
                             }
                         }
+                        else{
+                            c.getSavingAccount().transferTo(aTemp, cTemp, amountTemp);
+                            JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            if (c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() > 5000.0){
+                                JOptionPane.showMessageDialog(null, "You have enough balance to enjoy the stock market! Go make some money!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            dispose();
+                            new CustomerUI();
+                        }
                         break;
                     }
                     case "Security" -> {

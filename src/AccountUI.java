@@ -182,7 +182,7 @@ public class AccountUI extends JFrame{
                     // create a new account and record it in the database
                     dispose();
                     JOptionPane.showMessageDialog(null, "Account Created Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    if (currUser.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() > 5000.0){
+                    if (currUser.getSavingAccount() != null && currUser.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() > 5000.0){
                         JOptionPane.showMessageDialog(null, "You have enough balance to enjoy the stock market! Go make some money!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
                     }
                     new CustomerUI();

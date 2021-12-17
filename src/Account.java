@@ -253,6 +253,7 @@ public abstract class Account {
         this.transactions.add(t);
 
         try {
+            Database.WriteCustomersToLocal();
             Database.WriteTransactionLocal(LocalDateTime.now(),t);
             Database.WriteUserToLocal(this.ownerName);
         } catch (IOException e) {

@@ -138,9 +138,11 @@ public class StockUI extends JFrame{
                         String name = new JsonParser().parse(result).getAsJsonArray().get(0).getAsJsonObject().get("symbol").getAsString();
                         int volume = new JsonParser().parse(result).getAsJsonArray().get(0).getAsJsonObject().get("volume").getAsInt();
                         double price = new JsonParser().parse(result).getAsJsonArray().get(0).getAsJsonObject().get("price").getAsDouble();
+                        price = (Math.round(price*100)/100.0);
                         s = new Stock(name, volume, price);
+                        Customer currUser = Database.getUsers().get(c.getUserName());
                         stockInfo.setText(s.toString());
-                        for (Stock st : c.getStocks()){
+                        for (Stock st : currUser.getStocks()){
                             if (st.compareTo(s) == 0){
                                 stockInfo.setText(st.toString());
                             }

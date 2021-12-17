@@ -2,6 +2,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -119,7 +121,14 @@ public class ReturnLoanUI extends JFrame {
                         break;
                     }
                 }
-
+                try {
+                    Database.WriteUserToLocal(c.getUserName());
+                    Database.WriteCustomersToLocal();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (URISyntaxException ex) {
+                    ex.printStackTrace();
+                }
                 JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
                 new CustomerUI();
