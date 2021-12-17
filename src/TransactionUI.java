@@ -140,31 +140,54 @@ public class TransactionUI extends JFrame {
 
                 switch (fromTypeTemp){
                     case "Saving" -> {
-                        c.getSavingAccount().transferTo(aTemp, cTemp, amountTemp);
+                        if (toTypeTemp.equalsIgnoreCase("Security")){
+                            if (amountTemp < 1000){
+                                JOptionPane.showMessageDialog(null, "The deposit cannot be less than 1000!", "Low Deposit Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                            else if (c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() < 5000){
+                                JOptionPane.showMessageDialog(null, "Saving Balance is too low!", "Low Balance Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                            else if (c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() - amountTemp < 2500){
+                                JOptionPane.showMessageDialog(null, "Saving Balance is too low!", "Low Balance Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                            else{
+                                c.getSavingAccount().transferTo(aTemp, cTemp, amountTemp);
+                                JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                                if (c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() > 5000.0){
+                                    JOptionPane.showMessageDialog(null, "You have enough balance to enjoy the stock market! Go make some money!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                                }
+
+                                dispose();
+                                new CustomerUI();
+                            }
+                        }
                         break;
                     }
                     case "Security" -> {
                         c.getSecurityAccount().transferTo(aTemp, cTemp, amountTemp);
+                        JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        if (c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() > 5000.0){
+                            JOptionPane.showMessageDialog(null, "You have enough balance to enjoy the stock market! Go make some money!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+                        dispose();
+                        new CustomerUI();
                         break;
                     }
                     default -> {
                         c.getCheckingAccount().transferTo(aTemp, cTemp, amountTemp);
+                        JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                        if (c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() > 5000.0){
+                            JOptionPane.showMessageDialog(null, "You have enough balance to enjoy the stock market! Go make some money!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+                        dispose();
+                        new CustomerUI();
                         break;
                     }
                 }
 
-
-                JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-                if (c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() > 5000.0){
-                    JOptionPane.showMessageDialog(null, "You have enough balance to enjoy the stock market! Go make some money!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
-                }
-
-                dispose();
-                new CustomerUI();
-                /**
-                 * Transfer the money and show feedback
-                 */
             }
         });
 

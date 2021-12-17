@@ -88,7 +88,6 @@ public class ReturnLoanUI extends JFrame {
 
                 String currId = atm.getCurrUser().getUserName();
                 Customer c = Database.getUsers().get(currId);
-                System.out.println(c);
 
                 CurrencyType cTemp;
                 switch (currencyTemp){

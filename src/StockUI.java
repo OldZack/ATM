@@ -65,9 +65,6 @@ public class StockUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new CustomerUI();
-                /**
-                 * Do the stock and show feedback
-                 */
             }
         });
 
@@ -86,10 +83,7 @@ public class StockUI extends JFrame{
                 new CustomerUI();
             }
         });
-
-
     }
-
 }
 
 

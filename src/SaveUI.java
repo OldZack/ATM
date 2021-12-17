@@ -125,10 +125,22 @@ public class SaveUI extends JFrame {
                     }
                     case "Security" -> {
                         if (c.getSecurityAccount() != null){
-                            c.getSecurityAccount().makeDeposit(cTemp, amountTemp);
-                            JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                            dispose();
-                            new CustomerUI();
+                            if (amountTemp < 1000){
+                                JOptionPane.showMessageDialog(null, "The deposit cannot be less than 1000!", "Low Deposit Error", JOptionPane.ERROR_MESSAGE);
+                                dispose();
+                                new SaveUI();
+                            }
+                            else if (c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() < 5000){
+                                JOptionPane.showMessageDialog(null, "Saving Balance is too low!", "Low Balance Error", JOptionPane.ERROR_MESSAGE);
+                                dispose();
+                                new SaveUI();
+                            }
+                            else{
+                                c.getSecurityAccount().makeDeposit(cTemp, amountTemp);
+                                JOptionPane.showMessageDialog(null, "Operation Completed!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                                dispose();
+                                new CustomerUI();
+                            }
                         } else {
                             JOptionPane.showMessageDialog(null, "No Security Account!", "Empty Account Error", JOptionPane.ERROR_MESSAGE);
                             dispose();

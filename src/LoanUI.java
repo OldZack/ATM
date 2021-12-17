@@ -43,7 +43,8 @@ public class LoanUI extends JFrame{
         panel.setLayout(null);
 
         String temp = "";
-        Customer cs = (Customer) atm.getCurrUser();
+        Customer curr = (Customer) atm.getCurrUser();
+        Customer cs = Database.getUsers().get(curr.getUserName());
         String cName = cs.getUserName();
         double cSavingBalance,cCheckingBalance,cSecurityBalance;
         double cSavingLoan,cCheckingLoan,cSecurityLoan;

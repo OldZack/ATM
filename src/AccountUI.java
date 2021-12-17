@@ -99,7 +99,8 @@ public class AccountUI extends JFrame{
                 double amountTemp = Double.valueOf(amount.getText()).doubleValue();
 
 
-                Customer currUser = (Customer) atm.getCurrUser();
+                Customer curr = (Customer) atm.getCurrUser();
+                Customer currUser = Database.getUsers().get(curr.getUserName());
                 CurrencyType cTemp;
                 AccountType aTemp;
 
@@ -152,6 +153,7 @@ public class AccountUI extends JFrame{
                 }
 
                 if (typeTemp.equalsIgnoreCase("Security") && currUser.getSavingAccount() == null ){
+                    System.out.println(currUser.getSavingAccount());
                     JOptionPane.showMessageDialog(null, "Saving account is required!", "No Saving Error", JOptionPane.ERROR_MESSAGE);
                 }
                 else if (typeTemp.equalsIgnoreCase("Security") && currUser.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() < 5000.0){
@@ -180,6 +182,9 @@ public class AccountUI extends JFrame{
                     // create a new account and record it in the database
                     dispose();
                     JOptionPane.showMessageDialog(null, "Account Created Successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    if (currUser.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount() > 5000.0){
+                        JOptionPane.showMessageDialog(null, "You have enough balance to enjoy the stock market! Go make some money!", "Congratulations", JOptionPane.INFORMATION_MESSAGE);
+                    }
                     new CustomerUI();
                 }
             }

@@ -95,6 +95,11 @@ public class BorrowLoanUI extends JFrame {
                 Customer c = Database.getUsers().get(currId);
                 CurrencyType cTemp;
 
+                // the loan requested every time cannot exceed (10 * saving balance)
+                if (amountTemp >  10 * c.getSavingAccount().getCurrenciesDeposit().get(CurrencyType.USD).getAmount()){
+                    JOptionPane.showMessageDialog(null, "The requested loan cannot exceed (10 * saving balance)!", "Not Matching Error", JOptionPane.ERROR_MESSAGE);
+                }
+
                 // select the currency type of the loan
                 switch (currencyTemp){
                     case "USD" -> {

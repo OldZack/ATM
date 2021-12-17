@@ -50,7 +50,7 @@ public class InformationUI extends JFrame{
 
         String temp = "";
         Customer c = (Customer) atm.getCurrUser();
-        Customer cs = (Customer) Database.getUsers().get(c.getUserName());
+        Customer cs = Database.getUsers().get(c.getUserName());
         String cName = cs.getUserName();
         double cSavingBalanceUSD, cSavingBalanceEUR, cSavingBalanceCNY;
         double cCheckingBalanceUSD, cCheckingBalanceEUR, cCheckingBalanceCNY;

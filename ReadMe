@@ -33,35 +33,6 @@ Files(42 classes in total)
 <Deposit.java> -- The class for customer's savings.
 <FileUtils.java> -- The class for utility functions on csv files.
 
-<FireSpell.java> -- The fire spells
-<Game.java> -- The abstract class for games
-<GameLoader.java> -- The class for loading the game
-<Hero.java> -- In charge of heroes of the game
-<HeroTeam.java> -- The team of heroes
-<IceSpell.java> -- The ice spell
-<InaccessCell.java> -- The inaccessible cells
-<Inventory.java> -- The class for the inventory of heroes
-<KoulouCell.java> -- The koulou cells
-<Lane.java> -- The class for a single lane
-<LegendGame.java> -- The class for the main process of this game
-<LightningSpell.java> -- The lightning spells
-<Main.java> -- The game entrance
-<Market.java> -- In charge of the market and trade in the game
-<Monster.java> -- The superclass for all kinds of monsters in this game
-<MonsterTeam.java> -- The team of monsters
-<NexusCell.java> -- The nexus cells
-<Paladin.java> -- The paladin heroes
-<PlainCell.java> -- The plain cells
-<Potion.java> -- The potions
-<RpgGame.java> -- The abstract class for the RPG game
-<Sorcerer.java> -- The sorcerer heroes
-<Spell.java> -- The superclass for all kinds of spells.
-<Spirit.java> -- The spirit monsters
-<Team.java> -- The abstract class for all kinds of teams in the game
-<Utils.java> -- The class for some utility functions for the game
-<Warrior.java> -- The warrior heroes
-<Weapon.java> -- The weapons
-<World.java> -- The class for the game world
 
 
 Notes & Highlights ( BONUS ):
