@@ -30,7 +30,7 @@
  */
 
 public class ATM {
-    private static ATM atm = new ATM();
+    private static ATM instance;
     private User currUser;
     private Account currAccount;
     private CustomerDao customerDao;
@@ -49,7 +49,12 @@ public class ATM {
 
     public ManagerDao getManagerDao(){return managerDao; }
 
-    public static ATM getInstance(){ return atm; }
+    public static ATM getInstance(){
+        if (instance == null){
+            instance = new ATM();
+        }
+        return instance;
+    }
 
     public boolean customerLogin(String customerID, String password){
         Customer customer = customerDao.searchCustomer(customerID, password);

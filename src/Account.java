@@ -254,6 +254,7 @@ public abstract class Account {
 
         try {
             Database.WriteTransactionLocal(LocalDateTime.now(),t);
+            Database.WriteUserToLocal(this.ownerName);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
